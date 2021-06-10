@@ -54,9 +54,9 @@ func sendRequest(requestRoot request.Root) response.Root {
 }
 
 type ClientSettings struct {
-	user     string
-	password string
-	source   string
+	User     string
+	Password string
+	Source   string
 }
 
 func Client(settings ClientSettings) func(myFunc func(request.Root) request.Root) response.Root {
@@ -64,9 +64,9 @@ func Client(settings ClientSettings) func(myFunc func(request.Root) request.Root
 		Version: "2.0",
 		Header: request.Header{
 			Credentials: request.Credentials{
-				User:     settings.user,
-				Password: settings.password,
-				Source:   settings.source,
+				User:     settings.User,
+				Password: settings.Password,
+				Source:   settings.Source,
 			},
 		},
 	}
