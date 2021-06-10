@@ -12,9 +12,13 @@ To run
 
 1. Export the variables with:
    ```Bash
-   export $(grep -v '^#' .env | xargs)
+   export $(grep -v '^#' examples/.env | xargs)
    ```
 2. `go run .`
+
+## Examples
+
+Run `go run examples/*`
 
 TODO:
 

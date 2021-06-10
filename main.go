@@ -73,6 +73,12 @@ func Client(settings ClientSettings) func(myFunc func(request.Root) request.Root
 
 	innerFunc := func(myFunc func(request.Root) request.Root) response.Root {
 		transformedRequestRoot := myFunc(requestRoot)
+
+		// Set a default value for Lang because it’s required by the MSS
+		if transformedRequestRoot.Request.Search.Lang == "" {
+			transformedRequestRoot.Request.Search.Lang = "de"
+		}
+
 		return sendRequest(transformedRequestRoot)
 	}
 

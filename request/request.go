@@ -1,5 +1,7 @@
 package request
 
+import "encoding/xml"
+
 var Method = struct {
 	GetLocationList string
 	GetHotelList    string
@@ -60,31 +62,66 @@ var HotelDetails = struct {
 	COUPON_SERVICE_DATA:                16777216,
 }
 
+var OfferDetails = struct {
+	BASIC_INFO              int
+	ROOM_CODE               int
+	ROOM_TITLE              int
+	PRICE_DETAILS           int
+	ROOM_IMAGES             int
+	ROOM_FACILITIES_FILTER  int
+	ROOM_DESCRIPTION        int
+	INCLUDED_SERVICES       int
+	ADDITIONAL_SERVICES     int
+	ROOM_FACILITIES_DETAILS int
+	PRICE_IMAGES            int
+	THEMES                  int
+	ROOM_FEATURES           int
+	CANCEL_POLICIES         int
+	PAYMENT_TERMS           int
+}{
+	BASIC_INFO:              1,
+	ROOM_CODE:               4,
+	ROOM_TITLE:              8,
+	PRICE_DETAILS:           16,
+	ROOM_IMAGES:             32,
+	ROOM_FACILITIES_FILTER:  64,
+	ROOM_DESCRIPTION:        256,
+	INCLUDED_SERVICES:       1024,
+	ADDITIONAL_SERVICES:     2048,
+	ROOM_FACILITIES_DETAILS: 4096,
+	PRICE_IMAGES:            8192,
+	THEMES:                  16384,
+	ROOM_FEATURES:           32768,
+	CANCEL_POLICIES:         262144,
+	PAYMENT_TERMS:           1048576,
+}
+
 type Credentials struct {
-	User     string `xml:"user,omitempty"`
-	Password string `xml:"password,omitempty"`
-	Source   string `xml:"source,omitempty"`
+	User     string `xml:"user"`
+	Password string `xml:"password"`
+	Source   string `xml:"source"`
 }
 
 type Header struct {
-	Credentials Credentials `xml:"credentials,omitempty"`
+	Credentials Credentials `xml:"credentials"`
 	// TODO: restring values, e.g. getHotelList
-	Method string `xml:"method,omitempty"`
+	Method string `xml:"method"`
 }
 
 type Root struct {
-	Version string  `xml:"version,omitempty"`
-	Header  Header  `xml:"header,omitempty"`
-	Request Request `xml:"request,omitempty"`
+	XMLName xml.Name `xml:"root"`
+	Version string   `xml:"version"`
+	Header  Header   `xml:"header"`
+	Request Request  `xml:"request"`
 }
 
 type Request struct {
-	Search  Search  `xml:"search,omitempty"`
-	Options Options `xml:"options,omitempty"`
+	Search  Search  `xml:"search"`
+	Options Options `xml:"options"`
 }
 
 type Search struct {
-	Lang        string `xml:"lang,omitempty"`
+	Lang        string `xml:"lang"`
 	Id          []int  `xml:"id,omitempty"`
 	IdOfchannel string `xml:"id_ofchannel,omitempty"`
 	RootId      int    `xml:"root_id,omitempty"`
@@ -92,4 +129,5 @@ type Search struct {
 
 type Options struct {
 	HotelDetails int `xml:"hotel_details,omitempty"`
+	OfferDetails int `xml:"offer_details,omitempty"`
 }
