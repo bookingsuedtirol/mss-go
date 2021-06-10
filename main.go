@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"os"
 	"strings"
 
 	"github.com/hgv/mss-go/request"
@@ -78,32 +77,4 @@ func Client(settings ClientSettings) func(myFunc func(request.Root) request.Root
 	}
 
 	return innerFunc
-}
-
-func main() {
-	settings := ClientSettings{
-		user:     os.Getenv("MSS_USER"),
-		password: os.Getenv("MSS_PASSWORD"),
-		source:   os.Getenv("MSS_SOURCE"),
-	}
-
-	sendRequest := Client(settings)
-
-	responseRoot := sendRequest(func(requestRoot request.Root) request.Root {
-		requestRoot.Header.Method = request.Method.GetHotelList
-		requestRoot.Request = request.Request{
-			Search: request.Search{
-				Lang: "de",
-				Id:   []int{9002},
-			},
-			Options: request.Options{
-				HotelDetails: request.HotelDetails.BASIC_INFO |
-					request.HotelDetails.SHORT_DESCRIPTION,
-			},
-		}
-
-		return requestRoot
-	})
-
-	fmt.Printf("%+v\n", responseRoot)
 }
