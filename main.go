@@ -11,6 +11,34 @@ import (
 	"github.com/hgv/mss-go/response"
 )
 
+type Client struct {
+	User     string
+	Password string
+	Source   string
+}
+
+func (settings Client) Request(callback func(request.Root) request.Root) response.Root {
+	requestRoot := request.Root{
+		Version: "2.0",
+		Header: request.Header{
+			Credentials: request.Credentials{
+				User:     settings.User,
+				Password: settings.Password,
+				Source:   settings.Source,
+			},
+		},
+	}
+
+	transformedRequestRoot := callback(requestRoot)
+
+	// Set a default value for Lang because it’s required by MSS
+	if transformedRequestRoot.Request.Search.Lang == "" {
+		transformedRequestRoot.Request.Search.Lang = "de"
+	}
+
+	return sendRequest(transformedRequestRoot)
+}
+
 func sendRequest(requestRoot request.Root) response.Root {
 	requestXmlRoot, err := xml.Marshal(requestRoot)
 
@@ -51,36 +79,4 @@ func sendRequest(requestRoot request.Root) response.Root {
 	}
 
 	return responseRoot
-}
-
-type ClientSettings struct {
-	User     string
-	Password string
-	Source   string
-}
-
-func Client(settings ClientSettings) func(myFunc func(request.Root) request.Root) response.Root {
-	requestRoot := request.Root{
-		Version: "2.0",
-		Header: request.Header{
-			Credentials: request.Credentials{
-				User:     settings.User,
-				Password: settings.Password,
-				Source:   settings.Source,
-			},
-		},
-	}
-
-	innerFunc := func(myFunc func(request.Root) request.Root) response.Root {
-		transformedRequestRoot := myFunc(requestRoot)
-
-		// Set a default value for Lang because it’s required by the MSS
-		if transformedRequestRoot.Request.Search.Lang == "" {
-			transformedRequestRoot.Request.Search.Lang = "de"
-		}
-
-		return sendRequest(transformedRequestRoot)
-	}
-
-	return innerFunc
 }

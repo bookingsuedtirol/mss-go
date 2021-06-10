@@ -9,15 +9,13 @@ import (
 )
 
 func main() {
-	settings := mss.ClientSettings{
+	client := mss.Client{
 		User:     os.Getenv("MSS_USER"),
 		Password: os.Getenv("MSS_PASSWORD"),
 		Source:   os.Getenv("MSS_SOURCE"),
 	}
 
-	sendRequest := mss.Client(settings)
-
-	responseRoot := sendRequest(func(requestRoot request.Root) request.Root {
+	responseRoot := client.Request(func(requestRoot request.Root) request.Root {
 		requestRoot.Header.Method = request.Method.GetHotelList
 		requestRoot.Request = request.Request{
 			Search: request.Search{
