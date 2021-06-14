@@ -1,6 +1,9 @@
 package request
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+	"time"
+)
 
 var Method = struct {
 	GetLocationList string
@@ -121,13 +124,35 @@ type Request struct {
 }
 
 type Search struct {
-	Lang        string `xml:"lang"`
-	Id          []int  `xml:"id,omitempty"`
-	IdOfchannel string `xml:"id_ofchannel,omitempty"`
-	RootId      int    `xml:"root_id,omitempty"`
+	Lang        string      `xml:"lang"`
+	Id          []int       `xml:"id,omitempty"`
+	IdOfchannel string      `xml:"id_ofchannel,omitempty"`
+	RootId      int         `xml:"root_id,omitempty"`
+	SearchOffer SearchOffer `xml:"search_offer,omitempty"`
 }
 
 type Options struct {
 	HotelDetails int `xml:"hotel_details,omitempty"`
 	OfferDetails int `xml:"offer_details,omitempty"`
+}
+
+type Date time.Time
+
+func (input Date) MarshalXML(element *xml.Encoder, start xml.StartElement) error {
+	timeValue := time.Time(input)
+	timeString := timeValue.Format("2006-01-02")
+	return element.EncodeElement(timeString, start)
+}
+
+type SearchOffer struct {
+	Arrival   Date   `xml:"arrival"`
+	Departure Date   `xml:"departure"`
+	Service   int    `xml:"service"`
+	Room      []Room `xml:"room"`
+}
+
+type Room struct {
+	RoomSeq  int   `xml:"room_seq"`
+	RoomType int   `xml:"room_type"`
+	Person   []int `xml:"person"`
 }

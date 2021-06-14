@@ -69,7 +69,11 @@ func sendRequest(requestRoot request.Root) response.Root {
 	}
 
 	var responseRoot response.Root
-	xml.Unmarshal(responseBody, &responseRoot)
+	err = xml.Unmarshal(responseBody, &responseRoot)
+
+	if err != nil {
+		panic(err)
+	}
 
 	if responseRoot.Header.Error.Code != 0 {
 		panic(fmt.Errorf("the API returned an error\nCode: %v,\nMessage: %v",
