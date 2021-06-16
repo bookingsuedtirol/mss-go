@@ -31,7 +31,11 @@ func (settings Client) Request(callback func(request.Root) request.Root) respons
 
 	transformedRequestRoot := callback(requestRoot)
 
-	// Set a default value for Lang because it’s required by MSS
+	if transformedRequestRoot.Request.Search == nil {
+		transformedRequestRoot.Request.Search = &request.Search{}
+	}
+
+	// Set a default value for Lang because it’s required by the MSS
 	if transformedRequestRoot.Request.Search.Lang == "" {
 		transformedRequestRoot.Request.Search.Lang = "de"
 	}

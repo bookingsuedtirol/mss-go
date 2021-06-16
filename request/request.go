@@ -2,101 +2,27 @@ package request
 
 import (
 	"encoding/xml"
-	"time"
+
+	"github.com/hgv/mss-go/shared"
 )
 
-var Method = struct {
-	GetLocationList string
-	GetHotelList    string
-}{
-	GetLocationList: "getLocationList",
-	GetHotelList:    "getHotelList",
+type Address struct {
+	Street  string `xml:"street"`
+	Zipcode string `xml:"zipcode"`
+	City    string `xml:"city"`
+	Country string `xml:"country"`
 }
 
-var HotelDetails = struct {
-	BASIC_INFO                         int
-	THEMES                             int
-	HOTEL_FACILITIES                   int
-	SHORT_DESCRIPTION                  int
-	FULL_DESCRIPTION                   int
-	GEOGRAPHIC_INFORMATION             int
-	COORDINATES                        int
-	ADDRESS                            int
-	CONTACTS                           int
-	PAYMENT_OPTIONS_FOR_ONLINE_BOOKING int
-	PAYMENT_OPTIONS_AT_HOTEL           int
-	LOGO                               int
-	HEADER_IMAGES                      int
-	GALLERY                            int
-	HOTEL_MATCHING                     int
-	GEOGRAPHICAL_INFORMATION_AS_TEXT   int
-	HOTEL_NAVIGATOR_DATA               int
-	DETAILED_HOTEL_FACILITIES          int
-	SALES_POINT                        int
-	LTS_SPECIFIC_PARAMETERS            int
-	CHECK_IN_OUT                       int
-	SOURCE_DATA                        int
-	BOARD_DATA                         int
-	COUPON_SERVICE_DATA                int
-}{
-	BASIC_INFO:                         1,
-	THEMES:                             2,
-	HOTEL_FACILITIES:                   4,
-	SHORT_DESCRIPTION:                  8,
-	FULL_DESCRIPTION:                   16,
-	GEOGRAPHIC_INFORMATION:             32,
-	COORDINATES:                        64,
-	ADDRESS:                            128,
-	CONTACTS:                           256,
-	PAYMENT_OPTIONS_FOR_ONLINE_BOOKING: 512,
-	PAYMENT_OPTIONS_AT_HOTEL:           1024,
-	LOGO:                               2048,
-	HEADER_IMAGES:                      4096,
-	GALLERY:                            8192,
-	HOTEL_MATCHING:                     16384,
-	GEOGRAPHICAL_INFORMATION_AS_TEXT:   32768,
-	HOTEL_NAVIGATOR_DATA:               65536,
-	DETAILED_HOTEL_FACILITIES:          131072,
-	SALES_POINT:                        524288,
-	LTS_SPECIFIC_PARAMETERS:            262144,
-	CHECK_IN_OUT:                       1048576,
-	SOURCE_DATA:                        2097152,
-	BOARD_DATA:                         8388608,
-	COUPON_SERVICE_DATA:                16777216,
+type Company struct {
+	Name          string   `xml:"name"`
+	Taxnumber     string   `xml:"taxnumber"`
+	RecipientCode string   `xml:"recipient_code"`
+	Address       *Address `xml:"address"`
 }
 
-var OfferDetails = struct {
-	BASIC_INFO              int
-	ROOM_CODE               int
-	ROOM_TITLE              int
-	PRICE_DETAILS           int
-	ROOM_IMAGES             int
-	ROOM_FACILITIES_FILTER  int
-	ROOM_DESCRIPTION        int
-	INCLUDED_SERVICES       int
-	ADDITIONAL_SERVICES     int
-	ROOM_FACILITIES_DETAILS int
-	PRICE_IMAGES            int
-	THEMES                  int
-	ROOM_FEATURES           int
-	CANCEL_POLICIES         int
-	PAYMENT_TERMS           int
-}{
-	BASIC_INFO:              1,
-	ROOM_CODE:               4,
-	ROOM_TITLE:              8,
-	PRICE_DETAILS:           16,
-	ROOM_IMAGES:             32,
-	ROOM_FACILITIES_FILTER:  64,
-	ROOM_DESCRIPTION:        256,
-	INCLUDED_SERVICES:       1024,
-	ADDITIONAL_SERVICES:     2048,
-	ROOM_FACILITIES_DETAILS: 4096,
-	PRICE_IMAGES:            8192,
-	THEMES:                  16384,
-	ROOM_FEATURES:           32768,
-	CANCEL_POLICIES:         262144,
-	PAYMENT_TERMS:           1048576,
+type Coupon struct {
+	CouponCode string `xml:"coupon_code"`
+	CouponType string `xml:"coupon_type"`
 }
 
 type Credentials struct {
@@ -105,10 +31,109 @@ type Credentials struct {
 	Source   string `xml:"source"`
 }
 
+type Data struct {
+	Guest     *Guest    `xml:"guest"`
+	Company   *Company  `xml:"company"`
+	Payment   *Payment  `xml:"payment"`
+	Note      string    `xml:"note"`
+	Details   *Details  `xml:"details"`
+	Form      *Form     `xml:"form"`
+	Tracking  *Tracking `xml:"tracking"`
+	Insurance int       `xml:"insurance"`
+}
+
+type Details struct {
+	ExtraPrice []ExtraPrice `xml:"extra_price"`
+	Coupon     *Coupon      `xml:"coupon"`
+}
+
+type ExtraPrice struct {
+	PriceId     int     `xml:"price_id"`
+	PriceAmount float64 `xml:"price_amount"`
+}
+
+type Form struct {
+	UrlSuccess string `xml:"url_success"`
+	UrlFailure string `xml:"url_failure"`
+}
+
+type Guest struct {
+	Gender    string   `xml:"gender"`
+	Prefix    string   `xml:"prefix"`
+	Firstname string   `xml:"firstname"`
+	Lastname  string   `xml:"lastname"`
+	Email     string   `xml:"email"`
+	Phone     string   `xml:"phone"`
+	Address   *Address `xml:"address"`
+	// TODO: map to bool?
+	Newsletter int `xml:"newsletter"`
+}
+
 type Header struct {
 	Credentials Credentials `xml:"credentials"`
 	// TODO: restring values, e.g. getHotelList
-	Method string `xml:"method"`
+	Method   string  `xml:"method"`
+	Paging   *Paging `xml:"paging"`
+	ResultId string  `xml:"result_id"`
+}
+
+type Logging struct {
+	Step string `xml:"step"`
+}
+
+type Options struct {
+	HotelDetails         int          `xml:"hotel_details"`
+	OfferDetails         int          `xml:"offer_details"`
+	RoomDetails          int          `xml:"room_details"`
+	SpecialDetails       int          `xml:"special_details"`
+	SeoDetails           int          `xml:"seo_details"`
+	PictureDate          *shared.Date `xml:"picture_date"`
+	LtsBookable          int          `xml:"lts_bookable"`
+	GetAvailability      int          `xml:"get_availability"`
+	GetRestrictions      int          `xml:"get_restrictions"`
+	GetRoomdetails       int          `xml:"get_roomdetails"`
+	GetMasterpackages    int          `xml:"get_masterpackages"`
+	BasePrice            int          `xml:"base_price"`
+	PricelistDetails     int          `xml:"pricelist_details"`
+	OnlySubscribedHotels int          `xml:"only_subscribed_hotels"`
+	OnlyAvailable        int          `xml:"only_available"`
+}
+
+type Order struct {
+	Field string `xml:"field"`
+	Dir   string `xml:"dir"`
+}
+
+type Paging struct {
+	Start int `xml:"start"`
+	Limit int `xml:"limit"`
+}
+
+type Payment struct {
+	Method  int `xml:"method"`
+	Invoice int `xml:"invoice"`
+}
+
+type Rateplan struct {
+	Code   string `xml:"code"`
+	Source string `xml:"source"`
+}
+
+type Request struct {
+	Search  *Search  `xml:"search"`
+	Options *Options `xml:"options"`
+	Order   *Order   `xml:"order"`
+	Data    *Data    `xml:"data"`
+	Logging *Logging `xml:"logging"`
+}
+
+type Room struct {
+	OfferId  int   `xml:"offer_id"`
+	RoomId   int   `xml:"room_id"`
+	Service  int   `xml:"service,omitempty"`
+	RoomType int   `xml:"room_type"`
+	RoomSeq  int   `xml:"room_seq"`
+	Person   []int `xml:"person"`
 }
 
 type Root struct {
@@ -118,41 +143,113 @@ type Root struct {
 	Request Request  `xml:"request"`
 }
 
-type Request struct {
-	Search  Search  `xml:"search"`
-	Options Options `xml:"options"`
-}
-
 type Search struct {
-	Lang        string      `xml:"lang"`
-	Id          []int       `xml:"id,omitempty"`
-	IdOfchannel string      `xml:"id_ofchannel,omitempty"`
-	RootId      int         `xml:"root_id,omitempty"`
-	SearchOffer SearchOffer `xml:"search_offer,omitempty"`
+	Lang               string              `xml:"lang"`
+	ResultId           string              `xml:"result_id"`
+	Agent              string              `xml:"agent"`
+	Id                 []int               `xml:"id"`
+	SearchHotel        *SearchHotel        `xml:"search_hotel"`
+	SearchLocation     *SearchLocation     `xml:"search_location"`
+	SearchDistance     *SearchDistance     `xml:"search_distance"`
+	SearchOffer        *SearchOffer        `xml:"search_offer"`
+	SearchLts          *shared.LtsData     `xml:"search_lts"`
+	SearchSpecial      *SearchSpecial      `xml:"search_special"`
+	SearchAvailability *SearchAvailability `xml:"search_availability"`
+	SearchPricelist    *SearchPriceList    `xml:"search_pricelist"`
+	In                 []int               `xml:"in"`
+	IdOfchannel        string              `xml:"id_ofchannel,omitempty"`
+	TransactionId      string              `xml:"transaction_id"`
+	BookingId          string              `xml:"booking_id"`
+	GuestEmail         string              `xml:"guest_email"`
+	RootId             int                 `xml:"root_id"`
+	ExternalId         int                 `xml:"external_id"`
+	Typ                string              `xml:"typ"`
+	SeoTyp             string              `xml:"seo_typ"`
+	LocationDetails    int                 `xml:"location_details"`
+	CouponCode         string              `xml:"coupon_code"`
+	CouponType         string              `xml:"coupon_type"`
+	TotalPrice         float64             `xml:"total_price"`
+	Arrival            *shared.Date        `xml:"arrival"`
+	Departure          *shared.Date        `xml:"departure"`
 }
 
-type Options struct {
-	HotelDetails int `xml:"hotel_details,omitempty"`
-	OfferDetails int `xml:"offer_details,omitempty"`
+type SearchAvailability struct {
+	DateFrom *shared.Date `xml:"date_from"`
+	DateTo   *shared.Date `xml:"date_to"`
+	OfferId  []int        `xml:"offer_id"`
+	RoomId   []int        `xml:"room_id"`
 }
 
-type Date time.Time
+type SearchDistance struct {
+	Latitude  float64 `xml:"latitude"`
+	Longitude float64 `xml:"longitude"`
+	Radius    int     `xml:"radius"`
+}
 
-func (input Date) MarshalXML(element *xml.Encoder, start xml.StartElement) error {
-	timeValue := time.Time(input)
-	timeString := timeValue.Format("2006-01-02")
-	return element.EncodeElement(timeString, start)
+type SearchHotel struct {
+	Name     string `xml:"name"`
+	Type     []int  `xml:"type"`
+	Stars    *Stars `xml:"stars"`
+	Feature  int    `xml:"feature"`
+	Theme    int    `xml:"theme"`
+	RoomType int    `xml:"room_type"`
+}
+
+type SearchLocation struct {
+	Location    []int    `xml:"location"`
+	LocationLts []string `xml:"location_lts"`
 }
 
 type SearchOffer struct {
-	Arrival   Date   `xml:"arrival"`
-	Departure Date   `xml:"departure"`
-	Service   int    `xml:"service"`
-	Room      []Room `xml:"room"`
+	Arrival   *shared.Date `xml:"arrival"`
+	Departure *shared.Date `xml:"departure"`
+	Service   int          `xml:"service"`
+	Feature   int          `xml:"feature,omitempty"`
+	ChannelId []string     `xml:"channel_id"`
+	Room      []Room       `xml:"room"`
+	Typ       int          `xml:"typ"`
+	Rateplan  *Rateplan    `xml:"rateplan"`
 }
 
-type Room struct {
-	RoomSeq  int   `xml:"room_seq"`
-	RoomType int   `xml:"room_type"`
-	Person   []int `xml:"person"`
+type SearchPriceList struct {
+	DateFrom *shared.Date `xml:"date_from"`
+	DateTo   *shared.Date `xml:"date_to"`
+	Service  int          `xml:"service"`
+	RoomId   []int        `xml:"room_id"`
+	Typ      int          `xml:"typ"`
+}
+
+type SearchSpecial struct {
+	OfferId  []int        `xml:"offer_id"`
+	DateFrom *shared.Date `xml:"date_from"`
+	DateTo   *shared.Date `xml:"date_to"`
+	Theme    []int        `xml:"theme"`
+	PoiId    []int        `xml:"poi_id"`
+	PoiCat   []int        `xml:"poi_cat"`
+	Validity *Validity    `xml:"validity"`
+	Typ      int          `xml:"typ"`
+	Premium  int          `xml:"premium"`
+	Status   int          `xml:"status"`
+}
+
+type Stars struct {
+	Min float64 `xml:"min"`
+	Max float64 `xml:"max"`
+}
+
+type Tracking struct {
+	Partner     string `xml:"partner"`
+	Media       string `xml:"media"`
+	Campain     string `xml:"campain"`
+	Campaign    string `xml:"campaign"`
+	Companyinfo string `xml:"companyinfo"`
+}
+
+type Validity struct {
+	Valid     int          `xml:"valid"`
+	Offers    int          `xml:"offers"`
+	Arrival   *shared.Date `xml:"arrival"`
+	Departure *shared.Date `xml:"departure"`
+	Service   int          `xml:"service"`
+	Room      []Room       `xml:"room"`
 }
