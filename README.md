@@ -6,21 +6,33 @@ MSS API client for Go projects
 
 ## Available methods
 
+- [x] getHotelList
+- [x] getSpecialList
+- [x] getRoomList
+- [x] getPriceList
+- [x] getRoomAvailability
+- [x] prepareBooking
+- [x] getBooking
+- [x] createInquiry
+- [x] getUserSources
 - [x] getLocationList
+- [x] getMasterpackagesList
+- [x] getThemeList
+- [x] getSeoTexts
+- [x] validateCoupon
 
-To run
+## Before running examples/tests
 
-1. Export the variables with:
-   ```Bash
-   export $(grep -v '^#' examples/.env | xargs)
-   ```
-2. `go run .`
+Set the environment variables with:
+
+```Bash
+export $(grep -v '^#' examples/.env | xargs)
+```
 
 ## Examples
 
-Run `go run examples/*`
+Run `go run examples/simple/*`, `go run examples/advanced/*` etc.
 
-TODO:
+## Tests
 
-- Parse dates as time interface, not as string
-- Perhaps parse XML comma list as array?
+Run `go test -v`
