@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/hgv/mss-go/request"
-	"github.com/hgv/mss-go/response"
+	"github.com/HGV/mss-go/request"
+	"github.com/HGV/mss-go/response"
 )
 
 type Client struct {

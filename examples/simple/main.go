@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/hgv/mss-go"
-	"github.com/hgv/mss-go/bitmasks"
-	"github.com/hgv/mss-go/request"
+	"github.com/HGV/mss-go"
+	"github.com/HGV/mss-go/bitmasks"
+	"github.com/HGV/mss-go/request"
 )
 
 func main() {

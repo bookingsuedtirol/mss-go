@@ -1,3 +1,3 @@
-module github.com/hgv/mss-go
+module github.com/HGV/mss-go
 
 go 1.16

@@ -4,9 +4,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hgv/mss-go/bitmasks"
-	"github.com/hgv/mss-go/request"
-	"github.com/hgv/mss-go/response"
+	"github.com/HGV/mss-go/bitmasks"
+	"github.com/HGV/mss-go/request"
+	"github.com/HGV/mss-go/response"
 )
 
 var client = Client{

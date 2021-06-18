@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hgv/mss-go/shared"
+	"github.com/HGV/mss-go/shared"
 )
 
 type Address struct {
