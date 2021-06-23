@@ -22,7 +22,7 @@ func TestEnvVariablesAreDefined(t *testing.T) {
 }
 
 func TestSimpleMssCall(t *testing.T) {
-	responseRoot := client.Request(func(requestRoot request.Root) request.Root {
+	responseRoot, err := client.Request(func(requestRoot request.Root) request.Root {
 		requestRoot.Header.Method = bitmasks.Method.GetHotelList
 		requestRoot.Request = request.Request{
 			Search: &request.Search{
@@ -36,6 +36,10 @@ func TestSimpleMssCall(t *testing.T) {
 
 		return requestRoot
 	})
+
+	if err != nil {
+		panic(err)
+	}
 
 	want := response.TrimmedString("Testhotel Webseitentool HGV (hotelhgv.it)")
 	got := responseRoot.Result.Hotel[0].Name

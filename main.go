@@ -17,7 +17,7 @@ type Client struct {
 	Source   string
 }
 
-func (settings Client) Request(callback func(request.Root) request.Root) response.Root {
+func (settings Client) Request(callback func(request.Root) request.Root) (response.Root, error) {
 	requestRoot := request.Root{
 		Version: "2.0",
 		Header: request.Header{
@@ -43,11 +43,11 @@ func (settings Client) Request(callback func(request.Root) request.Root) respons
 	return sendRequest(transformedRequestRoot)
 }
 
-func sendRequest(requestRoot request.Root) response.Root {
+func sendRequest(requestRoot request.Root) (response.Root, error) {
 	requestXmlRoot, err := xml.Marshal(requestRoot)
 
 	if err != nil {
-		panic(err)
+		return response.Root{}, err
 	}
 
 	resp, err := http.Post(
@@ -57,34 +57,36 @@ func sendRequest(requestRoot request.Root) response.Root {
 	)
 
 	if err != nil {
-		panic(err)
-	}
-
-	if resp.StatusCode >= 400 {
-		panic(fmt.Errorf("failed to request the API\nStatusCode %v", resp.StatusCode))
+		return response.Root{}, err
 	}
 
 	defer resp.Body.Close()
 
+	if resp.StatusCode >= 400 {
+		return response.Root{},
+			fmt.Errorf("request to MSS failed with HTTP status code %v", resp.StatusCode)
+	}
+
 	responseBody, err := ioutil.ReadAll(resp.Body)
 
 	if err != nil {
-		panic(err)
+		return response.Root{}, err
 	}
 
 	var responseRoot response.Root
 	err = xml.Unmarshal(responseBody, &responseRoot)
 
 	if err != nil {
-		panic(err)
+		return response.Root{}, err
 	}
 
 	if responseRoot.Header.Error.Code != 0 {
-		panic(fmt.Errorf("the API returned an error\nCode: %v,\nMessage: %v",
-			responseRoot.Header.Error.Code,
-			responseRoot.Header.Error.Message,
-		))
+		return response.Root{},
+			fmt.Errorf("MSS returned an error\nCode: %v,\nMessage: %v",
+				responseRoot.Header.Error.Code,
+				responseRoot.Header.Error.Message,
+			)
 	}
 
-	return responseRoot
+	return responseRoot, nil
 }

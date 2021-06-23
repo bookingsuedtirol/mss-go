@@ -16,7 +16,7 @@ func main() {
 		Source:   os.Getenv("MSS_SOURCE"),
 	}
 
-	responseRoot := client.Request(func(requestRoot request.Root) request.Root {
+	responseRoot, err := client.Request(func(requestRoot request.Root) request.Root {
 		requestRoot.Header.Method = bitmasks.Method.GetHotelList
 		requestRoot.Request = request.Request{
 			Search: &request.Search{
@@ -30,6 +30,10 @@ func main() {
 
 		return requestRoot
 	})
+
+	if err != nil {
+		panic(err)
+	}
 
 	hotel := responseRoot.Result.Hotel[0]
 

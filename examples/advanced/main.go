@@ -21,7 +21,7 @@ func main() {
 	today := shared.Date(time.Now())
 	oneWeekFromNow := shared.Date(time.Now().AddDate(0, 0, 7))
 
-	responseRoot := client.Request(func(requestRoot request.Root) request.Root {
+	responseRoot, err := client.Request(func(requestRoot request.Root) request.Root {
 		requestRoot.Header.Method = bitmasks.Method.GetHotelList
 		requestRoot.Request = request.Request{
 			Search: &request.Search{
@@ -49,6 +49,10 @@ func main() {
 
 		return requestRoot
 	})
+
+	if err != nil {
+		panic(err)
+	}
 
 	hotel := responseRoot.Result.Hotel[0]
 
