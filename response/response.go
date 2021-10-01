@@ -24,35 +24,35 @@ type Bank struct {
 }
 
 type Booking struct {
-	BookingId     int          `xml:"booking_id"`
-	StornoId      int          `xml:"storno_id"`
-	BookingDate   DateWithTime `xml:"booking_date"`
-	Source        string       `xml:"source"`
-	HotelId       int          `xml:"hotel_id"`
-	Arrival       shared.Date  `xml:"arrival"`
-	Departure     shared.Date  `xml:"departure"`
-	Service       int          `xml:"service"`
-	BookingStatus int          `xml:"booking_status"`
-	Cancelled     int          `xml:"cancelled"`
-	Note          string       `xml:"note"`
-	Hotel         Hotel        `xml:"hotel"`
-	Guest         Guest        `xml:"guest"`
-	Company       Company      `xml:"company"`
-	Payment       Payment      `xml:"payment"`
-	Room          []Room       `xml:"room"`
-	ExtraPrice    []Price      `xml:"extra_price"`
-	Offer         []Offer      `xml:"offer"`
-	Insurance     Insurance    `xml:"insurance"`
-	Coupon        Coupon       `xml:"coupon"`
+	BookingId     int         `xml:"booking_id"`
+	StornoId      int         `xml:"storno_id"`
+	BookingDate   DateTime    `xml:"booking_date"`
+	Source        string      `xml:"source"`
+	HotelId       int         `xml:"hotel_id"`
+	Arrival       shared.Date `xml:"arrival"`
+	Departure     shared.Date `xml:"departure"`
+	Service       int         `xml:"service"`
+	BookingStatus int         `xml:"booking_status"`
+	Cancelled     int         `xml:"cancelled"`
+	Note          string      `xml:"note"`
+	Hotel         Hotel       `xml:"hotel"`
+	Guest         Guest       `xml:"guest"`
+	Company       Company     `xml:"company"`
+	Payment       Payment     `xml:"payment"`
+	Room          []Room      `xml:"room"`
+	ExtraPrice    []Price     `xml:"extra_price"`
+	Offer         []Offer     `xml:"offer"`
+	Insurance     Insurance   `xml:"insurance"`
+	Coupon        Coupon      `xml:"coupon"`
 }
 
 type CancelPolicy struct {
-	Id              int          `xml:"id"`
-	Refundable      bool         `xml:"refundable"`
-	RefundableUntil DateWithTime `xml:"refundable_until"`
-	Penalties       []Penalty    `xml:"penalties>penalty"`
-	Description     Nl2brString  `xml:"description"`
-	Priority        string       `xml:"priority"`
+	Id              int         `xml:"id"`
+	Refundable      bool        `xml:"refundable"`
+	RefundableUntil DateTime    `xml:"refundable_until"`
+	Penalties       []Penalty   `xml:"penalties>penalty"`
+	Description     Nl2brString `xml:"description"`
+	Priority        string      `xml:"priority"`
 }
 
 type Channel struct {
@@ -191,8 +191,8 @@ type Hotel struct {
 	Logo                  []Picture     `xml:"logo>picture"`
 	Pictures              []Picture     `xml:"pictures>picture"`
 	AvailableFrom         shared.Date   `xml:"available_from"`
-	PricesChangedAt       DateWithTime  `xml:"prices_changed_at"`
-	AvailabilityChangedAt DateWithTime  `xml:"availability_changed_at"`
+	PricesChangedAt       DateTime      `xml:"prices_changed_at"`
+	AvailabilityChangedAt DateTime      `xml:"availability_changed_at"`
 	// TODO: use time.Time here?
 	BookableUntil string         `xml:"bookable_until"`
 	Gallery       []Picture      `xml:"gallery>picture"`
@@ -213,7 +213,7 @@ type Hotel struct {
 	ChildAgeMax   int            `xml:"child_age_max"`
 	AdultCntMax   int            `xml:"adult_cnt_max"`
 	ChildCntMax   int            `xml:"child_cnt_max"`
-	Ratings       []Rating       `xml:"ratings"`
+	Ratings       []Rating       `xml:"ratings>rating"`
 	SourceData    SourceData     `xml:"source_data"`
 	Coupon        CouponService  `xml:"coupon"`
 }
@@ -313,9 +313,9 @@ type PaymentTerm struct {
 }
 
 type Penalty struct {
-	Percent     int          `xml:"percent"`
-	Datefrom    DateWithTime `xml:"datefrom"`
-	Daysarrival int          `xml:"daysarrival"`
+	Percent     int      `xml:"percent"`
+	Datefrom    DateTime `xml:"datefrom"`
+	Daysarrival int      `xml:"daysarrival"`
 }
 
 type Picture struct {
@@ -597,34 +597,27 @@ type Tracking struct {
 	Pixel string `xml:"pixel"`
 }
 
-type DateWithTime time.Time
+type DateTime time.Time
 
-// TODO: implement string representation method like in time.Time
-func (input *DateWithTime) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
+func (input *DateTime) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
 	layout := "2006-01-02 15:04:05"
-	var value string
-	err := decoder.DecodeElement(&value, &start)
+	value, err := shared.ParseDateTime(layout, decoder, start)
 
 	if err != nil {
 		return err
 	}
 
-	// use default time if empty
-	if value == "" {
-		*input = DateWithTime(time.Time{})
-		return nil
-	}
-
-	// TODO: parse local time to UTC?
-	parsedTime, err := time.Parse(layout, value)
-
 	if err != nil {
 		return err
 	}
 
-	*input = DateWithTime(parsedTime)
+	*input = DateTime(value)
 
 	return nil
+}
+
+func (dateTime DateTime) String() string {
+	return time.Time(dateTime).String()
 }
 
 type TrimmedString string
