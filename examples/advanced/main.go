@@ -6,7 +6,8 @@ import (
 	"time"
 
 	"github.com/HGV/mss-go"
-	"github.com/HGV/mss-go/bitmasks"
+	"github.com/HGV/mss-go/bitmasks/method"
+	"github.com/HGV/mss-go/bitmasks/offer_details"
 	"github.com/HGV/mss-go/request"
 	"github.com/HGV/mss-go/shared"
 )
@@ -22,7 +23,7 @@ func main() {
 	oneWeekFromNow := shared.Date(time.Now().AddDate(0, 0, 7))
 
 	responseRoot, err := client.Request(func(requestRoot request.Root) request.Root {
-		requestRoot.Header.Method = bitmasks.Method.GetHotelList
+		requestRoot.Header.Method = method.GetHotelList
 		requestRoot.Request = request.Request{
 			Search: &request.Search{
 				Id: []int{9002},
@@ -40,10 +41,10 @@ func main() {
 				},
 			},
 			Options: &request.Options{
-				OfferDetails: bitmasks.OfferDetails.BASIC_INFO |
-					bitmasks.OfferDetails.ROOM_TITLE |
-					bitmasks.OfferDetails.CANCEL_POLICIES |
-					bitmasks.OfferDetails.PAYMENT_TERMS,
+				OfferDetails: offer_details.BasicInfo |
+					offer_details.RoomTitle |
+					offer_details.CancelPolicies |
+					offer_details.PaymentTerms,
 			},
 		}
 

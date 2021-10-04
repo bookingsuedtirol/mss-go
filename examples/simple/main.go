@@ -5,7 +5,8 @@ import (
 	"os"
 
 	"github.com/HGV/mss-go"
-	"github.com/HGV/mss-go/bitmasks"
+	"github.com/HGV/mss-go/bitmasks/hotel_details"
+	"github.com/HGV/mss-go/bitmasks/method"
 	"github.com/HGV/mss-go/request"
 )
 
@@ -17,14 +18,14 @@ func main() {
 	}
 
 	responseRoot, err := client.Request(func(requestRoot request.Root) request.Root {
-		requestRoot.Header.Method = bitmasks.Method.GetHotelList
+		requestRoot.Header.Method = method.GetHotelList
 		requestRoot.Request = request.Request{
 			Search: &request.Search{
 				Id: []int{11230},
 			},
 			Options: &request.Options{
-				HotelDetails: bitmasks.HotelDetails.BASIC_INFO |
-					bitmasks.HotelDetails.COORDINATES,
+				HotelDetails: hotel_details.BasicInfo |
+					hotel_details.Coordinates,
 			},
 		}
 

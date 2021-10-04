@@ -4,7 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/HGV/mss-go/bitmasks"
+	"github.com/HGV/mss-go/bitmasks/hotel_details"
+	"github.com/HGV/mss-go/bitmasks/method"
 	"github.com/HGV/mss-go/request"
 	"github.com/HGV/mss-go/response"
 )
@@ -23,14 +24,14 @@ func TestEnvVariablesAreDefined(t *testing.T) {
 
 func TestSimpleMssCall(t *testing.T) {
 	responseRoot, err := client.Request(func(requestRoot request.Root) request.Root {
-		requestRoot.Header.Method = bitmasks.Method.GetHotelList
+		requestRoot.Header.Method = method.GetHotelList
 		requestRoot.Request = request.Request{
 			Search: &request.Search{
 				Id: []int{9002},
 			},
 			Options: &request.Options{
-				HotelDetails: bitmasks.HotelDetails.BASIC_INFO |
-					bitmasks.HotelDetails.COORDINATES,
+				HotelDetails: hotel_details.BasicInfo |
+					hotel_details.Coordinates,
 			},
 		}
 
