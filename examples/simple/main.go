@@ -5,9 +5,9 @@ import (
 	"os"
 
 	"github.com/HGV/mss-go"
-	"github.com/HGV/mss-go/bitmasks/hotel_details"
-	"github.com/HGV/mss-go/bitmasks/method"
 	"github.com/HGV/mss-go/request"
+	"github.com/HGV/mss-go/types/hotel_details"
+	"github.com/HGV/mss-go/types/method"
 )
 
 func main() {

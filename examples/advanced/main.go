@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"github.com/HGV/mss-go"
-	"github.com/HGV/mss-go/bitmasks/method"
-	"github.com/HGV/mss-go/bitmasks/offer_details"
 	"github.com/HGV/mss-go/request"
 	"github.com/HGV/mss-go/shared"
+	"github.com/HGV/mss-go/types/method"
+	"github.com/HGV/mss-go/types/offer_details"
 )
 
 func main() {
