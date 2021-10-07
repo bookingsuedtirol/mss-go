@@ -58,3 +58,13 @@ type LtsData struct {
 	A0MTV int `xml:"A0MTV"`
 	A0Rep int `xml:"A0Rep"`
 }
+
+type RoomType int
+
+type HotelType int
+
+type HotelFeature int
+
+type Theme int
+
+type Board int

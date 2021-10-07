@@ -81,9 +81,13 @@ type Logging struct {
 	Step string `xml:"step"`
 }
 
+type HotelDetails int
+
+type OfferDetails int
+
 type Options struct {
-	HotelDetails         int          `xml:"hotel_details"`
-	OfferDetails         int          `xml:"offer_details"`
+	HotelDetails         HotelDetails `xml:"hotel_details"`
+	OfferDetails         OfferDetails `xml:"offer_details"`
 	RoomDetails          int          `xml:"room_details"`
 	SpecialDetails       int          `xml:"special_details"`
 	SeoDetails           int          `xml:"seo_details"`
@@ -128,12 +132,12 @@ type Request struct {
 }
 
 type Room struct {
-	OfferId  int   `xml:"offer_id"`
-	RoomId   int   `xml:"room_id"`
-	Service  int   `xml:"service,omitempty"`
-	RoomType int   `xml:"room_type"`
-	RoomSeq  int   `xml:"room_seq"`
-	Person   []int `xml:"person"`
+	OfferId  int             `xml:"offer_id"`
+	RoomId   int             `xml:"room_id"`
+	Service  shared.Board    `xml:"service,omitempty"`
+	RoomType shared.RoomType `xml:"room_type"`
+	RoomSeq  int             `xml:"room_seq"`
+	Person   []int           `xml:"person"`
 }
 
 type Root struct {
@@ -187,12 +191,12 @@ type SearchDistance struct {
 }
 
 type SearchHotel struct {
-	Name     string `xml:"name"`
-	Type     []int  `xml:"type"`
-	Stars    *Stars `xml:"stars"`
-	Feature  int    `xml:"feature"`
-	Theme    int    `xml:"theme"`
-	RoomType int    `xml:"room_type"`
+	Name     string              `xml:"name"`
+	Type     []shared.HotelType  `xml:"type"`
+	Stars    *Stars              `xml:"stars"`
+	Feature  shared.HotelFeature `xml:"feature"`
+	Theme    shared.Theme        `xml:"theme"`
+	RoomType shared.RoomType     `xml:"room_type"`
 }
 
 type SearchLocation struct {
@@ -203,7 +207,7 @@ type SearchLocation struct {
 type SearchOffer struct {
 	Arrival   *shared.Date `xml:"arrival"`
 	Departure *shared.Date `xml:"departure"`
-	Service   int          `xml:"service"`
+	Service   shared.Board `xml:"service"`
 	Feature   int          `xml:"feature,omitempty"`
 	ChannelId []string     `xml:"channel_id"`
 	Room      []Room       `xml:"room"`
@@ -214,7 +218,7 @@ type SearchOffer struct {
 type SearchPriceList struct {
 	DateFrom *shared.Date `xml:"date_from"`
 	DateTo   *shared.Date `xml:"date_to"`
-	Service  int          `xml:"service"`
+	Service  shared.Board `xml:"service"`
 	RoomId   []int        `xml:"room_id"`
 	Typ      int          `xml:"typ"`
 }
@@ -250,6 +254,6 @@ type Validity struct {
 	Offers    int          `xml:"offers"`
 	Arrival   *shared.Date `xml:"arrival"`
 	Departure *shared.Date `xml:"departure"`
-	Service   int          `xml:"service"`
+	Service   shared.Board `xml:"service"`
 	Room      []Room       `xml:"room"`
 }

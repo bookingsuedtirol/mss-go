@@ -24,26 +24,26 @@ type Bank struct {
 }
 
 type Booking struct {
-	BookingId     int         `xml:"booking_id"`
-	StornoId      int         `xml:"storno_id"`
-	BookingDate   DateTime    `xml:"booking_date"`
-	Source        string      `xml:"source"`
-	HotelId       int         `xml:"hotel_id"`
-	Arrival       shared.Date `xml:"arrival"`
-	Departure     shared.Date `xml:"departure"`
-	Service       int         `xml:"service"`
-	BookingStatus int         `xml:"booking_status"`
-	Cancelled     int         `xml:"cancelled"`
-	Note          string      `xml:"note"`
-	Hotel         Hotel       `xml:"hotel"`
-	Guest         Guest       `xml:"guest"`
-	Company       Company     `xml:"company"`
-	Payment       Payment     `xml:"payment"`
-	Room          []Room      `xml:"room"`
-	ExtraPrice    []Price     `xml:"extra_price"`
-	Offer         []Offer     `xml:"offer"`
-	Insurance     Insurance   `xml:"insurance"`
-	Coupon        Coupon      `xml:"coupon"`
+	BookingId     int          `xml:"booking_id"`
+	StornoId      int          `xml:"storno_id"`
+	BookingDate   DateTime     `xml:"booking_date"`
+	Source        string       `xml:"source"`
+	HotelId       int          `xml:"hotel_id"`
+	Arrival       shared.Date  `xml:"arrival"`
+	Departure     shared.Date  `xml:"departure"`
+	Service       shared.Board `xml:"service"`
+	BookingStatus int          `xml:"booking_status"`
+	Cancelled     int          `xml:"cancelled"`
+	Note          string       `xml:"note"`
+	Hotel         Hotel        `xml:"hotel"`
+	Guest         Guest        `xml:"guest"`
+	Company       Company      `xml:"company"`
+	Payment       Payment      `xml:"payment"`
+	Room          []Room       `xml:"room"`
+	ExtraPrice    []Price      `xml:"extra_price"`
+	Offer         []Offer      `xml:"offer"`
+	Insurance     Insurance    `xml:"insurance"`
+	Coupon        Coupon       `xml:"coupon"`
 }
 
 type CancelPolicy struct {
@@ -118,9 +118,11 @@ type Day struct {
 	Restrictions []Restriction `xml:"restrictions>restriction"`
 }
 
+type ErrorCode int
+
 type Error struct {
-	Code    int    `xml:"code"`
-	Message string `xml:"message"`
+	Code    ErrorCode `xml:"code"`
+	Message string    `xml:"message"`
 }
 
 type Feature struct {
@@ -171,28 +173,28 @@ type Header struct {
 }
 
 type Hotel struct {
-	Id                    int           `xml:"id"`
-	IdLts                 string        `xml:"id_lts"`
-	Bookable              bool          `xml:"bookable"`
-	Name                  TrimmedString `xml:"name"`
-	Type                  int           `xml:"type"`
-	Stars                 float64       `xml:"stars"`
-	Address               Address       `xml:"address"`
-	Themes                int           `xml:"themes"`
-	Features              int           `xml:"features"`
-	Location              HotelLocation `xml:"location"`
-	LocationName          LocationName  `xml:"location_name"`
-	Geolocation           Geolocation   `xml:"geolocation"`
-	Contact               Contact       `xml:"contact"`
-	Headline              string        `xml:"headline"`
-	Description           string        `xml:"description"`
-	HotelPayment          HotelPayment  `xml:"hotel_payment"`
-	Matching              Matching      `xml:"matching"`
-	Logo                  []Picture     `xml:"logo>picture"`
-	Pictures              []Picture     `xml:"pictures>picture"`
-	AvailableFrom         shared.Date   `xml:"available_from"`
-	PricesChangedAt       DateTime      `xml:"prices_changed_at"`
-	AvailabilityChangedAt DateTime      `xml:"availability_changed_at"`
+	Id                    int                 `xml:"id"`
+	IdLts                 string              `xml:"id_lts"`
+	Bookable              bool                `xml:"bookable"`
+	Name                  TrimmedString       `xml:"name"`
+	Type                  shared.HotelType    `xml:"type"`
+	Stars                 float64             `xml:"stars"`
+	Address               Address             `xml:"address"`
+	Themes                shared.Theme        `xml:"themes"`
+	Features              shared.HotelFeature `xml:"features"`
+	Location              HotelLocation       `xml:"location"`
+	LocationName          LocationName        `xml:"location_name"`
+	Geolocation           Geolocation         `xml:"geolocation"`
+	Contact               Contact             `xml:"contact"`
+	Headline              string              `xml:"headline"`
+	Description           string              `xml:"description"`
+	HotelPayment          HotelPayment        `xml:"hotel_payment"`
+	Matching              Matching            `xml:"matching"`
+	Logo                  []Picture           `xml:"logo>picture"`
+	Pictures              []Picture           `xml:"pictures>picture"`
+	AvailableFrom         shared.Date         `xml:"available_from"`
+	PricesChangedAt       DateTime            `xml:"prices_changed_at"`
+	AvailabilityChangedAt DateTime            `xml:"availability_changed_at"`
 	// TODO: use time.Time here?
 	BookableUntil string         `xml:"bookable_until"`
 	Gallery       []Picture      `xml:"gallery>picture"`
@@ -421,32 +423,32 @@ type Result struct {
 }
 
 type Room struct {
-	RoomId          int          `xml:"room_id"`
-	RoomLtsId       string       `xml:"room_lts_id"`
-	OfferId         int          `xml:"offer_id"`
-	Service         int          `xml:"service"`
-	RoomType        int          `xml:"room_type"`
-	RoomCode        string       `xml:"room_code"`
-	RoomTitle       string       `xml:"room_title"`
-	RoomDescription string       `xml:"room_description"`
-	Title           string       `xml:"title"`
-	Description     Nl2brString  `xml:"description"`
-	RoomPersons     string       `xml:"room_persons"`
-	RoomFree        int          `xml:"room_free"`
-	Features        int          `xml:"features"`
-	FeaturesView    []Feature    `xml:"features_view>feature"`
-	RoomTotal       float64      `xml:"room_total"`
-	Pictures        []Picture    `xml:"pictures>picture"`
-	RoomPrice       []Price      `xml:"room_price"`
-	CancelPolicy    CancelPolicy `xml:"cancel_policy"`
-	PaymentTerm     PaymentTerm  `xml:"payment_term"`
-	Properties      Properties   `xml:"properties"`
-	Occupancy       Occupancy    `xml:"occupancy"`
-	RoomNumbers     []string     `xml:"room_numbers>number"`
-	RoomDetails     []RoomDetail `xml:"room_details>room_detail"`
-	Days            []Day        `xml:"days>day"`
-	PriceFrom       int          `xml:"price_from"`
-	PriceList       []PriceList  `xml:"pricelist"`
+	RoomId          int             `xml:"room_id"`
+	RoomLtsId       string          `xml:"room_lts_id"`
+	OfferId         int             `xml:"offer_id"`
+	Service         int             `xml:"service"`
+	RoomType        shared.RoomType `xml:"room_type"`
+	RoomCode        string          `xml:"room_code"`
+	RoomTitle       string          `xml:"room_title"`
+	RoomDescription string          `xml:"room_description"`
+	Title           string          `xml:"title"`
+	Description     Nl2brString     `xml:"description"`
+	RoomPersons     string          `xml:"room_persons"`
+	RoomFree        int             `xml:"room_free"`
+	Features        int             `xml:"features"`
+	FeaturesView    []Feature       `xml:"features_view>feature"`
+	RoomTotal       float64         `xml:"room_total"`
+	Pictures        []Picture       `xml:"pictures>picture"`
+	RoomPrice       []Price         `xml:"room_price"`
+	CancelPolicy    CancelPolicy    `xml:"cancel_policy"`
+	PaymentTerm     PaymentTerm     `xml:"payment_term"`
+	Properties      Properties      `xml:"properties"`
+	Occupancy       Occupancy       `xml:"occupancy"`
+	RoomNumbers     []string        `xml:"room_numbers>number"`
+	RoomDetails     []RoomDetail    `xml:"room_details>room_detail"`
+	Days            []Day           `xml:"days>day"`
+	PriceFrom       int             `xml:"price_from"`
+	PriceList       []PriceList     `xml:"pricelist"`
 }
 
 type RoomDetail struct {

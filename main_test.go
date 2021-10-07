@@ -4,10 +4,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/HGV/mss-go/bitmasks/hotel_details"
-	"github.com/HGV/mss-go/bitmasks/method"
 	"github.com/HGV/mss-go/request"
 	"github.com/HGV/mss-go/response"
+	"github.com/HGV/mss-go/types/hotel_details"
+	"github.com/HGV/mss-go/types/method"
 )
 
 var client = Client{
