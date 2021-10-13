@@ -21,6 +21,8 @@ MSS API client for Go projects
 - [x] getSeoTexts
 - [x] validateCoupon
 
+Warning: Only the implementations for `getHotelList` and `getLocationList` have been tested so far.
+
 ## Before running examples/tests
 
 Set the environment variables with:
