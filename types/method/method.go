@@ -1,6 +1,8 @@
 package method
 
+import "github.com/HGV/mss-go/request"
+
 const (
-	GetLocationList = "getLocationList"
-	GetHotelList    = "getHotelList"
+	GetLocationList request.Method = "getLocationList"
+	GetHotelList    request.Method = "getHotelList"
 )

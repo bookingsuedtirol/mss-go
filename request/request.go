@@ -69,12 +69,13 @@ type Guest struct {
 	Newsletter int `xml:"newsletter"`
 }
 
+type Method string
+
 type Header struct {
 	Credentials Credentials `xml:"credentials"`
-	// TODO: restring values, e.g. getHotelList
-	Method   string  `xml:"method"`
-	Paging   *Paging `xml:"paging"`
-	ResultId string  `xml:"result_id"`
+	Method      Method      `xml:"method"`
+	Paging      *Paging     `xml:"paging"`
+	ResultId    string      `xml:"result_id"`
 }
 
 type Logging struct {
