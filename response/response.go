@@ -227,8 +227,10 @@ type HotelLocation struct {
 	IdArea      int `xml:"id_area"`
 }
 
+type PaymentMethods int
+
 type HotelPayment struct {
-	Methods int `xml:"methods"`
+	Methods PaymentMethods `xml:"methods"`
 }
 
 type Insurance struct {
