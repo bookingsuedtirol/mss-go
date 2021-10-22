@@ -26,16 +26,16 @@ func main() {
 		requestRoot.Header.Method = method.GetHotelList
 		requestRoot.Request = request.Request{
 			Search: &request.Search{
-				Id: []int{9002},
+				Ids: []int{9002},
 				SearchOffer: &request.SearchOffer{
 					Arrival:   &today,
 					Departure: &oneWeekFromNow,
 					Service:   0,
-					Room: []request.Room{
+					Rooms: []request.Room{
 						{
 							RoomSeq:  1,
 							RoomType: 0,
-							Person:   []int{18, 18},
+							Persons:  []int{18, 18},
 						},
 					},
 				},
@@ -55,7 +55,7 @@ func main() {
 		panic(err)
 	}
 
-	hotel := responseRoot.Result.Hotel[0]
+	hotel := responseRoot.Result.Hotels[0]
 
 	fmt.Printf("%+v\n", hotel)
 }

@@ -26,7 +26,7 @@ func TestSimpleMssCall(t *testing.T) {
 		requestRoot.Header.Method = method.GetHotelList
 		requestRoot.Request = request.Request{
 			Search: &request.Search{
-				Id: []int{9002},
+				Ids: []int{9002},
 			},
 			Options: &request.Options{
 				HotelDetails: hotel_details.BasicInfo |
@@ -42,7 +42,7 @@ func TestSimpleMssCall(t *testing.T) {
 	}
 
 	want := "Testhotel Webseitentool HGV (hotelhgv.it)"
-	got := responseRoot.Result.Hotel[0].Name
+	got := responseRoot.Result.Hotels[0].Name
 
 	if got != want {
 		t.Errorf("failed, want \"%v\", got \"%v\"", want, got)

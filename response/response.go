@@ -38,9 +38,9 @@ type Booking struct {
 	Guest         Guest        `xml:"guest"`
 	Company       Company      `xml:"company"`
 	Payment       Payment      `xml:"payment"`
-	Room          []Room       `xml:"room"`
-	ExtraPrice    []Price      `xml:"extra_price"`
-	Offer         []Offer      `xml:"offer"`
+	Rooms         []Room       `xml:"room"`
+	ExtraPrices   []Price      `xml:"extra_price"`
+	Offers        []Offer      `xml:"offer"`
 	Insurance     Insurance    `xml:"insurance"`
 	Coupon        Coupon       `xml:"coupon"`
 }
@@ -55,22 +55,22 @@ type CancelPolicy struct {
 }
 
 type Channel struct {
-	ChannelId        string           `xml:"channel_id"`
-	OfferId          int              `xml:"offer_id"`
-	OfferDescription []Offer          `xml:"offer_description>offer"`
-	RoomPrice        []RoomPrice      `xml:"room_price>price"`
-	RoomDescription  []Room           `xml:"room_description>room"`
-	ServicePrice     []Price          `xml:"service_price>price"`
-	FromPrice        int              `xml:"from_price"`
-	BasePrice        []RoomPrice      `xml:"base_price>price"`
-	CancelPolicies   []CancelPolicy   `xml:"cancel_policies>cancel_policy"`
-	PaymentTerms     []PaymentTerm    `xml:"payment_terms>payment_term"`
-	PriceList        ChannelPriceList `xml:"pricelist"`
+	ChannelId         string           `xml:"channel_id"`
+	OfferId           int              `xml:"offer_id"`
+	OfferDescriptions []Offer          `xml:"offer_description>offer"`
+	RoomPrices        []RoomPrice      `xml:"room_price>price"`
+	RoomDescriptions  []Room           `xml:"room_description>room"`
+	ServicePrice      []Price          `xml:"service_price>price"`
+	FromPrice         int              `xml:"from_price"`
+	BasePrices        []RoomPrice      `xml:"base_price>price"`
+	CancelPolicies    []CancelPolicy   `xml:"cancel_policies>cancel_policy"`
+	PaymentTerms      []PaymentTerm    `xml:"payment_terms>payment_term"`
+	PriceList         ChannelPriceList `xml:"pricelist"`
 }
 
 type ChannelPriceList struct {
-	OfferId   int     `xml:"offer_id"`
-	Inclusive []Price `xml:"inclusive>price"`
+	OfferId    int     `xml:"offer_id"`
+	Inclusives []Price `xml:"inclusive>price"`
 }
 
 // TODO: Perhaps use time.Time instead of string here?
@@ -189,7 +189,7 @@ type Hotel struct {
 	Description           NormalizedHTMLString `xml:"description"`
 	HotelPayment          HotelPayment         `xml:"hotel_payment"`
 	Matching              Matching             `xml:"matching"`
-	Logo                  []Picture            `xml:"logo>picture"`
+	Logos                 []Picture            `xml:"logo>picture"`
 	Pictures              []Picture            `xml:"pictures>picture"`
 	AvailableFrom         shared.Date          `xml:"available_from"`
 	PricesChangedAt       DateTime             `xml:"prices_changed_at"`
@@ -369,7 +369,7 @@ type PriceList struct {
 	AdultsMin      int      `xml:"adults_min"`
 	AdultsMax      int      `xml:"adults_max"`
 	Title          string   `xml:"title"`
-	Season         []Season `xml:"season"`
+	Seasons        []Season `xml:"season"`
 }
 
 type Properties struct {
@@ -414,13 +414,13 @@ type Restriction struct {
 }
 
 type Result struct {
-	Hotel    []Hotel         `xml:"hotel"`
-	Special  []Special       `xml:"special"`
-	Tracking Tracking        `xml:"tracking"`
-	Source   []Source        `xml:"source"`
-	SeoText  []SeoText       `xml:"seo_text"`
-	Location []Location      `xml:"location"`
-	Theme    []ThemeListItem `xml:"theme"`
+	Hotels    []Hotel         `xml:"hotel"`
+	Specials  []Special       `xml:"special"`
+	Tracking  Tracking        `xml:"tracking"`
+	Sources   []Source        `xml:"source"`
+	SeoTexts  []SeoText       `xml:"seo_text"`
+	Locations []Location      `xml:"location"`
+	Themes    []ThemeListItem `xml:"theme"`
 }
 
 type Room struct {

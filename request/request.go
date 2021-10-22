@@ -43,8 +43,8 @@ type Data struct {
 }
 
 type Details struct {
-	ExtraPrice []ExtraPrice `xml:"extra_price"`
-	Coupon     *Coupon      `xml:"coupon"`
+	ExtraPrices []ExtraPrice `xml:"extra_price"`
+	Coupon      *Coupon      `xml:"coupon"`
 }
 
 type ExtraPrice struct {
@@ -138,7 +138,7 @@ type Room struct {
 	Service  shared.Board    `xml:"service,omitempty"`
 	RoomType shared.RoomType `xml:"room_type"`
 	RoomSeq  int             `xml:"room_seq"`
-	Person   []int           `xml:"person"`
+	Persons  []int           `xml:"person"`
 }
 
 type Root struct {
@@ -152,7 +152,7 @@ type Search struct {
 	Lang               string              `xml:"lang"`
 	ResultId           string              `xml:"result_id"`
 	Agent              string              `xml:"agent"`
-	Id                 []int               `xml:"id"`
+	Ids                []int               `xml:"id"`
 	SearchHotel        *SearchHotel        `xml:"search_hotel"`
 	SearchLocation     *SearchLocation     `xml:"search_location"`
 	SearchDistance     *SearchDistance     `xml:"search_distance"`
@@ -181,8 +181,8 @@ type Search struct {
 type SearchAvailability struct {
 	DateFrom *shared.Date `xml:"date_from"`
 	DateTo   *shared.Date `xml:"date_to"`
-	OfferId  []int        `xml:"offer_id"`
-	RoomId   []int        `xml:"room_id"`
+	OfferIds []int        `xml:"offer_id"`
+	RoomIds  []int        `xml:"room_id"`
 }
 
 type SearchDistance struct {
@@ -193,7 +193,7 @@ type SearchDistance struct {
 
 type SearchHotel struct {
 	Name     string              `xml:"name"`
-	Type     []shared.HotelType  `xml:"type"`
+	Types    []shared.HotelType  `xml:"type"`
 	Stars    *Stars              `xml:"stars"`
 	Feature  shared.HotelFeature `xml:"feature"`
 	Theme    shared.Theme        `xml:"theme"`
@@ -201,36 +201,36 @@ type SearchHotel struct {
 }
 
 type SearchLocation struct {
-	Location    []int    `xml:"location"`
-	LocationLts []string `xml:"location_lts"`
+	Locations    []int    `xml:"location"`
+	LocationsLts []string `xml:"location_lts"`
 }
 
 type SearchOffer struct {
-	Arrival   *shared.Date `xml:"arrival"`
-	Departure *shared.Date `xml:"departure"`
-	Service   shared.Board `xml:"service"`
-	Feature   int          `xml:"feature,omitempty"`
-	ChannelId []string     `xml:"channel_id"`
-	Room      []Room       `xml:"room"`
-	Typ       int          `xml:"typ"`
-	Rateplan  *Rateplan    `xml:"rateplan"`
+	Arrival    *shared.Date `xml:"arrival"`
+	Departure  *shared.Date `xml:"departure"`
+	Service    shared.Board `xml:"service"`
+	Feature    int          `xml:"feature,omitempty"`
+	ChannelIds []string     `xml:"channel_id"`
+	Rooms      []Room       `xml:"room"`
+	Typ        int          `xml:"typ"`
+	Rateplan   *Rateplan    `xml:"rateplan"`
 }
 
 type SearchPriceList struct {
 	DateFrom *shared.Date `xml:"date_from"`
 	DateTo   *shared.Date `xml:"date_to"`
 	Service  shared.Board `xml:"service"`
-	RoomId   []int        `xml:"room_id"`
+	RoomIds  []int        `xml:"room_id"`
 	Typ      int          `xml:"typ"`
 }
 
 type SearchSpecial struct {
-	OfferId  []int        `xml:"offer_id"`
+	OfferIds []int        `xml:"offer_id"`
 	DateFrom *shared.Date `xml:"date_from"`
 	DateTo   *shared.Date `xml:"date_to"`
-	Theme    []int        `xml:"theme"`
-	PoiId    []int        `xml:"poi_id"`
-	PoiCat   []int        `xml:"poi_cat"`
+	Themes   []int        `xml:"theme"`
+	PoiIds   []int        `xml:"poi_id"`
+	PoiCats  []int        `xml:"poi_cat"`
 	Validity *Validity    `xml:"validity"`
 	Typ      int          `xml:"typ"`
 	Premium  int          `xml:"premium"`
@@ -256,5 +256,5 @@ type Validity struct {
 	Arrival   *shared.Date `xml:"arrival"`
 	Departure *shared.Date `xml:"departure"`
 	Service   shared.Board `xml:"service"`
-	Room      []Room       `xml:"room"`
+	Rooms     []Room       `xml:"room"`
 }
