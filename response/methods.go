@@ -29,19 +29,6 @@ func (dateTime DateTime) String() string {
 	return time.Time(dateTime).String()
 }
 
-func (input *TrimmedString) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
-	var value string
-	err := decoder.DecodeElement(&value, &start)
-
-	if err != nil {
-		return err
-	}
-
-	*input = TrimmedString(strings.TrimSpace(value))
-
-	return nil
-}
-
 func (input *Nl2brString) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
 	var value string
 	err := decoder.DecodeElement(&value, &start)
@@ -50,8 +37,7 @@ func (input *Nl2brString) UnmarshalXML(decoder *xml.Decoder, start xml.StartElem
 		return err
 	}
 
-	trimmedString := strings.TrimSpace(value)
-	nl2brString := strings.ReplaceAll(trimmedString, "\n", "<br />\n")
+	nl2brString := strings.ReplaceAll(value, "\n", "<br />\n")
 	*input = Nl2brString(nl2brString)
 
 	return nil

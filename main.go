@@ -1,6 +1,7 @@
 package mss
 
 import (
+	"bytes"
 	"encoding/xml"
 	"fmt"
 	"net/http"
@@ -66,7 +67,9 @@ func sendRequest(requestRoot request.Root) (response.Root, error) {
 			fmt.Errorf("request to MSS failed with HTTP status code %v", resp.StatusCode)
 	}
 
-	dec := xml.NewDecoder(resp.Body)
+	rawDec := xml.NewDecoder(resp.Body)
+	// Trim all leading and trailing whitespace inside XML elements
+	dec := xml.NewTokenDecoder(WhitespaceTrimmer{rawDec})
 
 	var responseRoot response.Root
 	err = dec.Decode(&responseRoot)
@@ -84,4 +87,16 @@ func sendRequest(requestRoot request.Root) (response.Root, error) {
 	}
 
 	return responseRoot, nil
+}
+
+type WhitespaceTrimmer struct {
+	dec *xml.Decoder
+}
+
+func (tr WhitespaceTrimmer) Token() (xml.Token, error) {
+	t, err := tr.dec.Token()
+	if cd, ok := t.(xml.CharData); ok {
+		t = xml.CharData(bytes.TrimSpace(cd))
+	}
+	return t, err
 }

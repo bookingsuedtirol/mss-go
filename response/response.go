@@ -87,10 +87,10 @@ type Company struct {
 }
 
 type Contact struct {
-	Email TrimmedString `xml:"email"`
-	Phone string        `xml:"phone"`
-	Fax   string        `xml:"fax"`
-	Web   string        `xml:"web"`
+	Email string `xml:"email"`
+	Phone string `xml:"phone"`
+	Fax   string `xml:"fax"`
+	Web   string `xml:"web"`
 }
 
 type Coupon struct {
@@ -153,14 +153,14 @@ type Geolocation struct {
 }
 
 type Guest struct {
-	GuestId   int           `xml:"guest_id"`
-	Firstname string        `xml:"firstname"`
-	Lastname  string        `xml:"lastname"`
-	Prefix    string        `xml:"prefix"`
-	Gender    string        `xml:"gender"`
-	Email     TrimmedString `xml:"email"`
-	Phone     string        `xml:"phone"`
-	Address   Address       `xml:"address"`
+	GuestId   int     `xml:"guest_id"`
+	Firstname string  `xml:"firstname"`
+	Lastname  string  `xml:"lastname"`
+	Prefix    string  `xml:"prefix"`
+	Gender    string  `xml:"gender"`
+	Email     string  `xml:"email"`
+	Phone     string  `xml:"phone"`
+	Address   Address `xml:"address"`
 }
 
 type Header struct {
@@ -175,7 +175,7 @@ type Hotel struct {
 	Id                    int                 `xml:"id"`
 	IdLts                 string              `xml:"id_lts"`
 	Bookable              bool                `xml:"bookable"`
-	Name                  TrimmedString       `xml:"name"`
+	Name                  string              `xml:"name"`
 	Type                  shared.HotelType    `xml:"type"`
 	Stars                 float64             `xml:"stars"`
 	Address               Address             `xml:"address"`
@@ -601,7 +601,5 @@ type Tracking struct {
 }
 
 type DateTime time.Time
-
-type TrimmedString string
 
 type Nl2brString string

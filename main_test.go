@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/HGV/mss-go/request"
-	"github.com/HGV/mss-go/response"
 	"github.com/HGV/mss-go/types/hotel_details"
 	"github.com/HGV/mss-go/types/method"
 )
@@ -42,7 +41,7 @@ func TestSimpleMssCall(t *testing.T) {
 		panic(err)
 	}
 
-	want := response.TrimmedString("Testhotel Webseitentool HGV (hotelhgv.it)")
+	want := "Testhotel Webseitentool HGV (hotelhgv.it)"
 	got := responseRoot.Result.Hotel[0].Name
 
 	if got != want {
