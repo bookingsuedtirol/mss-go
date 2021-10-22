@@ -172,28 +172,28 @@ type Header struct {
 }
 
 type Hotel struct {
-	Id                    int                 `xml:"id"`
-	IdLts                 string              `xml:"id_lts"`
-	Bookable              bool                `xml:"bookable"`
-	Name                  string              `xml:"name"`
-	Type                  shared.HotelType    `xml:"type"`
-	Stars                 float64             `xml:"stars"`
-	Address               Address             `xml:"address"`
-	Themes                shared.Theme        `xml:"themes"`
-	Features              shared.HotelFeature `xml:"features"`
-	Location              HotelLocation       `xml:"location"`
-	LocationName          LocationName        `xml:"location_name"`
-	Geolocation           Geolocation         `xml:"geolocation"`
-	Contact               Contact             `xml:"contact"`
-	Headline              string              `xml:"headline"`
-	Description           string              `xml:"description"`
-	HotelPayment          HotelPayment        `xml:"hotel_payment"`
-	Matching              Matching            `xml:"matching"`
-	Logo                  []Picture           `xml:"logo>picture"`
-	Pictures              []Picture           `xml:"pictures>picture"`
-	AvailableFrom         shared.Date         `xml:"available_from"`
-	PricesChangedAt       DateTime            `xml:"prices_changed_at"`
-	AvailabilityChangedAt DateTime            `xml:"availability_changed_at"`
+	Id                    int                  `xml:"id"`
+	IdLts                 string               `xml:"id_lts"`
+	Bookable              bool                 `xml:"bookable"`
+	Name                  string               `xml:"name"`
+	Type                  shared.HotelType     `xml:"type"`
+	Stars                 float64              `xml:"stars"`
+	Address               Address              `xml:"address"`
+	Themes                shared.Theme         `xml:"themes"`
+	Features              shared.HotelFeature  `xml:"features"`
+	Location              HotelLocation        `xml:"location"`
+	LocationName          LocationName         `xml:"location_name"`
+	Geolocation           Geolocation          `xml:"geolocation"`
+	Contact               Contact              `xml:"contact"`
+	Headline              string               `xml:"headline"`
+	Description           NormalizedHTMLString `xml:"description"`
+	HotelPayment          HotelPayment         `xml:"hotel_payment"`
+	Matching              Matching             `xml:"matching"`
+	Logo                  []Picture            `xml:"logo>picture"`
+	Pictures              []Picture            `xml:"pictures>picture"`
+	AvailableFrom         shared.Date          `xml:"available_from"`
+	PricesChangedAt       DateTime             `xml:"prices_changed_at"`
+	AvailabilityChangedAt DateTime             `xml:"availability_changed_at"`
 	// TODO: use time.Time here?
 	BookableUntil string         `xml:"bookable_until"`
 	Gallery       []Picture      `xml:"gallery>picture"`
@@ -603,3 +603,5 @@ type Tracking struct {
 type DateTime time.Time
 
 type Nl2brString string
+
+type NormalizedHTMLString string

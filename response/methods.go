@@ -1,11 +1,16 @@
 package response
 
 import (
+	"bytes"
 	"encoding/xml"
+	"io"
 	"strings"
 	"time"
 
 	"github.com/HGV/mss-go/shared"
+	"github.com/microcosm-cc/bluemonday"
+	"golang.org/x/net/html"
+	"golang.org/x/net/html/atom"
 )
 
 func (input *DateTime) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
@@ -41,4 +46,64 @@ func (input *Nl2brString) UnmarshalXML(decoder *xml.Decoder, start xml.StartElem
 	*input = Nl2brString(nl2brString)
 
 	return nil
+}
+
+func (input *NormalizedHTMLString) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
+	var value string
+	err := decoder.DecodeElement(&value, &start)
+
+	if err != nil {
+		return err
+	}
+
+	if value == "" {
+		*input = ""
+		return nil
+	}
+
+	fixed, err := fixHTML(strings.NewReader(value))
+
+	if err != nil {
+		return err
+	}
+
+	sanitized := sanitizePolicy.SanitizeReader(fixed)
+
+	*input = NormalizedHTMLString(sanitized.String())
+
+	return nil
+}
+
+var sanitizePolicy = getSanitizePolicy()
+
+func getSanitizePolicy() *bluemonday.Policy {
+	p := bluemonday.StrictPolicy()
+	// TODO: Check if this is the right list of allowed elements
+	p.AllowElements("p", "ul", "ol", "li", "b", "strong", "br", "em", "u")
+	return p
+}
+
+// Fix ill-formed HTML (which MSS sometimes outputs, e.g.
+// missing closing elements) and output well-formed HTML.
+func fixHTML(input io.Reader) (io.Reader, error) {
+	nodes, err := html.ParseFragment(input, &html.Node{
+		Type:     html.ElementNode,
+		Data:     "body",
+		DataAtom: atom.Body,
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	buf := new(bytes.Buffer)
+
+	for _, node := range nodes {
+		err = html.Render(buf, node)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return buf, nil
 }
