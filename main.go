@@ -3,7 +3,6 @@ package mss
 import (
 	"encoding/xml"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"strings"
 
@@ -67,14 +66,10 @@ func sendRequest(requestRoot request.Root) (response.Root, error) {
 			fmt.Errorf("request to MSS failed with HTTP status code %v", resp.StatusCode)
 	}
 
-	responseBody, err := ioutil.ReadAll(resp.Body)
-
-	if err != nil {
-		return response.Root{}, err
-	}
+	dec := xml.NewDecoder(resp.Body)
 
 	var responseRoot response.Root
-	err = xml.Unmarshal(responseBody, &responseRoot)
+	err = dec.Decode(&responseRoot)
 
 	if err != nil {
 		return response.Root{}, err
