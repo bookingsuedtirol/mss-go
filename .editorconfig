@@ -11,5 +11,5 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[{go.mod,go.sum,*.go}]
+[{Makefile,go.mod,go.sum,*.go}]
 indent_style = tab

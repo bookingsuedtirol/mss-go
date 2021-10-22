@@ -28,13 +28,13 @@ Warning: Only the implementations for `getHotelList` and `getLocationList` have 
 Set the environment variables with:
 
 ```Bash
-export $(grep -v '^#' examples/.env | xargs)
+export $(make env)
 ```
 
 ## Examples
 
-Run `go run examples/simple/*`, `go run examples/advanced/*` etc.
+Run `make simple` or `make advanced`
 
 ## Tests
 
-Run `go test -v`
+Run `make test`
