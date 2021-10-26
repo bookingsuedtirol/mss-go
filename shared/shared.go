@@ -68,3 +68,5 @@ type HotelFeature int
 type Theme int
 
 type Board int
+
+type OfferType int

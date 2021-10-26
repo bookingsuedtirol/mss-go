@@ -206,14 +206,14 @@ type SearchLocation struct {
 }
 
 type SearchOffer struct {
-	Arrival    *shared.Date `xml:"arrival"`
-	Departure  *shared.Date `xml:"departure"`
-	Service    shared.Board `xml:"service"`
-	Feature    int          `xml:"feature,omitempty"`
-	ChannelIds []string     `xml:"channel_id"`
-	Rooms      []Room       `xml:"room"`
-	Type       int          `xml:"typ"`
-	Rateplan   *Rateplan    `xml:"rateplan"`
+	Arrival    *shared.Date     `xml:"arrival"`
+	Departure  *shared.Date     `xml:"departure"`
+	Service    shared.Board     `xml:"service"`
+	Feature    int              `xml:"feature,omitempty"`
+	ChannelIds []string         `xml:"channel_id"`
+	Rooms      []Room           `xml:"room"`
+	Type       shared.OfferType `xml:"typ"`
+	Rateplan   *Rateplan        `xml:"rateplan"`
 }
 
 type SearchPriceList struct {

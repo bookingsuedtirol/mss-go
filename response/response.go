@@ -278,17 +278,17 @@ type Occupancy struct {
 }
 
 type Offer struct {
-	OfferId          int       `xml:"offer_id"`
-	OfferGid         int       `xml:"offer_gid"`
-	OfferBaseId      int       `xml:"offer_base_id"`
-	OfferType        int       `xml:"offer_typ"`
-	OfferShow        int       `xml:"offer_show"`
-	OfferTitle       string    `xml:"offer_title"`
-	Title            string    `xml:"title"`
-	OfferDescription string    `xml:"offer_description"`
-	Description      string    `xml:"description"`
-	Pictures         []Picture `xml:"pictures>picture"`
-	Themes           []Theme   `xml:"themes>theme"`
+	OfferId          int              `xml:"offer_id"`
+	OfferGid         int              `xml:"offer_gid"`
+	OfferBaseId      int              `xml:"offer_base_id"`
+	OfferType        shared.OfferType `xml:"offer_typ"`
+	OfferShow        int              `xml:"offer_show"`
+	OfferTitle       string           `xml:"offer_title"`
+	Title            string           `xml:"title"`
+	OfferDescription string           `xml:"offer_description"`
+	Description      string           `xml:"description"`
+	Pictures         []Picture        `xml:"pictures>picture"`
+	Themes           []Theme          `xml:"themes>theme"`
 }
 
 type Paging struct {
@@ -331,45 +331,45 @@ type Picture struct {
 }
 
 type Price struct {
-	PriceId          int       `xml:"price_id"`
-	PriceType        int       `xml:"price_typ"`
-	Title            string    `xml:"title"`
-	PriceTitle       string    `xml:"price_title"`
-	Description      string    `xml:"description"`
-	PriceDescription string    `xml:"price_description"`
-	Supplement       int       `xml:"supplement"`
-	PriceSupplement  int       `xml:"price_supplement"`
-	PriceWs          float64   `xml:"price_ws"`
-	PriceBb          float64   `xml:"price_bb"`
-	PriceHb          float64   `xml:"price_hb"`
-	PriceFb          float64   `xml:"price_fb"`
-	PriceAi          float64   `xml:"price_ai"`
-	PriceAmount      float64   `xml:"price_amount"`
-	PriceValue       float64   `xml:"price_value"`
-	PriceTotal       float64   `xml:"price_total"`
-	Unit             int       `xml:"unit"`
-	Pictures         []Picture `xml:"pictures>picture"`
+	PriceId          int              `xml:"price_id"`
+	PriceType        shared.OfferType `xml:"price_typ"`
+	Title            string           `xml:"title"`
+	PriceTitle       string           `xml:"price_title"`
+	Description      string           `xml:"description"`
+	PriceDescription string           `xml:"price_description"`
+	Supplement       int              `xml:"supplement"`
+	PriceSupplement  int              `xml:"price_supplement"`
+	PriceWs          float64          `xml:"price_ws"`
+	PriceBb          float64          `xml:"price_bb"`
+	PriceHb          float64          `xml:"price_hb"`
+	PriceFb          float64          `xml:"price_fb"`
+	PriceAi          float64          `xml:"price_ai"`
+	PriceAmount      float64          `xml:"price_amount"`
+	PriceValue       float64          `xml:"price_value"`
+	PriceTotal       float64          `xml:"price_total"`
+	Unit             int              `xml:"unit"`
+	Pictures         []Picture        `xml:"pictures>picture"`
 }
 
 type PriceList struct {
-	OfferId        int      `xml:"offer_id"`
-	OfferType      int      `xml:"offer_typ"`
-	OfferBaseId    int      `xml:"offer_base_id"`
-	SpecialType    int      `xml:"special_typ"`
-	PrlMode        int      `xml:"prl_mode"`
-	PrlUnit        int      `xml:"prl_unit"`
-	DaysArrival    int      `xml:"days_arrival"`
-	DaysDeparture  int      `xml:"days_departure"`
-	DaysDurMin     int      `xml:"days_dur_min"`
-	DaysDurMax     int      `xml:"days_dur_max"`
-	DaysArrivalMin int      `xml:"days_arrival_min"`
-	DaysArrivalMax int      `xml:"days_arrival_max"`
-	ChildrenMin    int      `xml:"children_min"`
-	ChildrenMax    int      `xml:"children_max"`
-	AdultsMin      int      `xml:"adults_min"`
-	AdultsMax      int      `xml:"adults_max"`
-	Title          string   `xml:"title"`
-	Seasons        []Season `xml:"season"`
+	OfferId        int              `xml:"offer_id"`
+	OfferType      shared.OfferType `xml:"offer_typ"`
+	OfferBaseId    int              `xml:"offer_base_id"`
+	SpecialType    int              `xml:"special_typ"`
+	PrlMode        int              `xml:"prl_mode"`
+	PrlUnit        int              `xml:"prl_unit"`
+	DaysArrival    int              `xml:"days_arrival"`
+	DaysDeparture  int              `xml:"days_departure"`
+	DaysDurMin     int              `xml:"days_dur_min"`
+	DaysDurMax     int              `xml:"days_dur_max"`
+	DaysArrivalMin int              `xml:"days_arrival_min"`
+	DaysArrivalMax int              `xml:"days_arrival_max"`
+	ChildrenMin    int              `xml:"children_min"`
+	ChildrenMax    int              `xml:"children_max"`
+	AdultsMin      int              `xml:"adults_min"`
+	AdultsMax      int              `xml:"adults_max"`
+	Title          string           `xml:"title"`
+	Seasons        []Season         `xml:"season"`
 }
 
 type Properties struct {
@@ -545,36 +545,36 @@ type SourceData struct {
 }
 
 type Special struct {
-	OfferId        int         `xml:"offer_id"`
-	Status         int         `xml:"status"`
-	Valid          int         `xml:"valid"`
-	OfferType      int         `xml:"offer_typ"`
-	SpecialType    int         `xml:"special_typ"`
-	SpecialPremium int         `xml:"special_premium"`
-	DaysArrival    int         `xml:"days_arrival"`
-	DaysDeparture  int         `xml:"days_departure"`
-	DaysDurMin     int         `xml:"days_dur_min"`
-	DaysDurMax     int         `xml:"days_dur_max"`
-	DaysArrivalMin int         `xml:"days_arrival_min"`
-	DaysArrivalMax int         `xml:"days_arrival_max"`
-	ChildrenMin    int         `xml:"children_min"`
-	ChildrenMax    int         `xml:"children_max"`
-	AdultsMin      int         `xml:"adults_min"`
-	AdultsMax      int         `xml:"adults_max"`
-	PersAgeMin     int         `xml:"pers_age_min"`
-	ChildAgeMin    int         `xml:"child_age_min"`
-	ChildAgeMax    int         `xml:"child_age_max"`
-	AdultAgeMin    int         `xml:"adult_age_min"`
-	ValidStart     shared.Date `xml:"valid_start"`
-	ValidEnd       shared.Date `xml:"valid_end"`
-	Title          string      `xml:"title"`
-	Description    string      `xml:"description"`
-	Hotels         []Hotel     `xml:"hotels>hotel"`
-	Seasons        []Season    `xml:"seasons>season"`
-	Services       []int       `xml:"services>service"`
-	Inclusive      []Price     `xml:"inclusive>price"`
-	Pictures       []Picture   `xml:"pictures>picture"`
-	Themes         []Theme     `xml:"themes>theme"`
+	OfferId        int              `xml:"offer_id"`
+	Status         int              `xml:"status"`
+	Valid          int              `xml:"valid"`
+	OfferType      shared.OfferType `xml:"offer_typ"`
+	SpecialType    int              `xml:"special_typ"`
+	SpecialPremium int              `xml:"special_premium"`
+	DaysArrival    int              `xml:"days_arrival"`
+	DaysDeparture  int              `xml:"days_departure"`
+	DaysDurMin     int              `xml:"days_dur_min"`
+	DaysDurMax     int              `xml:"days_dur_max"`
+	DaysArrivalMin int              `xml:"days_arrival_min"`
+	DaysArrivalMax int              `xml:"days_arrival_max"`
+	ChildrenMin    int              `xml:"children_min"`
+	ChildrenMax    int              `xml:"children_max"`
+	AdultsMin      int              `xml:"adults_min"`
+	AdultsMax      int              `xml:"adults_max"`
+	PersAgeMin     int              `xml:"pers_age_min"`
+	ChildAgeMin    int              `xml:"child_age_min"`
+	ChildAgeMax    int              `xml:"child_age_max"`
+	AdultAgeMin    int              `xml:"adult_age_min"`
+	ValidStart     shared.Date      `xml:"valid_start"`
+	ValidEnd       shared.Date      `xml:"valid_end"`
+	Title          string           `xml:"title"`
+	Description    string           `xml:"description"`
+	Hotels         []Hotel          `xml:"hotels>hotel"`
+	Seasons        []Season         `xml:"seasons>season"`
+	Services       []int            `xml:"services>service"`
+	Inclusive      []Price          `xml:"inclusive>price"`
+	Pictures       []Picture        `xml:"pictures>picture"`
+	Themes         []Theme          `xml:"themes>theme"`
 }
 
 type Theme struct {
