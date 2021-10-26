@@ -168,8 +168,8 @@ type Search struct {
 	GuestEmail         string              `xml:"guest_email"`
 	RootId             int                 `xml:"root_id"`
 	ExternalId         int                 `xml:"external_id"`
-	Typ                string              `xml:"typ"`
-	SeoTyp             string              `xml:"seo_typ"`
+	Type               string              `xml:"typ"`
+	SeoType            string              `xml:"seo_typ"`
 	LocationDetails    int                 `xml:"location_details"`
 	CouponCode         string              `xml:"coupon_code"`
 	CouponType         string              `xml:"coupon_type"`
@@ -212,7 +212,7 @@ type SearchOffer struct {
 	Feature    int          `xml:"feature,omitempty"`
 	ChannelIds []string     `xml:"channel_id"`
 	Rooms      []Room       `xml:"room"`
-	Typ        int          `xml:"typ"`
+	Type       int          `xml:"typ"`
 	Rateplan   *Rateplan    `xml:"rateplan"`
 }
 
@@ -221,7 +221,7 @@ type SearchPriceList struct {
 	DateTo   *shared.Date `xml:"date_to"`
 	Service  shared.Board `xml:"service"`
 	RoomIds  []int        `xml:"room_id"`
-	Typ      int          `xml:"typ"`
+	Type     int          `xml:"typ"`
 }
 
 type SearchSpecial struct {
@@ -232,7 +232,7 @@ type SearchSpecial struct {
 	PoiIds   []int        `xml:"poi_id"`
 	PoiCats  []int        `xml:"poi_cat"`
 	Validity *Validity    `xml:"validity"`
-	Typ      int          `xml:"typ"`
+	Type     int          `xml:"typ"`
 	Premium  int          `xml:"premium"`
 	Status   int          `xml:"status"`
 }

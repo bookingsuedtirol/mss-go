@@ -243,7 +243,7 @@ type Location struct {
 	RootId    int     `xml:"root_id"`
 	ParentId  int     `xml:"parent_id"`
 	VirtualId string  `xml:"virtual_id"`
-	Typ       string  `xml:"typ"`
+	Type      string  `xml:"typ"`
 	Visible   int     `xml:"visible"`
 	Latitude  float64 `xml:"latitude"`
 	Longitude float64 `xml:"longitude"`
@@ -281,7 +281,7 @@ type Offer struct {
 	OfferId          int       `xml:"offer_id"`
 	OfferGid         int       `xml:"offer_gid"`
 	OfferBaseId      int       `xml:"offer_base_id"`
-	OfferTyp         int       `xml:"offer_typ"`
+	OfferType        int       `xml:"offer_typ"`
 	OfferShow        int       `xml:"offer_show"`
 	OfferTitle       string    `xml:"offer_title"`
 	Title            string    `xml:"title"`
@@ -332,7 +332,7 @@ type Picture struct {
 
 type Price struct {
 	PriceId          int       `xml:"price_id"`
-	PriceTyp         int       `xml:"price_typ"`
+	PriceType        int       `xml:"price_typ"`
 	Title            string    `xml:"title"`
 	PriceTitle       string    `xml:"price_title"`
 	Description      string    `xml:"description"`
@@ -353,9 +353,9 @@ type Price struct {
 
 type PriceList struct {
 	OfferId        int      `xml:"offer_id"`
-	OfferTyp       int      `xml:"offer_typ"`
+	OfferType      int      `xml:"offer_typ"`
 	OfferBaseId    int      `xml:"offer_base_id"`
-	SpecialTyp     int      `xml:"special_typ"`
+	SpecialType    int      `xml:"special_typ"`
 	PrlMode        int      `xml:"prl_mode"`
 	PrlUnit        int      `xml:"prl_unit"`
 	DaysArrival    int      `xml:"days_arrival"`
@@ -482,7 +482,7 @@ type Season struct {
 
 type SeoText struct {
 	Id             int       `xml:"id"`
-	Typ            string    `xml:"typ"`
+	Type           string    `xml:"typ"`
 	ExternalId     int       `xml:"external_id"`
 	HeadlineDeu    string    `xml:"headline_deu"`
 	DescriptionDeu string    `xml:"description_deu"`
@@ -548,8 +548,8 @@ type Special struct {
 	OfferId        int         `xml:"offer_id"`
 	Status         int         `xml:"status"`
 	Valid          int         `xml:"valid"`
-	OfferTyp       int         `xml:"offer_typ"`
-	SpecialTyp     int         `xml:"special_typ"`
+	OfferType      int         `xml:"offer_typ"`
+	SpecialType    int         `xml:"special_typ"`
 	SpecialPremium int         `xml:"special_premium"`
 	DaysArrival    int         `xml:"days_arrival"`
 	DaysDeparture  int         `xml:"days_departure"`
