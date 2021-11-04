@@ -9,25 +9,25 @@ import (
 
 type Address struct {
 	Street        string `xml:"street"`
-	Zip           string `xml:"zip"`
-	Zipcode       string `xml:"zipcode"`
+	ZIP           string `xml:"zip"`
+	ZIPCode       string `xml:"zipcode"`
 	City          string `xml:"city"`
 	Country       string `xml:"country"`
-	UrlStreetview string `xml:"url_streetview"`
+	URLStreetview string `xml:"url_streetview"`
 }
 
 type Bank struct {
 	Name  string `xml:"name"`
-	Iban  string `xml:"iban"`
-	Swift string `xml:"swift"`
+	IBAN  string `xml:"iban"`
+	SWIFT string `xml:"swift"`
 }
 
 type Booking struct {
-	BookingId     int          `xml:"booking_id"`
-	StornoId      int          `xml:"storno_id"`
+	BookingID     int          `xml:"booking_id"`
+	StornoID      int          `xml:"storno_id"`
 	BookingDate   DateTime     `xml:"booking_date"`
 	Source        string       `xml:"source"`
-	HotelId       int          `xml:"hotel_id"`
+	HotelID       int          `xml:"hotel_id"`
 	Arrival       shared.Date  `xml:"arrival"`
 	Departure     shared.Date  `xml:"departure"`
 	Service       shared.Board `xml:"service"`
@@ -46,7 +46,7 @@ type Booking struct {
 }
 
 type CancelPolicy struct {
-	Id              int         `xml:"id"`
+	ID              int         `xml:"id"`
 	Refundable      bool        `xml:"refundable"`
 	RefundableUntil DateTime    `xml:"refundable_until"`
 	Penalties       []Penalty   `xml:"penalties>penalty"`
@@ -55,8 +55,8 @@ type CancelPolicy struct {
 }
 
 type Channel struct {
-	ChannelId         string           `xml:"channel_id"`
-	OfferId           int              `xml:"offer_id"`
+	ChannelID         string           `xml:"channel_id"`
+	OfferID           int              `xml:"offer_id"`
 	OfferDescriptions []Offer          `xml:"offer_description>offer"`
 	RoomPrices        []RoomPrice      `xml:"room_price>price"`
 	RoomDescriptions  []Room           `xml:"room_description>room"`
@@ -69,7 +69,7 @@ type Channel struct {
 }
 
 type ChannelPriceList struct {
-	OfferId    int     `xml:"offer_id"`
+	OfferID    int     `xml:"offer_id"`
 	Inclusives []Price `xml:"inclusive>price"`
 }
 
@@ -125,7 +125,7 @@ type Error struct {
 }
 
 type Feature struct {
-	Id    int    `xml:"id"`
+	ID    int    `xml:"id"`
 	Title string `xml:"title"`
 }
 
@@ -135,7 +135,7 @@ type Field struct {
 }
 
 type Form struct {
-	FormUrl     string   `xml:"form_url"`
+	FormURL     string   `xml:"form_url"`
 	FormIframe  int      `xml:"form_iframe"`
 	FormMethods []string `xml:"form_methods>method"`
 	FormFields  int      `xml:"form_fields"`
@@ -153,7 +153,7 @@ type Geolocation struct {
 }
 
 type Guest struct {
-	GuestId   int     `xml:"guest_id"`
+	GuestID   int     `xml:"guest_id"`
 	Firstname string  `xml:"firstname"`
 	Lastname  string  `xml:"lastname"`
 	Prefix    string  `xml:"prefix"`
@@ -165,15 +165,15 @@ type Guest struct {
 
 type Header struct {
 	Error    Error  `xml:"error"`
-	ResultId string `xml:"result_id"`
+	ResultID string `xml:"result_id"`
 	Source   string `xml:"source"`
 	Paging   Paging `xml:"paging"`
 	Time     string `xml:"time"`
 }
 
 type Hotel struct {
-	Id                    int                  `xml:"id"`
-	IdLts                 string               `xml:"id_lts"`
+	ID                    int                  `xml:"id"`
+	IDLTS                 string               `xml:"id_lts"`
 	Bookable              bool                 `xml:"bookable"`
 	Name                  string               `xml:"name"`
 	Type                  shared.HotelType     `xml:"type"`
@@ -199,8 +199,8 @@ type Hotel struct {
 	Gallery       []Picture      `xml:"gallery>picture"`
 	FeaturesView  []Feature      `xml:"features_view>feature"`
 	Channel       Channel        `xml:"channel"`
-	LtsData       shared.LtsData `xml:"lts_data"`
-	Pos           []string       `xml:"pos>id_pos"`
+	LTSData       shared.LTSData `xml:"lts_data"`
+	POS           []string       `xml:"pos>id_pos"`
 	PriceEngine   int            `xml:"price_engine"`
 	Language      string         `xml:"language"`
 	CheckIn       CheckInOut     `xml:"check_in"`
@@ -220,10 +220,10 @@ type Hotel struct {
 }
 
 type HotelLocation struct {
-	IdCity      int `xml:"id_city"`
-	IdCommunity int `xml:"id_community"`
-	IdRegion    int `xml:"id_region"`
-	IdArea      int `xml:"id_area"`
+	IDCity      int `xml:"id_city"`
+	IDCommunity int `xml:"id_community"`
+	IDRegion    int `xml:"id_region"`
+	IDArea      int `xml:"id_area"`
 }
 
 type PaymentMethods int
@@ -234,15 +234,15 @@ type HotelPayment struct {
 
 type Insurance struct {
 	InsuranceType int    `xml:"insurance_type"`
-	InsuranceUrl  string `xml:"insurance_url"`
+	InsuranceURL  string `xml:"insurance_url"`
 	AgencyNr      string `xml:"agency_nr"`
 }
 
 type Location struct {
-	Id         int     `xml:"id"`
-	RootId     int     `xml:"root_id"`
-	ParentId   int     `xml:"parent_id"`
-	VirtualIds Ints    `xml:"virtual_id"`
+	ID         int     `xml:"id"`
+	RootID     int     `xml:"root_id"`
+	ParentID   int     `xml:"parent_id"`
+	VirtualIDs Ints    `xml:"virtual_id"`
 	Type       string  `xml:"typ"`
 	Visible    int     `xml:"visible"`
 	Latitude   float64 `xml:"latitude"`
@@ -264,10 +264,10 @@ type LocationName struct {
 }
 
 type Matching struct {
-	IdBok int `xml:"id_bok"`
-	IdExp int `xml:"id_exp"`
-	IdHtl int `xml:"id_htl"`
-	IdHrs int `xml:"id_hrs"`
+	IDBok int `xml:"id_bok"`
+	IDExp int `xml:"id_exp"`
+	IDHtl int `xml:"id_htl"`
+	IDHrs int `xml:"id_hrs"`
 }
 
 type Occupancy struct {
@@ -278,9 +278,9 @@ type Occupancy struct {
 }
 
 type Offer struct {
-	OfferId          int              `xml:"offer_id"`
-	OfferGid         int              `xml:"offer_gid"`
-	OfferBaseId      int              `xml:"offer_base_id"`
+	OfferID          int              `xml:"offer_id"`
+	OfferGID         int              `xml:"offer_gid"`
+	OfferBaseID      int              `xml:"offer_base_id"`
 	OfferType        shared.OfferType `xml:"offer_typ"`
 	OfferShow        int              `xml:"offer_show"`
 	OfferTitle       string           `xml:"offer_title"`
@@ -304,8 +304,8 @@ type Payment struct {
 }
 
 type PaymentTerm struct {
-	Id          int       `xml:"id"`
-	OwnerId     int       `xml:"owner_id"`
+	ID          int       `xml:"id"`
+	OwnerID     int       `xml:"owner_id"`
 	Methods     int       `xml:"methods"`
 	Ccards      int       `xml:"ccards"`
 	Prepayment  int       `xml:"prepayment"`
@@ -322,7 +322,7 @@ type Penalty struct {
 }
 
 type Picture struct {
-	Url       string `xml:"url"`
+	URL       string `xml:"url"`
 	Time      int    `xml:"time"`
 	Title     string `xml:"title"`
 	Copyright string `xml:"copyright"`
@@ -331,7 +331,7 @@ type Picture struct {
 }
 
 type Price struct {
-	PriceId          int              `xml:"price_id"`
+	PriceID          int              `xml:"price_id"`
 	PriceType        shared.OfferType `xml:"price_typ"`
 	Title            string           `xml:"title"`
 	PriceTitle       string           `xml:"price_title"`
@@ -352,9 +352,9 @@ type Price struct {
 }
 
 type PriceList struct {
-	OfferId        int              `xml:"offer_id"`
+	OfferID        int              `xml:"offer_id"`
 	OfferType      shared.OfferType `xml:"offer_typ"`
-	OfferBaseId    int              `xml:"offer_base_id"`
+	OfferBaseID    int              `xml:"offer_base_id"`
 	SpecialType    int              `xml:"special_typ"`
 	PrlMode        int              `xml:"prl_mode"`
 	PrlUnit        int              `xml:"prl_unit"`
@@ -386,7 +386,7 @@ type Properties struct {
 }
 
 type Rating struct {
-	Id       string      `xml:"id"`
+	ID       string      `xml:"id"`
 	Provider string      `xml:"provider"`
 	Value    float64     `xml:"value"`
 	Count    int         `xml:"count"`
@@ -394,8 +394,8 @@ type Rating struct {
 }
 
 type Restriction struct {
-	ObjId          int `xml:"obj_id"`
-	ObjSubId       int `xml:"obj_sub_id"`
+	ObjID          int `xml:"obj_id"`
+	ObjSubID       int `xml:"obj_sub_id"`
 	ObjSubOnly     int `xml:"obj_sub_only"`
 	Service        int `xml:"service"`
 	Arrival        int `xml:"arrival"`
@@ -418,15 +418,15 @@ type Result struct {
 	Specials  []Special       `xml:"special"`
 	Tracking  Tracking        `xml:"tracking"`
 	Sources   []Source        `xml:"source"`
-	SeoTexts  []SeoText       `xml:"seo_text"`
+	SEOTexts  []SEOText       `xml:"seo_text"`
 	Locations []Location      `xml:"location"`
 	Themes    []ThemeListItem `xml:"theme"`
 }
 
 type Room struct {
-	RoomId          int             `xml:"room_id"`
-	RoomLtsId       string          `xml:"room_lts_id"`
-	OfferId         int             `xml:"offer_id"`
+	RoomID          int             `xml:"room_id"`
+	RoomLTSID       string          `xml:"room_lts_id"`
+	OfferID         int             `xml:"offer_id"`
 	Service         int             `xml:"service"`
 	RoomType        shared.RoomType `xml:"room_type"`
 	RoomCode        string          `xml:"room_code"`
@@ -458,14 +458,14 @@ type RoomDetail struct {
 }
 
 type RoomPrice struct {
-	RoomId         int     `xml:"room_id"`
+	RoomID         int     `xml:"room_id"`
 	RoomSeq        int     `xml:"room_seq"`
-	OfferId        int     `xml:"offer_id"`
+	OfferID        int     `xml:"offer_id"`
 	PriceDetails   []Price `xml:"price_details>price"`
 	PriceTotal     Price   `xml:"price_total"`
 	PriceInclusive Price   `xml:"price_inclusive"`
-	CancelPolicyId int     `xml:"cancel_policy_id"`
-	PaymentTermId  int     `xml:"payment_term_id"`
+	CancelPolicyID int     `xml:"cancel_policy_id"`
+	PaymentTermID  int     `xml:"payment_term_id"`
 }
 
 type Root struct {
@@ -480,57 +480,57 @@ type Season struct {
 	Price     Price       `xml:"price"`
 }
 
-type SeoText struct {
-	Id             int       `xml:"id"`
+type SEOText struct {
+	ID             int       `xml:"id"`
 	Type           string    `xml:"typ"`
-	ExternalId     int       `xml:"external_id"`
+	ExternalID     int       `xml:"external_id"`
 	HeadlineDeu    string    `xml:"headline_deu"`
 	DescriptionDeu string    `xml:"description_deu"`
 	VideoDeu       string    `xml:"video_deu"`
-	UrlDeu         string    `xml:"url_deu"`
+	URLDeu         string    `xml:"url_deu"`
 	PagetitleDeu   string    `xml:"pagetitle_deu"`
 	MetadescDeu    string    `xml:"metadesc_deu"`
 	HeadlineIta    string    `xml:"headline_ita"`
 	DescriptionIta string    `xml:"description_ita"`
 	VideoIta       string    `xml:"video_ita"`
-	UrlIta         string    `xml:"url_ita"`
+	URLIta         string    `xml:"url_ita"`
 	PagetitleIta   string    `xml:"pagetitle_ita"`
 	MetadescIta    string    `xml:"metadesc_ita"`
 	HeadlineEng    string    `xml:"headline_eng"`
 	DescriptionEng string    `xml:"description_eng"`
 	VideoEng       string    `xml:"video_eng"`
-	UrlEng         string    `xml:"url_eng"`
+	URLEng         string    `xml:"url_eng"`
 	PagetitleEng   string    `xml:"pagetitle_eng"`
 	MetadescEng    string    `xml:"metadesc_eng"`
 	HeadlineSpa    string    `xml:"headline_spa"`
 	DescriptionSpa string    `xml:"description_spa"`
 	VideoSpa       string    `xml:"video_spa"`
-	UrlSpa         string    `xml:"url_spa"`
+	URLSpa         string    `xml:"url_spa"`
 	PagetitleSpa   string    `xml:"pagetitle_spa"`
 	MetadescSpa    string    `xml:"metadesc_spa"`
 	HeadlineFra    string    `xml:"headline_fra"`
 	DescriptionFra string    `xml:"description_fra"`
 	VideoFra       string    `xml:"video_fra"`
-	UrlFra         string    `xml:"url_fra"`
+	URLFra         string    `xml:"url_fra"`
 	PagetitleFra   string    `xml:"pagetitle_fra"`
 	MetadescFra    string    `xml:"metadesc_fra"`
 	HeadlineRus    string    `xml:"headline_rus"`
 	DescriptionRus string    `xml:"description_rus"`
 	VideoRus       string    `xml:"video_rus"`
-	UrlRus         string    `xml:"url_rus"`
+	URLRus         string    `xml:"url_rus"`
 	PagetitleRus   string    `xml:"pagetitle_rus"`
 	MetadescRus    string    `xml:"metadesc_rus"`
 	HeadlineDan    string    `xml:"headline_dan"`
 	DescriptionDan string    `xml:"description_dan"`
 	VideoDan       string    `xml:"video_dan"`
-	UrlDan         string    `xml:"url_dan"`
+	URLDan         string    `xml:"url_dan"`
 	PagetitleDan   string    `xml:"pagetitle_dan"`
 	MetadescDan    string    `xml:"metadesc_dan"`
 	Pictures       []Picture `xml:"pictures>picture"`
 }
 
 type Source struct {
-	SrcId      int    `xml:"src_id"`
+	SrcID      int    `xml:"src_id"`
 	Sourcename string `xml:"sourcename"`
 	Logkey     string `xml:"logkey"`
 	De         string `xml:"de"`
@@ -541,11 +541,11 @@ type Source struct {
 type SourceData struct {
 	Description string `xml:"description"`
 	Headline    string `xml:"headline"`
-	Url         string `xml:"url"`
+	URL         string `xml:"url"`
 }
 
 type Special struct {
-	OfferId        int              `xml:"offer_id"`
+	OfferID        int              `xml:"offer_id"`
 	Status         int              `xml:"status"`
 	Valid          int              `xml:"valid"`
 	OfferType      shared.OfferType `xml:"offer_typ"`
@@ -578,14 +578,14 @@ type Special struct {
 }
 
 type Theme struct {
-	Id    int    `xml:"id"`
+	ID    int    `xml:"id"`
 	Title string `xml:"title"`
 }
 
 type ThemeListItem struct {
-	Id         int    `xml:"id"`
-	FilterId   int    `xml:"filter_id"`
-	VirtualIds Ints   `xml:"virtual_id"`
+	ID         int    `xml:"id"`
+	FilterID   int    `xml:"filter_id"`
+	VirtualIDs Ints   `xml:"virtual_id"`
 	Sequence   int    `xml:"sequence"`
 	TitleDeu   string `xml:"title_deu"`
 	TitleIta   string `xml:"title_ita"`

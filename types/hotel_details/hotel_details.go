@@ -21,7 +21,7 @@ const (
 	GeographicalInformationAsText
 	HotelNavigatorData
 	DetailedHotelFacilities
-	LtsSpecificParameters
+	LTSSpecificParameters
 	SalesPoint
 	CheckInOut
 	SourceData

@@ -7,7 +7,7 @@ const (
 	AuthenticationError
 	InvalidXml
 	InvalidMethod
-	ResultIdNotInCache
+	ResultIDNotInCache
 	InvalidMissingParameter
 	BookingValidationFailed
 	PermissionsDenied

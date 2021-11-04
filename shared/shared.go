@@ -53,7 +53,7 @@ func (date Date) String() string {
 	return time.Time(date).String()
 }
 
-type LtsData struct {
+type LTSData struct {
 	A0Ene int `xml:"A0Ene"`
 	A0MTV int `xml:"A0MTV"`
 	A0Rep int `xml:"A0Rep"`

@@ -15,6 +15,6 @@ const (
 	GetLocationList       request.Method = "getLocationList"
 	GetMasterpackagesList request.Method = "getMasterpackagesList"
 	GetThemeList          request.Method = "getThemeList"
-	GetSeoTexts           request.Method = "getSeoTexts"
+	GetSEOTexts           request.Method = "getSeoTexts"
 	ValidateCoupon        request.Method = "validateCoupon"
 )

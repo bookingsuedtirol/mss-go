@@ -26,7 +26,7 @@ func main() {
 		requestRoot.Header.Method = method.GetHotelList
 		requestRoot.Request = request.Request{
 			Search: &request.Search{
-				Ids: []int{9002},
+				IDs: []int{9002},
 				SearchOffer: &request.SearchOffer{
 					Arrival:   &today,
 					Departure: &oneWeekFromNow,
