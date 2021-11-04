@@ -239,21 +239,21 @@ type Insurance struct {
 }
 
 type Location struct {
-	Id        int     `xml:"id"`
-	RootId    int     `xml:"root_id"`
-	ParentId  int     `xml:"parent_id"`
-	VirtualId string  `xml:"virtual_id"`
-	Type      string  `xml:"typ"`
-	Visible   int     `xml:"visible"`
-	Latitude  float64 `xml:"latitude"`
-	Longitude float64 `xml:"longitude"`
-	NameDeu   string  `xml:"name_deu"`
-	NameIta   string  `xml:"name_ita"`
-	NameSpa   string  `xml:"name_spa"`
-	NameFra   string  `xml:"name_fra"`
-	NameRus   string  `xml:"name_rus"`
-	NameDan   string  `xml:"name_dan"`
-	NameEng   string  `xml:"name_eng"`
+	Id         int     `xml:"id"`
+	RootId     int     `xml:"root_id"`
+	ParentId   int     `xml:"parent_id"`
+	VirtualIds Ints    `xml:"virtual_id"`
+	Type       string  `xml:"typ"`
+	Visible    int     `xml:"visible"`
+	Latitude   float64 `xml:"latitude"`
+	Longitude  float64 `xml:"longitude"`
+	NameDeu    string  `xml:"name_deu"`
+	NameIta    string  `xml:"name_ita"`
+	NameSpa    string  `xml:"name_spa"`
+	NameFra    string  `xml:"name_fra"`
+	NameRus    string  `xml:"name_rus"`
+	NameDan    string  `xml:"name_dan"`
+	NameEng    string  `xml:"name_eng"`
 }
 
 type LocationName struct {
@@ -583,17 +583,17 @@ type Theme struct {
 }
 
 type ThemeListItem struct {
-	Id        int    `xml:"id"`
-	FilterId  int    `xml:"filter_id"`
-	VirtualId int    `xml:"virtual_id"`
-	Sequence  int    `xml:"sequence"`
-	TitleDeu  string `xml:"title_deu"`
-	TitleIta  string `xml:"title_ita"`
-	TitleEng  string `xml:"title_eng"`
-	TitleSpa  string `xml:"title_spa"`
-	TitleFra  string `xml:"title_fra"`
-	TitleRus  string `xml:"title_rus"`
-	TitleDan  string `xml:"title_dan"`
+	Id         int    `xml:"id"`
+	FilterId   int    `xml:"filter_id"`
+	VirtualIds Ints   `xml:"virtual_id"`
+	Sequence   int    `xml:"sequence"`
+	TitleDeu   string `xml:"title_deu"`
+	TitleIta   string `xml:"title_ita"`
+	TitleEng   string `xml:"title_eng"`
+	TitleSpa   string `xml:"title_spa"`
+	TitleFra   string `xml:"title_fra"`
+	TitleRus   string `xml:"title_rus"`
+	TitleDan   string `xml:"title_dan"`
 }
 
 type Tracking struct {
@@ -605,3 +605,5 @@ type DateTime time.Time
 type Nl2brString string
 
 type NormalizedHTMLString string
+
+type Ints []int

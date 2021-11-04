@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/xml"
 	"io"
+	"strconv"
 	"strings"
 	"time"
 
@@ -70,6 +71,37 @@ func (input *NormalizedHTMLString) UnmarshalXML(decoder *xml.Decoder, start xml.
 	sanitized := sanitizePolicy.SanitizeReader(fixed)
 
 	*input = NormalizedHTMLString(sanitized.String())
+
+	return nil
+}
+
+// Decode from a comma-separated list of ints
+func (input *Ints) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
+	var value string
+	err := decoder.DecodeElement(&value, &start)
+
+	if err != nil {
+		return err
+	}
+
+	out := []int{}
+
+	if value == "" {
+		*input = out
+		return nil
+	}
+
+	for _, idStr := range strings.Split(value, ",") {
+		id, err := strconv.Atoi(idStr)
+
+		if err != nil {
+			return err
+		}
+
+		out = append(out, id)
+	}
+
+	*input = out
 
 	return nil
 }
