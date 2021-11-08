@@ -105,9 +105,13 @@ type Options struct {
 }
 
 type Order struct {
-	Field string `xml:"field"`
-	Dir   string `xml:"dir"`
+	Field OrderField `xml:"field"`
+	Dir   Direction  `xml:"dir"`
 }
+
+type OrderField string
+
+type Direction string
 
 type Paging struct {
 	Start int `xml:"start"`
