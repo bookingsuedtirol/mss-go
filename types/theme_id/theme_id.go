@@ -1,9 +1,9 @@
 package theme_id
 
-import "github.com/HGV/mss-go/request"
+import "github.com/HGV/mss-go/shared"
 
 const (
-	Hiking request.ThemeID = iota + 1
+	Hiking shared.ThemeID = iota + 1
 	CyclingMountainbike
 	Family
 	WellnessHealth
@@ -21,12 +21,12 @@ const (
 	VitalpinaBreathe
 	BikeHotelsEBike
 	BikeHotelsFreeride
-	BikeHotelsMountainbike request.ThemeID = iota + 2
+	BikeHotelsMountainbike shared.ThemeID = iota + 2
 	BikeHotelsBikeTours
 	BikeHotelsRacingBike
 	FamilyHotels
 	FamilyHotelsNatureDetective
-	FamilyHotel request.ThemeID = iota + 3
+	FamilyHotel shared.ThemeID = iota + 3
 	NatureDetectivSummer
 	NatureDetectivWinter
 )

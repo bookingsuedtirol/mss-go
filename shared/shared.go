@@ -74,3 +74,5 @@ type OfferType int
 type SpecialType int
 
 type SpecialPremium int
+
+type ThemeID int

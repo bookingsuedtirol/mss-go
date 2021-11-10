@@ -578,8 +578,8 @@ type Special struct {
 }
 
 type Theme struct {
-	ID    int    `xml:"id"`
-	Title string `xml:"title"`
+	ID    shared.ThemeID `xml:"id"`
+	Title string         `xml:"title"`
 }
 
 type ThemeListItem struct {

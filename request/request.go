@@ -236,13 +236,11 @@ type SearchPriceList struct {
 	Type     int          `xml:"typ"`
 }
 
-type ThemeID int
-
 type SearchSpecial struct {
 	OfferIDs []int                 `xml:"offer_id"`
 	DateFrom *shared.Date          `xml:"date_from"`
 	DateTo   *shared.Date          `xml:"date_to"`
-	Themes   []ThemeID             `xml:"theme"`
+	Themes   []shared.ThemeID      `xml:"theme"`
 	PoiIDs   []int                 `xml:"poi_id"`
 	PoiCats  []int                 `xml:"poi_cat"`
 	Validity *Validity             `xml:"validity"`
