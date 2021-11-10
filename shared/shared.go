@@ -70,3 +70,7 @@ type Theme int
 type Board int
 
 type OfferType int
+
+type SpecialType int
+
+type SpecialPremium int

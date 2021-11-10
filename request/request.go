@@ -86,22 +86,30 @@ type HotelDetails int
 
 type OfferDetails int
 
+type RoomDetails int
+
+type SpecialDetails int
+
+type SEODetails int
+
+type PriceListDetails int
+
 type Options struct {
-	HotelDetails         HotelDetails `xml:"hotel_details"`
-	OfferDetails         OfferDetails `xml:"offer_details"`
-	RoomDetails          int          `xml:"room_details"`
-	SpecialDetails       int          `xml:"special_details"`
-	SEODetails           int          `xml:"seo_details"`
-	PictureDate          *shared.Date `xml:"picture_date"`
-	LTSBookable          int          `xml:"lts_bookable"`
-	GetAvailability      int          `xml:"get_availability"`
-	GetRestrictions      int          `xml:"get_restrictions"`
-	GetRoomdetails       int          `xml:"get_roomdetails"`
-	GetMasterpackages    int          `xml:"get_masterpackages"`
-	BasePrice            int          `xml:"base_price"`
-	PricelistDetails     int          `xml:"pricelist_details"`
-	OnlySubscribedHotels int          `xml:"only_subscribed_hotels"`
-	OnlyAvailable        int          `xml:"only_available"`
+	HotelDetails         HotelDetails     `xml:"hotel_details"`
+	OfferDetails         OfferDetails     `xml:"offer_details"`
+	RoomDetails          RoomDetails      `xml:"room_details"`
+	SpecialDetails       SpecialDetails   `xml:"special_details"`
+	SEODetails           SEODetails       `xml:"seo_details"`
+	PictureDate          *shared.Date     `xml:"picture_date"`
+	LTSBookable          int              `xml:"lts_bookable"`
+	GetAvailability      int              `xml:"get_availability"`
+	GetRestrictions      int              `xml:"get_restrictions"`
+	GetRoomdetails       int              `xml:"get_roomdetails"`
+	GetMasterpackages    int              `xml:"get_masterpackages"`
+	BasePrice            int              `xml:"base_price"`
+	PriceListDetails     PriceListDetails `xml:"pricelist_details"`
+	OnlySubscribedHotels int              `xml:"only_subscribed_hotels"`
+	OnlyAvailable        int              `xml:"only_available"`
 }
 
 type Order struct {
@@ -228,17 +236,19 @@ type SearchPriceList struct {
 	Type     int          `xml:"typ"`
 }
 
+type ThemeID int
+
 type SearchSpecial struct {
-	OfferIDs []int        `xml:"offer_id"`
-	DateFrom *shared.Date `xml:"date_from"`
-	DateTo   *shared.Date `xml:"date_to"`
-	Themes   []int        `xml:"theme"`
-	PoiIDs   []int        `xml:"poi_id"`
-	PoiCats  []int        `xml:"poi_cat"`
-	Validity *Validity    `xml:"validity"`
-	Type     int          `xml:"typ"`
-	Premium  int          `xml:"premium"`
-	Status   int          `xml:"status"`
+	OfferIDs []int                 `xml:"offer_id"`
+	DateFrom *shared.Date          `xml:"date_from"`
+	DateTo   *shared.Date          `xml:"date_to"`
+	Themes   []ThemeID             `xml:"theme"`
+	PoiIDs   []int                 `xml:"poi_id"`
+	PoiCats  []int                 `xml:"poi_cat"`
+	Validity *Validity             `xml:"validity"`
+	Type     shared.SpecialType    `xml:"typ"`
+	Premium  shared.SpecialPremium `xml:"premium"`
+	Status   int                   `xml:"status"`
 }
 
 type Stars struct {

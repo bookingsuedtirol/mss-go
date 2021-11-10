@@ -1,13 +1,15 @@
 package special_details
 
+import "github.com/HGV/mss-go/request"
+
 const (
-	BasicInfo              = 1
-	Title                  = 2
-	Descriptions           = 4
-	Seasons                = 8
-	Images                 = 16
-	Themes                 = 32
-	IncludedServices       = 64
-	HotelIncludedServices  = 128
-	HotelMandatoryServices = 256
+	BasicInfo request.SpecialDetails = 1 << iota
+	Title
+	Descriptions
+	Seasons
+	Images
+	Themes
+	IncludedServices
+	HotelIncludedServices
+	HotelMandatoryServices
 )

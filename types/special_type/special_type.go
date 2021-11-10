@@ -1,7 +1,9 @@
 package special_type
 
+import "github.com/HGV/mss-go/shared"
+
 const (
-	Packages       = 1
-	Specials       = 2
-	Masterpackages = 4
+	Packages shared.SpecialType = 1 << iota
+	Specials
+	Masterpackages
 )

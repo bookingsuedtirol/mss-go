@@ -1,12 +1,14 @@
 package room_details
 
+import "github.com/HGV/mss-go/request"
+
 const (
-	BasicInfo             = 4
-	Title                 = 8
-	RoomImages            = 32
-	RoomFacilitiesFilter  = 64
-	RoomDescription       = 256
-	RoomFacilitiesDetails = 4096
-	RoomFeatures          = 32768
-	RoomNumbers           = 65536
+	BasicInfo             request.RoomDetails = 4
+	Title                 request.RoomDetails = 8
+	RoomImages            request.RoomDetails = 32
+	RoomFacilitiesFilter  request.RoomDetails = 64
+	RoomDescription       request.RoomDetails = 256
+	RoomFacilitiesDetails request.RoomDetails = 4096
+	RoomFeatures          request.RoomDetails = 32768
+	RoomNumbers           request.RoomDetails = 65536
 )

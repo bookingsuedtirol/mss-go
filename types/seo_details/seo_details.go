@@ -1,3 +1,5 @@
 package seo_details
 
-const Pictures = 32
+import "github.com/HGV/mss-go/request"
+
+const Pictures request.SEODetails = 32
