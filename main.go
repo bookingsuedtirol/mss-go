@@ -44,7 +44,7 @@ func (settings Client) Request(callback func(request.Root) request.Root) (respon
 }
 
 func sendRequest(requestRoot request.Root) (response.Root, error) {
-	requestXmlRoot, err := xml.Marshal(requestRoot)
+	requestXMLRoot, err := xml.Marshal(requestRoot)
 
 	if err != nil {
 		return response.Root{}, err
@@ -53,7 +53,7 @@ func sendRequest(requestRoot request.Root) (response.Root, error) {
 	resp, err := http.Post(
 		"https://easychannel.it/mss/mss_service.php",
 		"text/xml",
-		strings.NewReader(xml.Header+string(requestXmlRoot)),
+		strings.NewReader(xml.Header+string(requestXMLRoot)),
 	)
 
 	if err != nil {

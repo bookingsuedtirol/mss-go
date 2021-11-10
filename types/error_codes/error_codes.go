@@ -5,7 +5,7 @@ import "github.com/HGV/mss-go/response"
 const (
 	GenericError response.ErrorCode = 1 << iota
 	AuthenticationError
-	InvalidXml
+	InvalidXML
 	InvalidMethod
 	ResultIDNotInCache
 	InvalidMissingParameter
