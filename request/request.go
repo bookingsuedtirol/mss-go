@@ -6,6 +6,10 @@ import (
 	"github.com/HGV/mss-go/shared"
 )
 
+// The boolean type for request data. This must be used instead of the
+// standard "bool". Maps to 0/1 (which MSS expects) instead of "true"/"false"
+type Bool bool
+
 type Address struct {
 	Street  string `xml:"street"`
 	ZIPCode string `xml:"zipcode"`
@@ -39,7 +43,7 @@ type Data struct {
 	Details   *Details  `xml:"details"`
 	Form      *Form     `xml:"form"`
 	Tracking  *Tracking `xml:"tracking"`
-	Insurance int       `xml:"insurance"`
+	Insurance Bool      `xml:"insurance"`
 }
 
 type Details struct {
@@ -58,15 +62,14 @@ type Form struct {
 }
 
 type Guest struct {
-	Gender    string   `xml:"gender"`
-	Prefix    string   `xml:"prefix"`
-	Firstname string   `xml:"firstname"`
-	Lastname  string   `xml:"lastname"`
-	Email     string   `xml:"email"`
-	Phone     string   `xml:"phone"`
-	Address   *Address `xml:"address"`
-	// TODO: map to bool?
-	Newsletter int `xml:"newsletter"`
+	Gender     string   `xml:"gender"`
+	Prefix     string   `xml:"prefix"`
+	Firstname  string   `xml:"firstname"`
+	Lastname   string   `xml:"lastname"`
+	Email      string   `xml:"email"`
+	Phone      string   `xml:"phone"`
+	Address    *Address `xml:"address"`
+	Newsletter Bool     `xml:"newsletter"`
 }
 
 type Method string
@@ -102,14 +105,14 @@ type Options struct {
 	SEODetails           SEODetails       `xml:"seo_details"`
 	PictureDate          *shared.Date     `xml:"picture_date"`
 	LTSBookable          int              `xml:"lts_bookable"`
-	GetAvailability      int              `xml:"get_availability"`
-	GetRestrictions      int              `xml:"get_restrictions"`
-	GetRoomdetails       int              `xml:"get_roomdetails"`
-	GetMasterpackages    int              `xml:"get_masterpackages"`
-	BasePrice            int              `xml:"base_price"`
+	GetAvailability      Bool             `xml:"get_availability"`
+	GetRestrictions      Bool             `xml:"get_restrictions"`
+	GetRoomdetails       Bool             `xml:"get_roomdetails"`
+	GetMasterpackages    Bool             `xml:"get_masterpackages"`
+	BasePrice            Bool             `xml:"base_price"`
 	PriceListDetails     PriceListDetails `xml:"pricelist_details"`
-	OnlySubscribedHotels int              `xml:"only_subscribed_hotels"`
-	OnlyAvailable        int              `xml:"only_available"`
+	OnlySubscribedHotels Bool             `xml:"only_subscribed_hotels"`
+	OnlyAvailable        Bool             `xml:"only_available"`
 }
 
 type Order struct {
@@ -127,8 +130,8 @@ type Paging struct {
 }
 
 type Payment struct {
-	Method  int `xml:"method"`
-	Invoice int `xml:"invoice"`
+	Method  int  `xml:"method"`
+	Invoice Bool `xml:"invoice"`
 }
 
 type Rateplan struct {
@@ -263,8 +266,8 @@ type Tracking struct {
 }
 
 type Validity struct {
-	Valid     int          `xml:"valid"`
-	Offers    int          `xml:"offers"`
+	Valid     Bool         `xml:"valid"`
+	Offers    Bool         `xml:"offers"`
 	Arrival   *shared.Date `xml:"arrival"`
 	Departure *shared.Date `xml:"departure"`
 	Service   shared.Board `xml:"service"`

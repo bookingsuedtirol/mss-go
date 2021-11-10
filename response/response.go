@@ -31,8 +31,8 @@ type Booking struct {
 	Arrival       shared.Date  `xml:"arrival"`
 	Departure     shared.Date  `xml:"departure"`
 	Service       shared.Board `xml:"service"`
-	BookingStatus int          `xml:"booking_status"`
-	Cancelled     int          `xml:"cancelled"`
+	BookingStatus bool         `xml:"booking_status"`
+	Cancelled     bool         `xml:"cancelled"`
 	Note          string       `xml:"note"`
 	Hotel         Hotel        `xml:"hotel"`
 	Guest         Guest        `xml:"guest"`
