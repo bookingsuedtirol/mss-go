@@ -35,8 +35,9 @@ func ParseDateTime(
 		return time.Time{}, err
 	}
 
-	// use default time if empty
-	if value == "" {
+	// Use zero time if empty and if MSS
+	// returns "0000-00-00"
+	if value == "" || value == "0000-00-00" {
 		return time.Time{}, nil
 	}
 
