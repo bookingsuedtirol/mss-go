@@ -568,7 +568,7 @@ type Special struct {
 	ValidStart     shared.Date           `xml:"valid_start"`
 	ValidEnd       shared.Date           `xml:"valid_end"`
 	Title          string                `xml:"title"`
-	Description    string                `xml:"description"`
+	Description    NormalizedHTMLString  `xml:"description"`
 	Hotels         []Hotel               `xml:"hotels>hotel"`
 	Seasons        []Season              `xml:"seasons>season"`
 	Services       []shared.Board        `xml:"services>service"`
