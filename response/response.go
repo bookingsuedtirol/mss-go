@@ -572,7 +572,7 @@ type Special struct {
 	Hotels         []Hotel               `xml:"hotels>hotel"`
 	Seasons        []Season              `xml:"seasons>season"`
 	Services       []shared.Board        `xml:"services>service"`
-	Inclusive      []Price               `xml:"inclusive>price"`
+	Inclusives     []Price               `xml:"inclusive>price"`
 	Pictures       []Picture             `xml:"pictures>picture"`
 	Themes         []Theme               `xml:"themes>theme"`
 }
