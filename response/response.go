@@ -331,24 +331,24 @@ type Picture struct {
 }
 
 type Price struct {
-	PriceID          int              `xml:"price_id"`
-	PriceType        shared.OfferType `xml:"price_typ"`
-	Title            string           `xml:"title"`
-	PriceTitle       string           `xml:"price_title"`
-	Description      string           `xml:"description"`
-	PriceDescription string           `xml:"price_description"`
-	Supplement       int              `xml:"supplement"`
-	PriceSupplement  int              `xml:"price_supplement"`
-	PriceWs          float64          `xml:"price_ws"`
-	PriceBb          float64          `xml:"price_bb"`
-	PriceHb          float64          `xml:"price_hb"`
-	PriceFb          float64          `xml:"price_fb"`
-	PriceAi          float64          `xml:"price_ai"`
-	PriceAmount      float64          `xml:"price_amount"`
-	PriceValue       float64          `xml:"price_value"`
-	PriceTotal       float64          `xml:"price_total"`
-	Unit             int              `xml:"unit"`
-	Pictures         []Picture        `xml:"pictures>picture"`
+	PriceID          int                  `xml:"price_id"`
+	PriceType        shared.OfferType     `xml:"price_typ"`
+	Title            string               `xml:"title"`
+	PriceTitle       string               `xml:"price_title"`
+	Description      NormalizedHTMLString `xml:"description"`
+	PriceDescription string               `xml:"price_description"`
+	Supplement       int                  `xml:"supplement"`
+	PriceSupplement  int                  `xml:"price_supplement"`
+	PriceWs          float64              `xml:"price_ws"`
+	PriceBb          float64              `xml:"price_bb"`
+	PriceHb          float64              `xml:"price_hb"`
+	PriceFb          float64              `xml:"price_fb"`
+	PriceAi          float64              `xml:"price_ai"`
+	PriceAmount      float64              `xml:"price_amount"`
+	PriceValue       float64              `xml:"price_value"`
+	PriceTotal       float64              `xml:"price_total"`
+	Unit             int                  `xml:"unit"`
+	Pictures         []Picture            `xml:"pictures>picture"`
 }
 
 type PriceList struct {
