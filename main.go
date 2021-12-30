@@ -5,6 +5,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"net/http"
+	"regexp"
 	"strings"
 
 	"github.com/HGV/mss-go/request"
@@ -68,8 +69,7 @@ func sendRequest(requestRoot request.Root) (response.Root, error) {
 	}
 
 	rawDec := xml.NewDecoder(resp.Body)
-	// Trim all leading and trailing whitespace inside XML elements
-	dec := xml.NewTokenDecoder(WhitespaceTrimmer{rawDec})
+	dec := xml.NewTokenDecoder(normalizer{rawDec})
 
 	var responseRoot response.Root
 	err = dec.Decode(&responseRoot)
@@ -89,14 +89,23 @@ func sendRequest(requestRoot request.Root) (response.Root, error) {
 	return responseRoot, nil
 }
 
-type WhitespaceTrimmer struct {
+type normalizer struct {
 	dec *xml.Decoder
 }
 
-func (tr WhitespaceTrimmer) Token() (xml.Token, error) {
-	t, err := tr.dec.Token()
+// Match Unicode Private Use Areas
+var reg = regexp.MustCompile(`\p{Co}`)
+
+// MSS could potentially output trailing spaces and private Unicode characters.
+// This trims all leading and trailing whitespace inside XML elements and
+// removes Unicode Private Use characters.
+func (n normalizer) Token() (xml.Token, error) {
+	t, err := n.dec.Token()
+
 	if cd, ok := t.(xml.CharData); ok {
-		t = xml.CharData(bytes.TrimSpace(cd))
+		replaced := reg.ReplaceAll(cd, []byte(""))
+		trimmed := bytes.TrimSpace(replaced)
+		t = xml.CharData(trimmed)
 	}
 	return t, err
 }
