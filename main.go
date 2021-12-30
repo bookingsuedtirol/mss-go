@@ -10,6 +10,7 @@ import (
 
 	"github.com/HGV/mss-go/request"
 	"github.com/HGV/mss-go/response"
+	"golang.org/x/text/unicode/norm"
 )
 
 type Client struct {
@@ -96,16 +97,19 @@ type normalizer struct {
 // Match Unicode Private Use Areas
 var reg = regexp.MustCompile(`\p{Co}`)
 
-// MSS could potentially output trailing spaces and private Unicode characters.
-// This trims all leading and trailing whitespace inside XML elements and
-// removes Unicode Private Use characters.
+// Fixes some inconveniencies of the MSS output.
+// They would otherwise produce warnings in the W3C HTML validator.
+// - Trims all leading and trailing whitespace.
+// - Removes Unicode Private Use characters.
+// - Runs text through Unicode normalization form NFC.
 func (n normalizer) Token() (xml.Token, error) {
 	t, err := n.dec.Token()
 
 	if cd, ok := t.(xml.CharData); ok {
 		replaced := reg.ReplaceAll(cd, []byte(""))
 		trimmed := bytes.TrimSpace(replaced)
-		t = xml.CharData(trimmed)
+		normalized := norm.NFC.Bytes(trimmed)
+		t = xml.CharData(normalized)
 	}
 	return t, err
 }
