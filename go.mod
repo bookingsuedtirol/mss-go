@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/microcosm-cc/bluemonday v1.0.16
-	golang.org/x/net v0.0.0-20211201190559-0a0e4e1bb54c
+	golang.org/x/net v0.0.0-20211216030914-fe4d6282115f
 )
 
 require (
