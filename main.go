@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"regexp"
 	"strings"
+	"time"
 
 	"github.com/HGV/mss-go/request"
 	"github.com/HGV/mss-go/response"
@@ -45,6 +46,8 @@ func (settings Client) Request(callback func(request.Root) request.Root) (respon
 	return sendRequest(transformedRequestRoot)
 }
 
+var httpClient = http.Client{Timeout: 20 * time.Second}
+
 func sendRequest(requestRoot request.Root) (response.Root, error) {
 	requestXMLRoot, err := xml.Marshal(requestRoot)
 
@@ -52,7 +55,7 @@ func sendRequest(requestRoot request.Root) (response.Root, error) {
 		return response.Root{}, err
 	}
 
-	resp, err := http.Post(
+	resp, err := httpClient.Post(
 		"https://easychannel.it/mss/mss_service.php",
 		"text/xml",
 		strings.NewReader(xml.Header+string(requestXMLRoot)),
