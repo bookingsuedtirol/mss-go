@@ -189,7 +189,7 @@ type Hotel struct {
 	Description           NormalizedHTMLString `xml:"description"`
 	HotelPayment          HotelPayment         `xml:"hotel_payment"`
 	Matching              Matching             `xml:"matching"`
-	Logos                 []Picture            `xml:"logo>picture"`
+	Logo                  Picture              `xml:"logo>picture"`
 	Pictures              []Picture            `xml:"pictures>picture"`
 	AvailableFrom         shared.Date          `xml:"available_from"`
 	PricesChangedAt       DateTime             `xml:"prices_changed_at"`
