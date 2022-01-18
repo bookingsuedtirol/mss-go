@@ -22,11 +22,7 @@ func (input *DateTime) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement
 		return err
 	}
 
-	if err != nil {
-		return err
-	}
-
-	*input = DateTime(value)
+	*input = DateTime(*value)
 
 	return nil
 }

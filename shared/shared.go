@@ -20,34 +20,34 @@ func (input *Date) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) er
 		return err
 	}
 
-	*input = Date(value)
+	*input = Date(*value)
 
 	return nil
 }
 
 func ParseDateTime(
 	dateTimeLayout string, decoder *xml.Decoder, start xml.StartElement,
-) (time.Time, error) {
+) (*time.Time, error) {
 	var value string
 	err := decoder.DecodeElement(&value, &start)
 
 	if err != nil {
-		return time.Time{}, err
+		return nil, err
 	}
 
 	// Use zero time if empty and if MSS
 	// returns "0000-00-00"
 	if value == "" || value == "0000-00-00" {
-		return time.Time{}, nil
+		return &time.Time{}, nil
 	}
 
 	parsed, err := time.Parse(dateTimeLayout, value)
 
 	if err != nil {
-		return time.Time{}, err
+		return nil, err
 	}
 
-	return parsed, nil
+	return &parsed, nil
 }
 
 func (date Date) String() string {
