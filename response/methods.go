@@ -6,7 +6,6 @@ import (
 	"io"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/HGV/mss-go/shared"
 	"github.com/microcosm-cc/bluemonday"
@@ -15,20 +14,43 @@ import (
 )
 
 func (input *DateTime) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
-	layout := "2006-01-02 15:04:05"
-	value, err := shared.ParseDateTime(layout, decoder, start)
+	var str string
+	err := decoder.DecodeElement(&str, &start)
+	if err != nil {
+		return err
+	}
 
+	value, err := shared.ParseDateTime("2006-01-02 15:04:05", str)
 	if err != nil {
 		return err
 	}
 
 	*input = DateTime(*value)
-
 	return nil
 }
 
-func (dateTime DateTime) String() string {
-	return time.Time(dateTime).String()
+func (input *Time) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
+	var str string
+	err := decoder.DecodeElement(&str, &start)
+	if err != nil {
+		return err
+	}
+
+	if str == "" {
+		input.Valid = false
+		return nil
+	}
+
+	value, err := shared.ParseDateTime("15:04", str)
+	if err != nil {
+		return err
+	}
+
+	*input = Time{
+		Time:  *value,
+		Valid: true,
+	}
+	return nil
 }
 
 func (input *Nl2brString) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {

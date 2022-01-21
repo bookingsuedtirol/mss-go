@@ -14,7 +14,13 @@ func (input Date) MarshalXML(element *xml.Encoder, start xml.StartElement) error
 }
 
 func (input *Date) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
-	value, err := ParseDateTime("2006-01-02", decoder, start)
+	var str string
+	err := decoder.DecodeElement(&str, &start)
+	if err != nil {
+		return err
+	}
+
+	value, err := ParseDateTime("2006-01-02", str)
 
 	if err != nil {
 		return err
@@ -25,24 +31,14 @@ func (input *Date) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) er
 	return nil
 }
 
-func ParseDateTime(
-	dateTimeLayout string, decoder *xml.Decoder, start xml.StartElement,
-) (*time.Time, error) {
-	var value string
-	err := decoder.DecodeElement(&value, &start)
-
-	if err != nil {
-		return nil, err
-	}
-
+func ParseDateTime(layout string, value string) (*time.Time, error) {
 	// Use zero time if empty and if MSS
 	// returns "0000-00-00"
 	if value == "" || value == "0000-00-00" {
 		return &time.Time{}, nil
 	}
 
-	parsed, err := time.Parse(dateTimeLayout, value)
-
+	parsed, err := time.Parse(layout, value)
 	if err != nil {
 		return nil, err
 	}

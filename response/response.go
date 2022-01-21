@@ -201,29 +201,28 @@ type Hotel struct {
 	AvailableFrom         shared.Date          `xml:"available_from"`
 	PricesChangedAt       DateTime             `xml:"prices_changed_at"`
 	AvailabilityChangedAt DateTime             `xml:"availability_changed_at"`
-	// TODO: use time.Time here?
-	BookableUntil string         `xml:"bookable_until"`
-	Gallery       []Picture      `xml:"gallery>picture"`
-	FeaturesView  []Feature      `xml:"features_view>feature"`
-	Channel       Channel        `xml:"channel"`
-	LTSData       shared.LTSData `xml:"lts_data"`
-	POS           []string       `xml:"pos>id_pos"`
-	PriceEngine   int            `xml:"price_engine"`
-	Language      string         `xml:"language"`
-	CheckIn       CheckIn        `xml:"check_in"`
-	CheckOut      CheckOut       `xml:"check_out"`
-	PriceFrom     int            `xml:"price_from"`
-	Board         int            `xml:"board"`
-	BoardTq       int            `xml:"board_tq"`
-	PersAgeMin    int            `xml:"pers_age_min"`
-	ChildAgeMin   int            `xml:"child_age_min"`
-	AdultAgeMin   int            `xml:"adult_age_min"`
-	ChildAgeMax   int            `xml:"child_age_max"`
-	AdultCntMax   int            `xml:"adult_cnt_max"`
-	ChildCntMax   int            `xml:"child_cnt_max"`
-	Ratings       []Rating       `xml:"ratings>rating"`
-	SourceData    SourceData     `xml:"source_data"`
-	Coupon        CouponService  `xml:"coupon"`
+	BookableUntil         Time                 `xml:"bookable_until"`
+	Gallery               []Picture            `xml:"gallery>picture"`
+	FeaturesView          []Feature            `xml:"features_view>feature"`
+	Channel               Channel              `xml:"channel"`
+	LTSData               shared.LTSData       `xml:"lts_data"`
+	POS                   []string             `xml:"pos>id_pos"`
+	PriceEngine           int                  `xml:"price_engine"`
+	Language              string               `xml:"language"`
+	CheckIn               CheckIn              `xml:"check_in"`
+	CheckOut              CheckOut             `xml:"check_out"`
+	PriceFrom             int                  `xml:"price_from"`
+	Board                 int                  `xml:"board"`
+	BoardTq               int                  `xml:"board_tq"`
+	PersAgeMin            int                  `xml:"pers_age_min"`
+	ChildAgeMin           int                  `xml:"child_age_min"`
+	AdultAgeMin           int                  `xml:"adult_age_min"`
+	ChildAgeMax           int                  `xml:"child_age_max"`
+	AdultCntMax           int                  `xml:"adult_cnt_max"`
+	ChildCntMax           int                  `xml:"child_cnt_max"`
+	Ratings               []Rating             `xml:"ratings>rating"`
+	SourceData            SourceData           `xml:"source_data"`
+	Coupon                CouponService        `xml:"coupon"`
 }
 
 type HotelLocation struct {
@@ -608,6 +607,12 @@ type Tracking struct {
 }
 
 type DateTime time.Time
+
+type Time struct {
+	Time time.Time
+	// Valid is true if Time (which can also be Time.isZero() == 0) is present
+	Valid bool
+}
 
 type Nl2brString string
 
