@@ -73,7 +73,8 @@ type ChannelPriceList struct {
 	Inclusives []Price `xml:"inclusive>price"`
 }
 
-// TODO: Perhaps use time.Time instead of string here?
+// The From/To fields are inserted by users as
+// strings without a specific format, so they can’t be parsed as time.Time.
 type CheckIn struct {
 	From string `xml:"from"`
 	To   string `xml:"to"`
