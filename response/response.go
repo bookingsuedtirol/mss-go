@@ -74,7 +74,13 @@ type ChannelPriceList struct {
 }
 
 // TODO: Perhaps use time.Time instead of string here?
-type CheckInOut struct {
+type CheckIn struct {
+	From string `xml:"from"`
+	To   string `xml:"to"`
+	Note string `xml:"note"`
+}
+
+type CheckOut struct {
 	From string `xml:"from"`
 	To   string `xml:"to"`
 }
@@ -203,8 +209,8 @@ type Hotel struct {
 	POS           []string       `xml:"pos>id_pos"`
 	PriceEngine   int            `xml:"price_engine"`
 	Language      string         `xml:"language"`
-	CheckIn       CheckInOut     `xml:"check_in"`
-	CheckOut      CheckInOut     `xml:"check_out"`
+	CheckIn       CheckIn        `xml:"check_in"`
+	CheckOut      CheckOut       `xml:"check_out"`
 	PriceFrom     int            `xml:"price_from"`
 	Board         int            `xml:"board"`
 	BoardTq       int            `xml:"board_tq"`
