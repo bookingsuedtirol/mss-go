@@ -183,7 +183,7 @@ type Search struct {
 	GuestEmail         string              `xml:"guest_email"`
 	RootID             int                 `xml:"root_id"`
 	ExternalID         int                 `xml:"external_id"`
-	Type               string              `xml:"typ"`
+	Type               shared.LocationType `xml:"typ"`
 	SEOType            string              `xml:"seo_typ"`
 	LocationDetails    int                 `xml:"location_details"`
 	CouponCode         string              `xml:"coupon_code"`

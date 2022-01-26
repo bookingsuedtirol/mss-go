@@ -245,21 +245,21 @@ type Insurance struct {
 }
 
 type Location struct {
-	ID         int     `xml:"id"`
-	RootID     int     `xml:"root_id"`
-	ParentID   int     `xml:"parent_id"`
-	VirtualIDs Ints    `xml:"virtual_id"`
-	Type       string  `xml:"typ"`
-	Visible    int     `xml:"visible"`
-	Latitude   float64 `xml:"latitude"`
-	Longitude  float64 `xml:"longitude"`
-	NameDeu    string  `xml:"name_deu"`
-	NameIta    string  `xml:"name_ita"`
-	NameSpa    string  `xml:"name_spa"`
-	NameFra    string  `xml:"name_fra"`
-	NameRus    string  `xml:"name_rus"`
-	NameDan    string  `xml:"name_dan"`
-	NameEng    string  `xml:"name_eng"`
+	ID         int                 `xml:"id"`
+	RootID     int                 `xml:"root_id"`
+	ParentID   int                 `xml:"parent_id"`
+	VirtualIDs Ints                `xml:"virtual_id"`
+	Type       shared.LocationType `xml:"typ"`
+	Visible    int                 `xml:"visible"`
+	Latitude   float64             `xml:"latitude"`
+	Longitude  float64             `xml:"longitude"`
+	NameDeu    string              `xml:"name_deu"`
+	NameIta    string              `xml:"name_ita"`
+	NameSpa    string              `xml:"name_spa"`
+	NameFra    string              `xml:"name_fra"`
+	NameRus    string              `xml:"name_rus"`
+	NameDan    string              `xml:"name_dan"`
+	NameEng    string              `xml:"name_eng"`
 }
 
 type LocationName struct {
