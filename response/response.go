@@ -24,7 +24,7 @@ type Bank struct {
 
 type Booking struct {
 	BookingID     int          `xml:"booking_id"`
-	StornoID      int          `xml:"storno_id"`
+	StornoID      string       `xml:"storno_id"`
 	BookingDate   DateTime     `xml:"booking_date"`
 	Source        string       `xml:"source"`
 	HotelID       int          `xml:"hotel_id"`
@@ -427,6 +427,7 @@ type Result struct {
 	SEOTexts  []SEOText       `xml:"seo_text"`
 	Locations []Location      `xml:"location"`
 	Themes    []ThemeListItem `xml:"theme"`
+	Booking   Booking         `xml:"booking"`
 }
 
 type Room struct {
