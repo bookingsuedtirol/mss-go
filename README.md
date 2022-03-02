@@ -13,6 +13,7 @@ MSS API client for Go projects
 - [x] getRoomAvailability
 - [x] prepareBooking
 - [x] getBooking
+- [x] cancelBooking
 - [x] createInquiry
 - [x] getUserSources
 - [x] getLocationList

@@ -35,15 +35,19 @@ type Credentials struct {
 	Source   string `xml:"source"`
 }
 
+type StornoReason int
+
 type Data struct {
-	Guest     *Guest    `xml:"guest"`
-	Company   *Company  `xml:"company"`
-	Payment   *Payment  `xml:"payment"`
-	Note      string    `xml:"note"`
-	Details   *Details  `xml:"details"`
-	Form      *Form     `xml:"form"`
-	Tracking  *Tracking `xml:"tracking"`
-	Insurance Bool      `xml:"insurance"`
+	Guest            *Guest       `xml:"guest"`
+	Company          *Company     `xml:"company"`
+	Payment          *Payment     `xml:"payment"`
+	Note             string       `xml:"note"`
+	Details          *Details     `xml:"details"`
+	Form             *Form        `xml:"form"`
+	Tracking         *Tracking    `xml:"tracking"`
+	Insurance        Bool         `xml:"insurance"`
+	StornoReason     StornoReason `xml:"storno_reason"`
+	StornoReasonText string       `xml:"storno_reason_text"`
 }
 
 type Details struct {
@@ -179,7 +183,7 @@ type Search struct {
 	In                 []int               `xml:"in"`
 	IDOfchannel        string              `xml:"id_ofchannel,omitempty"`
 	TransactionID      string              `xml:"transaction_id"`
-	BookingID          string              `xml:"booking_id"`
+	BookingID          int                 `xml:"booking_id"`
 	GuestEmail         string              `xml:"guest_email"`
 	RootID             int                 `xml:"root_id"`
 	ExternalID         int                 `xml:"external_id"`

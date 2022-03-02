@@ -10,6 +10,7 @@ const (
 	GetRoomAvailability   request.Method = "getRoomAvailability"
 	PrepareBooking        request.Method = "prepareBooking"
 	GetBooking            request.Method = "getBooking"
+	CancelBooking         request.Method = "cancelBooking"
 	CreateInquiry         request.Method = "createInquiry"
 	GetUserSources        request.Method = "getUserSources"
 	GetLocationList       request.Method = "getLocationList"
