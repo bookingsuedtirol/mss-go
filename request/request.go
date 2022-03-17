@@ -195,6 +195,7 @@ type Search struct {
 	TotalPrice         float64             `xml:"total_price"`
 	Arrival            *shared.Date        `xml:"arrival"`
 	Departure          *shared.Date        `xml:"departure"`
+	StornoID           string              `xml:"storno_id"`
 }
 
 type SearchAvailability struct {
