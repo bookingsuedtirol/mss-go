@@ -14,6 +14,7 @@ type Address struct {
 	Street  string `xml:"street"`
 	ZIPCode string `xml:"zipcode"`
 	City    string `xml:"city"`
+	// The ISO 3166 alpha-3 code
 	Country string `xml:"country"`
 }
 
