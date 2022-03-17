@@ -79,3 +79,5 @@ type LocationType string
 type PaymentMethod int
 
 type SEOType string
+
+type Gender string

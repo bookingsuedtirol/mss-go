@@ -160,14 +160,14 @@ type Geolocation struct {
 }
 
 type Guest struct {
-	GuestID   int     `xml:"guest_id"`
-	Firstname string  `xml:"firstname"`
-	Lastname  string  `xml:"lastname"`
-	Prefix    string  `xml:"prefix"`
-	Gender    string  `xml:"gender"`
-	Email     string  `xml:"email"`
-	Phone     string  `xml:"phone"`
-	Address   Address `xml:"address"`
+	GuestID   int           `xml:"guest_id"`
+	Firstname string        `xml:"firstname"`
+	Lastname  string        `xml:"lastname"`
+	Prefix    string        `xml:"prefix"`
+	Gender    shared.Gender `xml:"gender"`
+	Email     string        `xml:"email"`
+	Phone     string        `xml:"phone"`
+	Address   Address       `xml:"address"`
 }
 
 type Header struct {

@@ -66,14 +66,14 @@ type Form struct {
 }
 
 type Guest struct {
-	Gender     string   `xml:"gender"`
-	Prefix     string   `xml:"prefix"`
-	Firstname  string   `xml:"firstname"`
-	Lastname   string   `xml:"lastname"`
-	Email      string   `xml:"email"`
-	Phone      string   `xml:"phone"`
-	Address    *Address `xml:"address"`
-	Newsletter Bool     `xml:"newsletter"`
+	Gender     shared.Gender `xml:"gender"`
+	Prefix     string        `xml:"prefix"`
+	Firstname  string        `xml:"firstname"`
+	Lastname   string        `xml:"lastname"`
+	Email      string        `xml:"email"`
+	Phone      string        `xml:"phone"`
+	Address    *Address      `xml:"address"`
+	Newsletter Bool          `xml:"newsletter"`
 }
 
 type Method string
