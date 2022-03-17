@@ -307,7 +307,8 @@ type Payment struct {
 	Method     shared.PaymentMethod `xml:"method"`
 	Price      float64              `xml:"price"`
 	Prepayment float64              `xml:"prepayment"`
-	Invoice    int                  `xml:"invoice"`
+	Invoice    bool                 `xml:"invoice"`
+	Bank       Bank                 `xml:"bank"`
 }
 
 type PaymentTerm struct {
