@@ -303,22 +303,22 @@ type Paging struct {
 }
 
 type Payment struct {
-	Method     int     `xml:"method"`
-	Price      float64 `xml:"price"`
-	Prepayment float64 `xml:"prepayment"`
-	Invoice    int     `xml:"invoice"`
+	Method     shared.PaymentMethod `xml:"method"`
+	Price      float64              `xml:"price"`
+	Prepayment float64              `xml:"prepayment"`
+	Invoice    int                  `xml:"invoice"`
 }
 
 type PaymentTerm struct {
-	ID          int       `xml:"id"`
-	OwnerID     int       `xml:"owner_id"`
-	Methods     int       `xml:"methods"`
-	Ccards      int       `xml:"ccards"`
-	Prepayment  int       `xml:"prepayment"`
-	Priority    int       `xml:"priority"`
-	Bank        Bank      `xml:"bank"`
-	Description string    `xml:"description"`
-	Insurance   Insurance `xml:"insurance"`
+	ID          int                  `xml:"id"`
+	OwnerID     int                  `xml:"owner_id"`
+	Methods     shared.PaymentMethod `xml:"methods"`
+	Ccards      int                  `xml:"ccards"`
+	Prepayment  int                  `xml:"prepayment"`
+	Priority    int                  `xml:"priority"`
+	Bank        Bank                 `xml:"bank"`
+	Description string               `xml:"description"`
+	Insurance   Insurance            `xml:"insurance"`
 }
 
 type Penalty struct {

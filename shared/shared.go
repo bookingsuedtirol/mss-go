@@ -75,3 +75,5 @@ type SpecialPremium int
 type ThemeID int
 
 type LocationType string
+
+type PaymentMethod int

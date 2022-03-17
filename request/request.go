@@ -134,8 +134,8 @@ type Paging struct {
 }
 
 type Payment struct {
-	Method  int  `xml:"method"`
-	Invoice Bool `xml:"invoice"`
+	Method  shared.PaymentMethod `xml:"method"`
+	Invoice Bool                 `xml:"invoice"`
 }
 
 type Rateplan struct {
