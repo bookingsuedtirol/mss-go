@@ -30,7 +30,6 @@ func main() {
 				SearchOffer: &request.SearchOffer{
 					Arrival:   &today,
 					Departure: &oneWeekFromNow,
-					Service:   0,
 					Rooms: []request.Room{
 						{
 							RoomSeq:  1,

@@ -402,23 +402,23 @@ type Rating struct {
 }
 
 type Restriction struct {
-	ObjID          int `xml:"obj_id"`
-	ObjSubID       int `xml:"obj_sub_id"`
-	ObjSubOnly     int `xml:"obj_sub_only"`
-	Service        int `xml:"service"`
-	Arrival        int `xml:"arrival"`
-	Departure      int `xml:"departure"`
-	Min            int `xml:"min"`
-	MinArrival     int `xml:"min_arrival"`
-	Max            int `xml:"max"`
-	MaxArrival     int `xml:"max_arrival"`
-	Close          int `xml:"close"`
-	ChildrenMin    int `xml:"children_min"`
-	ChildrenMax    int `xml:"children_max"`
-	Holes          int `xml:"holes"`
-	DaysArrivalMin int `xml:"days_arrival_min"`
-	DaysArrivalMax int `xml:"days_arrival_max"`
-	PersAgeMin     int `xml:"pers_age_min"`
+	ObjID          int          `xml:"obj_id"`
+	ObjSubID       int          `xml:"obj_sub_id"`
+	ObjSubOnly     int          `xml:"obj_sub_only"`
+	Service        shared.Board `xml:"service"`
+	Arrival        int          `xml:"arrival"`
+	Departure      int          `xml:"departure"`
+	Min            int          `xml:"min"`
+	MinArrival     int          `xml:"min_arrival"`
+	Max            int          `xml:"max"`
+	MaxArrival     int          `xml:"max_arrival"`
+	Close          int          `xml:"close"`
+	ChildrenMin    int          `xml:"children_min"`
+	ChildrenMax    int          `xml:"children_max"`
+	Holes          int          `xml:"holes"`
+	DaysArrivalMin int          `xml:"days_arrival_min"`
+	DaysArrivalMax int          `xml:"days_arrival_max"`
+	PersAgeMin     int          `xml:"pers_age_min"`
 }
 
 type Result struct {
@@ -436,7 +436,7 @@ type Room struct {
 	RoomID          int             `xml:"room_id"`
 	RoomLTSID       string          `xml:"room_lts_id"`
 	OfferID         int             `xml:"offer_id"`
-	Service         int             `xml:"service"`
+	Service         shared.Board    `xml:"service"`
 	RoomType        shared.RoomType `xml:"room_type"`
 	RoomCode        string          `xml:"room_code"`
 	RoomTitle       string          `xml:"room_title"`
