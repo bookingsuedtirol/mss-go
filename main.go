@@ -20,7 +20,7 @@ type Client struct {
 	Source   string
 }
 
-func (settings Client) Request(callback func(request.Root) request.Root) (*response.Root, error) {
+func (settings Client) Request(callback func(request.Root) request.Root) (*response.Root, *response.MSSError) {
 	requestRoot := request.Root{
 		Version: "2.0",
 		Header: request.Header{
@@ -48,11 +48,11 @@ func (settings Client) Request(callback func(request.Root) request.Root) (*respo
 
 var httpClient = http.Client{Timeout: 20 * time.Second}
 
-func sendRequest(requestRoot request.Root) (*response.Root, error) {
+func sendRequest(requestRoot request.Root) (*response.Root, *response.MSSError) {
 	requestXMLRoot, err := xml.Marshal(requestRoot)
 
 	if err != nil {
-		return nil, err
+		return nil, &response.MSSError{Err: err}
 	}
 
 	resp, err := httpClient.Post(
@@ -62,14 +62,18 @@ func sendRequest(requestRoot request.Root) (*response.Root, error) {
 	)
 
 	if err != nil {
-		return nil, err
+		return nil, &response.MSSError{Err: err}
 	}
 
 	defer resp.Body.Close()
 
 	if resp.StatusCode >= 400 {
-		return nil,
-			fmt.Errorf("request to MSS failed with HTTP status code %v", resp.StatusCode)
+		return nil, &response.MSSError{
+			Err: fmt.Errorf(
+				"request to MSS failed with HTTP status code %v", resp.StatusCode,
+			),
+			StatusCode: resp.StatusCode,
+		}
 	}
 
 	rawDec := xml.NewDecoder(resp.Body)
@@ -79,15 +83,19 @@ func sendRequest(requestRoot request.Root) (*response.Root, error) {
 	err = dec.Decode(&responseRoot)
 
 	if err != nil {
-		return nil, err
+		return nil, &response.MSSError{Err: err}
 	}
 
 	if responseRoot.Header.Error.Code != 0 {
 		return nil,
-			fmt.Errorf("MSS returned an error\nCode: %v,\nMessage: %v",
-				responseRoot.Header.Error.Code,
-				responseRoot.Header.Error.Message,
-			)
+			&response.MSSError{
+				Err: fmt.Errorf(
+					"%v, code: %v",
+					responseRoot.Header.Error.Message,
+					responseRoot.Header.Error.Code,
+				),
+				Code: responseRoot.Header.Error.Code,
+			}
 	}
 
 	return &responseRoot, nil

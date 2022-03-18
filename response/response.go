@@ -622,3 +622,13 @@ type Nl2brString string
 type NormalizedHTMLString string
 
 type Ints []int
+
+type MSSError struct {
+	Err        error
+	Code       ErrorCode
+	StatusCode int
+}
+
+func (e MSSError) Error() string {
+	return "MSS error: " + e.Err.Error()
+}
