@@ -443,7 +443,7 @@ type Room struct {
 	RoomDescription string          `xml:"room_description"`
 	Title           string          `xml:"title"`
 	Description     Nl2brString     `xml:"description"`
-	RoomPersons     string          `xml:"room_persons"`
+	RoomPersons     Ints            `xml:"room_persons"`
 	RoomFree        int             `xml:"room_free"`
 	Features        int             `xml:"features"`
 	FeaturesView    []Feature       `xml:"features_view>feature"`
