@@ -214,7 +214,7 @@ type Hotel struct {
 	CheckOut              CheckOut             `xml:"check_out"`
 	PriceFrom             int                  `xml:"price_from"`
 	Board                 int                  `xml:"board"`
-	BoardTq               int                  `xml:"board_tq"`
+	BoardThreeQuarters    bool                 `xml:"board_tq"`
 	PersAgeMin            int                  `xml:"pers_age_min"`
 	ChildAgeMin           int                  `xml:"child_age_min"`
 	AdultAgeMin           int                  `xml:"adult_age_min"`
