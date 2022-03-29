@@ -366,8 +366,8 @@ type PriceList struct {
 	SpecialType    shared.SpecialType `xml:"special_typ"`
 	PrlMode        int                `xml:"prl_mode"`
 	PrlUnit        int                `xml:"prl_unit"`
-	DaysArrival    int                `xml:"days_arrival"`
-	DaysDeparture  int                `xml:"days_departure"`
+	DaysArrival    Weekdays           `xml:"days_arrival"`
+	DaysDeparture  Weekdays           `xml:"days_departure"`
 	DaysDurMin     int                `xml:"days_dur_min"`
 	DaysDurMax     int                `xml:"days_dur_max"`
 	DaysArrivalMin int                `xml:"days_arrival_min"`
@@ -553,6 +553,8 @@ type SourceData struct {
 	URL         string `xml:"url"`
 }
 
+type Weekdays int
+
 type Special struct {
 	OfferID        int                   `xml:"offer_id"`
 	Status         int                   `xml:"status"`
@@ -560,8 +562,8 @@ type Special struct {
 	OfferType      shared.OfferType      `xml:"offer_typ"`
 	SpecialType    shared.SpecialType    `xml:"special_typ"`
 	SpecialPremium shared.SpecialPremium `xml:"special_premium"`
-	DaysArrival    int                   `xml:"days_arrival"`
-	DaysDeparture  int                   `xml:"days_departure"`
+	DaysArrival    Weekdays              `xml:"days_arrival"`
+	DaysDeparture  Weekdays              `xml:"days_departure"`
 	DaysDurMin     int                   `xml:"days_dur_min"`
 	DaysDurMax     int                   `xml:"days_dur_max"`
 	DaysArrivalMin int                   `xml:"days_arrival_min"`
