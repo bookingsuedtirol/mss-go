@@ -6,7 +6,7 @@ import (
 
 	"github.com/HGV/mss-go"
 	"github.com/HGV/mss-go/request"
-	"github.com/HGV/mss-go/types/hotel_details"
+	"github.com/HGV/mss-go/types/hoteldetails"
 	"github.com/HGV/mss-go/types/method"
 )
 
@@ -24,8 +24,8 @@ func main() {
 				IDs: []int{11230},
 			},
 			Options: &request.Options{
-				HotelDetails: hotel_details.BasicInfo |
-					hotel_details.Coordinates,
+				HotelDetails: hoteldetails.BasicInfo |
+					hoteldetails.Coordinates,
 			},
 		}
 

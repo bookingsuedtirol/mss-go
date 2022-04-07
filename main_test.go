@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/HGV/mss-go/request"
-	"github.com/HGV/mss-go/types/hotel_details"
+	"github.com/HGV/mss-go/types/hoteldetails"
 	"github.com/HGV/mss-go/types/method"
 )
 
@@ -29,8 +29,8 @@ func TestSimpleMssCall(t *testing.T) {
 				IDs: []int{9002},
 			},
 			Options: &request.Options{
-				HotelDetails: hotel_details.BasicInfo |
-					hotel_details.Coordinates,
+				HotelDetails: hoteldetails.BasicInfo |
+					hoteldetails.Coordinates,
 			},
 		}
 

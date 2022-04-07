@@ -9,7 +9,7 @@ import (
 	"github.com/HGV/mss-go/request"
 	"github.com/HGV/mss-go/shared"
 	"github.com/HGV/mss-go/types/method"
-	"github.com/HGV/mss-go/types/offer_details"
+	"github.com/HGV/mss-go/types/offerdetails"
 )
 
 func main() {
@@ -40,10 +40,10 @@ func main() {
 				},
 			},
 			Options: &request.Options{
-				OfferDetails: offer_details.BasicInfo |
-					offer_details.RoomTitle |
-					offer_details.CancelPolicies |
-					offer_details.PaymentTerms,
+				OfferDetails: offerdetails.BasicInfo |
+					offerdetails.RoomTitle |
+					offerdetails.CancelPolicies |
+					offerdetails.PaymentTerms,
 			},
 		}
 
