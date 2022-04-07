@@ -118,7 +118,7 @@ type normalizer struct {
 // Match Unicode Private Use Areas
 var reg = regexp.MustCompile(`\p{Co}`)
 
-// Fixes some inconveniencies of the MSS output.
+// Fixes some inconveniences of the MSS output.
 // They would otherwise produce warnings in the W3C HTML validator.
 // - Trims all leading and trailing whitespace.
 // - Removes Unicode Private Use characters.
