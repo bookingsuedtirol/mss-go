@@ -102,14 +102,15 @@ func (input *Ints) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) er
 		return err
 	}
 
-	out := []int{}
-
+	// Don’t assign anything (is a nil-slice by default).
 	if value == "" {
-		*input = out
 		return nil
 	}
 
-	for _, idStr := range strings.Split(value, ",") {
+	idStrings := strings.Split(value, ",")
+	out := make([]int, 0, len(idStrings))
+
+	for _, idStr := range idStrings {
 		id, err := strconv.Atoi(idStr)
 
 		if err != nil {
