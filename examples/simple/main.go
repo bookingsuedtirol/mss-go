@@ -11,11 +11,11 @@ import (
 )
 
 func main() {
-	client := mss.Client{
+	client := mss.NewClient(mss.Credentials{
 		User:     os.Getenv("MSS_USER"),
 		Password: os.Getenv("MSS_PASSWORD"),
 		Source:   os.Getenv("MSS_SOURCE"),
-	}
+	})
 
 	responseRoot, err := client.Request(func(requestRoot request.Root) request.Root {
 		requestRoot.Header.Method = method.GetHotelList

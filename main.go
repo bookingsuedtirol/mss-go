@@ -15,19 +15,31 @@ import (
 )
 
 type Client struct {
+	httpClient  http.Client
+	credentials Credentials
+}
+
+type Credentials struct {
 	User     string
 	Password string
 	Source   string
 }
 
-func (settings Client) Request(callback func(request.Root) request.Root) (*response.Root, *response.MSSError) {
+func NewClient(c Credentials) Client {
+	return Client{
+		httpClient:  http.Client{Timeout: 20 * time.Second},
+		credentials: c,
+	}
+}
+
+func (c Client) Request(callback func(request.Root) request.Root) (*response.Root, *response.MSSError) {
 	requestRoot := request.Root{
 		Version: "2.0",
 		Header: request.Header{
 			Credentials: request.Credentials{
-				User:     settings.User,
-				Password: settings.Password,
-				Source:   settings.Source,
+				User:     c.credentials.User,
+				Password: c.credentials.Password,
+				Source:   c.credentials.Source,
 			},
 		},
 	}
@@ -43,19 +55,17 @@ func (settings Client) Request(callback func(request.Root) request.Root) (*respo
 		transformedRequestRoot.Request.Search.Lang = "de"
 	}
 
-	return sendRequest(transformedRequestRoot)
+	return c.sendRequest(transformedRequestRoot)
 }
 
-var httpClient = http.Client{Timeout: 20 * time.Second}
-
-func sendRequest(requestRoot request.Root) (*response.Root, *response.MSSError) {
+func (c Client) sendRequest(requestRoot request.Root) (*response.Root, *response.MSSError) {
 	requestXMLRoot, err := xml.Marshal(requestRoot)
 
 	if err != nil {
 		return nil, &response.MSSError{Err: err}
 	}
 
-	resp, err := httpClient.Post(
+	resp, err := c.httpClient.Post(
 		"https://easychannel.it/mss/mss_service.php",
 		"text/xml",
 		strings.NewReader(xml.Header+string(requestXMLRoot)),

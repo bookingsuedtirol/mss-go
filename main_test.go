@@ -9,14 +9,14 @@ import (
 	"github.com/HGV/mss-go/types/method"
 )
 
-var client = Client{
+var client = NewClient(Credentials{
 	User:     os.Getenv("MSS_USER"),
 	Password: os.Getenv("MSS_PASSWORD"),
 	Source:   os.Getenv("MSS_SOURCE"),
-}
+})
 
 func TestEnvVariablesAreDefined(t *testing.T) {
-	if client.User == "" || client.Password == "" || client.Source == "" {
+	if c := client.credentials; c.User == "" || c.Password == "" || c.Source == "" {
 		t.Error("The env variables MSS_USER etc. are not set.")
 	}
 }
