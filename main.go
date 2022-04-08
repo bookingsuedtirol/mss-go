@@ -87,7 +87,7 @@ func (c Client) sendRequest(requestRoot request.Root) (*response.Root, *response
 	}
 
 	rawDec := xml.NewDecoder(resp.Body)
-	dec := xml.NewTokenDecoder(normalizer{rawDec})
+	dec := xml.NewTokenDecoder(newNormalizer(rawDec))
 
 	var responseRoot response.Root
 	err = dec.Decode(&responseRoot)
@@ -112,11 +112,15 @@ func (c Client) sendRequest(requestRoot request.Root) (*response.Root, *response
 }
 
 type normalizer struct {
-	dec *xml.Decoder
+	dec   *xml.Decoder
+	regex *regexp.Regexp
 }
 
-// Match Unicode Private Use Areas
-var reg = regexp.MustCompile(`\p{Co}`)
+func newNormalizer(dec *xml.Decoder) normalizer {
+	// Match Unicode Private Use Areas
+	regex := regexp.MustCompile(`\p{Co}`)
+	return normalizer{dec, regex}
+}
 
 // Fixes some inconveniences of the MSS output.
 // They would otherwise produce warnings in the W3C HTML validator.
@@ -127,7 +131,7 @@ func (n normalizer) Token() (xml.Token, error) {
 	t, err := n.dec.Token()
 
 	if cd, ok := t.(xml.CharData); ok {
-		replaced := reg.ReplaceAll(cd, []byte(""))
+		replaced := n.regex.ReplaceAll(cd, []byte(""))
 		trimmed := bytes.TrimSpace(replaced)
 		normalized := norm.NFC.Bytes(trimmed)
 		t = xml.CharData(normalized)
