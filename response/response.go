@@ -239,10 +239,12 @@ type HotelPayment struct {
 	Methods PaymentMethods `xml:"methods"`
 }
 
+type InsuranceType int
+
 type Insurance struct {
-	InsuranceType int    `xml:"insurance_type"`
-	InsuranceURL  string `xml:"insurance_url"`
-	AgencyNr      string `xml:"agency_nr"`
+	InsuranceType InsuranceType `xml:"insurance_type"`
+	InsuranceURL  string        `xml:"insurance_url"`
+	AgencyNr      string        `xml:"agency_nr"`
 }
 
 type Location struct {
