@@ -17,7 +17,7 @@ var client = NewClient(Credentials{
 
 func TestEnvVariablesAreDefined(t *testing.T) {
 	if c := client.credentials; c.User == "" || c.Password == "" || c.Source == "" {
-		t.Error("The env variables MSS_USER etc. are not set.")
+		t.Error("env variables MSS_USER etc. not set")
 	}
 }
 
