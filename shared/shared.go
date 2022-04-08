@@ -21,21 +21,20 @@ func (input *Date) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) er
 	}
 
 	value, err := ParseDateTime("2006-01-02", str)
-
 	if err != nil {
 		return err
 	}
 
-	*input = Date(*value)
+	if value != nil {
+		*input = Date(*value)
+	}
 
 	return nil
 }
 
 func ParseDateTime(layout string, value string) (*time.Time, error) {
-	// Use zero time if empty and if MSS
-	// returns "0000-00-00"
 	if value == "" || value == "0000-00-00" {
-		return &time.Time{}, nil
+		return nil, nil
 	}
 
 	parsed, err := time.Parse(layout, value)

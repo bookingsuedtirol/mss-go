@@ -25,7 +25,10 @@ func (input *DateTime) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement
 		return err
 	}
 
-	*input = DateTime(*value)
+	if value != nil {
+		*input = DateTime(*value)
+	}
+
 	return nil
 }
 
@@ -37,7 +40,6 @@ func (input *Time) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) er
 	}
 
 	if str == "" {
-		input.Valid = false
 		return nil
 	}
 
@@ -46,10 +48,13 @@ func (input *Time) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) er
 		return err
 	}
 
-	*input = Time{
-		Time:  *value,
-		Valid: true,
+	if value != nil {
+		*input = Time{
+			Time:  *value,
+			Valid: true,
+		}
 	}
+
 	return nil
 }
 
