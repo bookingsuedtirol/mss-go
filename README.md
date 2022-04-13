@@ -6,23 +6,23 @@ MSS API client for Go projects
 
 ## Available methods
 
-- [x] getHotelList
-- [x] getSpecialList
+- [x] getHotelList ✓
+- [x] getSpecialList ✓
 - [x] getRoomList
 - [x] getPriceList
 - [x] getRoomAvailability
 - [x] prepareBooking
-- [x] getBooking
-- [x] cancelBooking
+- [x] getBooking ✓
+- [x] cancelBooking ✓
 - [x] createInquiry
 - [x] getUserSources
-- [x] getLocationList
+- [x] getLocationList ✓
 - [x] getMasterpackagesList
 - [x] getThemeList
-- [x] getSeoTexts
+- [x] getSeoTexts ✓
 - [x] validateCoupon
 
-Warning: Only the implementations for `getHotelList` and `getLocationList` have been tested so far.
+Warning: Only the methods with a check mark next to them have been tested so far.
 
 ## Before running examples/tests
 
