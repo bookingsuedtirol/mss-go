@@ -58,20 +58,6 @@ func (input *Time) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) er
 	return nil
 }
 
-func (input *Nl2brString) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
-	var value string
-	err := decoder.DecodeElement(&value, &start)
-
-	if err != nil {
-		return err
-	}
-
-	nl2brString := strings.ReplaceAll(value, "\n", "<br />\n")
-	*input = Nl2brString(nl2brString)
-
-	return nil
-}
-
 func (input *NormalizedHTMLString) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
 	var value string
 	err := decoder.DecodeElement(&value, &start)

@@ -47,12 +47,13 @@ type Booking struct {
 }
 
 type CancelPolicy struct {
-	ID              int         `xml:"id"`
-	Refundable      bool        `xml:"refundable"`
-	RefundableUntil DateTime    `xml:"refundable_until"`
-	Penalties       []Penalty   `xml:"penalties>penalty"`
-	Description     Nl2brString `xml:"description"`
-	Priority        string      `xml:"priority"`
+	ID              int       `xml:"id"`
+	Refundable      bool      `xml:"refundable"`
+	RefundableUntil DateTime  `xml:"refundable_until"`
+	Penalties       []Penalty `xml:"penalties>penalty"`
+	// Description can contain \n characters.
+	Description string `xml:"description"`
+	Priority    string `xml:"priority"`
 }
 
 type Channel struct {
@@ -444,23 +445,24 @@ type Room struct {
 	RoomTitle       string          `xml:"room_title"`
 	RoomDescription string          `xml:"room_description"`
 	Title           string          `xml:"title"`
-	Description     Nl2brString     `xml:"description"`
-	RoomPersons     Ints            `xml:"room_persons"`
-	RoomFree        int             `xml:"room_free"`
-	Features        int             `xml:"features"`
-	FeaturesView    []Feature       `xml:"features_view>feature"`
-	RoomTotal       float64         `xml:"room_total"`
-	Pictures        []Picture       `xml:"pictures>picture"`
-	RoomPrice       []Price         `xml:"room_price"`
-	CancelPolicy    CancelPolicy    `xml:"cancel_policy"`
-	PaymentTerm     PaymentTerm     `xml:"payment_term"`
-	Properties      Properties      `xml:"properties"`
-	Occupancy       Occupancy       `xml:"occupancy"`
-	RoomNumbers     []string        `xml:"room_numbers>number"`
-	RoomDetails     []RoomDetail    `xml:"room_details>room_detail"`
-	Days            []Day           `xml:"days>day"`
-	PriceFrom       int             `xml:"price_from"`
-	PriceList       []PriceList     `xml:"pricelist"`
+	// Description can contain \n characters.
+	Description  string       `xml:"description"`
+	RoomPersons  Ints         `xml:"room_persons"`
+	RoomFree     int          `xml:"room_free"`
+	Features     int          `xml:"features"`
+	FeaturesView []Feature    `xml:"features_view>feature"`
+	RoomTotal    float64      `xml:"room_total"`
+	Pictures     []Picture    `xml:"pictures>picture"`
+	RoomPrice    []Price      `xml:"room_price"`
+	CancelPolicy CancelPolicy `xml:"cancel_policy"`
+	PaymentTerm  PaymentTerm  `xml:"payment_term"`
+	Properties   Properties   `xml:"properties"`
+	Occupancy    Occupancy    `xml:"occupancy"`
+	RoomNumbers  []string     `xml:"room_numbers>number"`
+	RoomDetails  []RoomDetail `xml:"room_details>room_detail"`
+	Days         []Day        `xml:"days>day"`
+	PriceFrom    int          `xml:"price_from"`
+	PriceList    []PriceList  `xml:"pricelist"`
 }
 
 type RoomDetail struct {
@@ -620,8 +622,6 @@ type Time struct {
 	// Valid is true if Time (which can also be Time.isZero() == 0) is present
 	Valid bool
 }
-
-type Nl2brString string
 
 type NormalizedHTMLString string
 
