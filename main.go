@@ -27,7 +27,9 @@ type Credentials struct {
 
 func NewClient(c Credentials) Client {
 	return Client{
-		httpClient:  http.Client{Timeout: 20 * time.Second},
+		httpClient: http.Client{Timeout: 20 * time.Second, Transport: &http.Transport{
+			DisableKeepAlives: true,
+		}},
 		credentials: c,
 	}
 }
