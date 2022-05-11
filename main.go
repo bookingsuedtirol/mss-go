@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/xml"
 	"fmt"
+	"io"
 	"net/http"
 	"regexp"
 	"strings"
@@ -86,13 +87,16 @@ func (c Client) sendRequest(requestRoot request.Root) (*response.Root, *response
 		}
 	}
 
-	rawDec := xml.NewDecoder(resp.Body)
+	data, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, &response.MSSError{Err: err}
+	}
+
+	rawDec := xml.NewDecoder(bytes.NewReader(data))
 	dec := xml.NewTokenDecoder(newNormalizer(rawDec))
 
 	var responseRoot response.Root
-	err = dec.Decode(&responseRoot)
-
-	if err != nil {
+	if err = dec.Decode(&responseRoot); err != nil {
 		return nil, &response.MSSError{Err: err}
 	}
 
