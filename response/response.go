@@ -23,27 +23,29 @@ type Bank struct {
 	SWIFT string `xml:"swift"`
 }
 
+type CancelledStatus int
+
 type Booking struct {
-	BookingID     int          `xml:"booking_id"`
-	StornoID      string       `xml:"storno_id"`
-	BookingDate   DateTime     `xml:"booking_date"`
-	Source        string       `xml:"source"`
-	HotelID       int          `xml:"hotel_id"`
-	Arrival       shared.Date  `xml:"arrival"`
-	Departure     shared.Date  `xml:"departure"`
-	Service       shared.Board `xml:"service"`
-	BookingStatus bool         `xml:"booking_status"`
-	Cancelled     bool         `xml:"cancelled"`
-	Note          string       `xml:"note"`
-	Hotel         Hotel        `xml:"hotel"`
-	Guest         Guest        `xml:"guest"`
-	Company       Company      `xml:"company"`
-	Payment       Payment      `xml:"payment"`
-	Rooms         []Room       `xml:"room"`
-	ExtraPrices   []Price      `xml:"extra_price"`
-	Offers        []Offer      `xml:"offer"`
-	Insurance     Insurance    `xml:"insurance"`
-	Coupon        Coupon       `xml:"coupon"`
+	BookingID     int             `xml:"booking_id"`
+	StornoID      string          `xml:"storno_id"`
+	BookingDate   DateTime        `xml:"booking_date"`
+	Source        string          `xml:"source"`
+	HotelID       int             `xml:"hotel_id"`
+	Arrival       shared.Date     `xml:"arrival"`
+	Departure     shared.Date     `xml:"departure"`
+	Service       shared.Board    `xml:"service"`
+	BookingStatus bool            `xml:"booking_status"`
+	Cancelled     CancelledStatus `xml:"cancelled"`
+	Note          string          `xml:"note"`
+	Hotel         Hotel           `xml:"hotel"`
+	Guest         Guest           `xml:"guest"`
+	Company       Company         `xml:"company"`
+	Payment       Payment         `xml:"payment"`
+	Rooms         []Room          `xml:"room"`
+	ExtraPrices   []Price         `xml:"extra_price"`
+	Offers        []Offer         `xml:"offer"`
+	Insurance     Insurance       `xml:"insurance"`
+	Coupon        Coupon          `xml:"coupon"`
 }
 
 type CancelPolicy struct {
