@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
+	"time"
 
 	"github.com/HGV/mss-go"
 	"github.com/HGV/mss-go/request"
@@ -11,11 +13,16 @@ import (
 )
 
 func main() {
-	client := mss.NewClient(mss.Credentials{
-		User:     os.Getenv("MSS_USER"),
-		Password: os.Getenv("MSS_PASSWORD"),
-		Source:   os.Getenv("MSS_SOURCE"),
-	})
+	client := mss.NewClient(
+		http.Client{
+			Timeout: 20 * time.Second,
+		},
+		mss.Credentials{
+			User:     os.Getenv("MSS_USER"),
+			Password: os.Getenv("MSS_PASSWORD"),
+			Source:   os.Getenv("MSS_SOURCE"),
+		},
+	)
 
 	responseRoot, err := client.Request(func(requestRoot request.Root) request.Root {
 		requestRoot.Header.Method = method.GetHotelList

@@ -1,19 +1,26 @@
 package mss
 
 import (
+	"net/http"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/HGV/mss-go/request"
 	"github.com/HGV/mss-go/types/hoteldetails"
 	"github.com/HGV/mss-go/types/method"
 )
 
-var client = NewClient(Credentials{
-	User:     os.Getenv("MSS_USER"),
-	Password: os.Getenv("MSS_PASSWORD"),
-	Source:   os.Getenv("MSS_SOURCE"),
-})
+var client = NewClient(
+	http.Client{
+		Timeout: 20 * time.Second,
+	},
+	Credentials{
+		User:     os.Getenv("MSS_USER"),
+		Password: os.Getenv("MSS_PASSWORD"),
+		Source:   os.Getenv("MSS_SOURCE"),
+	},
+)
 
 func TestEnvVariablesAreDefined(t *testing.T) {
 	if c := client.credentials; c.User == "" || c.Password == "" || c.Source == "" {

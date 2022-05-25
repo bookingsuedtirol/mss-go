@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 	"time"
 
@@ -13,11 +14,16 @@ import (
 )
 
 func main() {
-	client := mss.NewClient(mss.Credentials{
-		User:     os.Getenv("MSS_USER"),
-		Password: os.Getenv("MSS_PASSWORD"),
-		Source:   os.Getenv("MSS_SOURCE"),
-	})
+	client := mss.NewClient(
+		http.Client{
+			Timeout: 20 * time.Second,
+		},
+		mss.Credentials{
+			User:     os.Getenv("MSS_USER"),
+			Password: os.Getenv("MSS_PASSWORD"),
+			Source:   os.Getenv("MSS_SOURCE"),
+		},
+	)
 
 	today := shared.Date(time.Now())
 	oneWeekFromNow := shared.Date(time.Now().AddDate(0, 0, 7))

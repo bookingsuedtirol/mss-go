@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"regexp"
 	"strings"
-	"time"
 
 	"github.com/HGV/mss-go/request"
 	"github.com/HGV/mss-go/response"
@@ -25,13 +24,10 @@ type Credentials struct {
 	Source   string
 }
 
-func NewClient(c Credentials) Client {
-	return Client{
-		httpClient: http.Client{Timeout: 20 * time.Second, Transport: &http.Transport{
-			DisableKeepAlives: true,
-		}},
-		credentials: c,
-	}
+// NewClient creates a new client for requests to MSS.
+// Make sure to pass an http.Client with a reasonable timeout, e.g. 10–20 seconds.
+func NewClient(h http.Client, c Credentials) Client {
+	return Client{h, c}
 }
 
 func (c Client) Request(callback func(request.Root) request.Root) (*response.Root, *response.MSSError) {
@@ -67,12 +63,26 @@ func (c Client) sendRequest(requestRoot request.Root) (*response.Root, *response
 		return nil, &response.MSSError{Err: err}
 	}
 
-	resp, err := c.httpClient.Post(
+	req, err := http.NewRequest(
+		http.MethodPost,
 		"https://easychannel.it/mss/mss_service.php",
-		"text/xml",
 		strings.NewReader(xml.Header+string(requestXMLRoot)),
 	)
 
+	// The request needs to be closed every time because MSS does not seem to handle the
+	// "Connection: Keep-Alive" header correctly.
+	// For reference: https://stackoverflow.com/q/17714494, https://stackoverflow.com/a/34474535
+	if req != nil {
+		req.Close = true
+	}
+
+	if err != nil {
+		return nil, &response.MSSError{Err: err}
+	}
+
+	req.Header.Set("Content-Type", "text/xml")
+
+	resp, err := c.httpClient.Do(req)
 	if err != nil {
 		return nil, &response.MSSError{Err: err}
 	}
