@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"os"
@@ -28,33 +29,36 @@ func main() {
 	today := shared.Date(time.Now())
 	oneWeekFromNow := shared.Date(time.Now().AddDate(0, 0, 7))
 
-	responseRoot, err := client.Request(func(requestRoot request.Root) request.Root {
-		requestRoot.Header.Method = method.GetHotelList
-		requestRoot.Request = request.Request{
-			Search: &request.Search{
-				IDs: []int{9002},
-				SearchOffer: &request.SearchOffer{
-					Arrival:   &today,
-					Departure: &oneWeekFromNow,
-					Rooms: []request.Room{
-						{
-							RoomSeq:  1,
-							RoomType: 0,
-							Persons:  []int{18, 18},
+	responseRoot, err := client.Request(
+		context.Background(),
+		func(requestRoot request.Root) request.Root {
+			requestRoot.Header.Method = method.GetHotelList
+			requestRoot.Request = request.Request{
+				Search: &request.Search{
+					IDs: []int{9002},
+					SearchOffer: &request.SearchOffer{
+						Arrival:   &today,
+						Departure: &oneWeekFromNow,
+						Rooms: []request.Room{
+							{
+								RoomSeq:  1,
+								RoomType: 0,
+								Persons:  []int{18, 18},
+							},
 						},
 					},
 				},
-			},
-			Options: &request.Options{
-				OfferDetails: offerdetails.BasicInfo |
-					offerdetails.RoomTitle |
-					offerdetails.CancelPolicies |
-					offerdetails.PaymentTerms,
-			},
-		}
+				Options: &request.Options{
+					OfferDetails: offerdetails.BasicInfo |
+						offerdetails.RoomTitle |
+						offerdetails.CancelPolicies |
+						offerdetails.PaymentTerms,
+				},
+			}
 
-		return requestRoot
-	})
+			return requestRoot
+		},
+	)
 
 	if err != nil {
 		panic(err)

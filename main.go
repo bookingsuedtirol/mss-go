@@ -2,6 +2,7 @@ package mss
 
 import (
 	"bytes"
+	"context"
 	"encoding/xml"
 	"fmt"
 	"net/http"
@@ -30,7 +31,9 @@ func NewClient(h http.Client, c Credentials) Client {
 	return Client{h, c}
 }
 
-func (c Client) Request(callback func(request.Root) request.Root) (*response.Root, *response.MSSError) {
+func (c Client) Request(
+	ctx context.Context,
+	callback func(request.Root) request.Root) (*response.Root, *response.MSSError) {
 	requestRoot := request.Root{
 		Version: "2.0",
 		Header: request.Header{
@@ -53,17 +56,21 @@ func (c Client) Request(callback func(request.Root) request.Root) (*response.Roo
 		transformedRequestRoot.Request.Search.Lang = "de"
 	}
 
-	return c.sendRequest(transformedRequestRoot)
+	return c.sendRequest(ctx, transformedRequestRoot)
 }
 
-func (c Client) sendRequest(requestRoot request.Root) (*response.Root, *response.MSSError) {
+func (c Client) sendRequest(
+	ctx context.Context,
+	requestRoot request.Root,
+) (*response.Root, *response.MSSError) {
 	requestXMLRoot, err := xml.Marshal(requestRoot)
 
 	if err != nil {
 		return nil, &response.MSSError{Err: err}
 	}
 
-	req, err := http.NewRequest(
+	req, err := http.NewRequestWithContext(
+		ctx,
 		http.MethodPost,
 		"https://easychannel.it/mss/mss_service.php",
 		strings.NewReader(xml.Header+string(requestXMLRoot)),

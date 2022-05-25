@@ -1,6 +1,7 @@
 package mss
 
 import (
+	"context"
 	"net/http"
 	"os"
 	"testing"
@@ -29,20 +30,22 @@ func TestEnvVariablesAreDefined(t *testing.T) {
 }
 
 func TestSimpleMssCall(t *testing.T) {
-	responseRoot, err := client.Request(func(requestRoot request.Root) request.Root {
-		requestRoot.Header.Method = method.GetHotelList
-		requestRoot.Request = request.Request{
-			Search: &request.Search{
-				IDs: []int{9002},
-			},
-			Options: &request.Options{
-				HotelDetails: hoteldetails.BasicInfo |
-					hoteldetails.Coordinates,
-			},
-		}
+	responseRoot, err := client.Request(context.Background(),
+		func(requestRoot request.Root) request.Root {
+			requestRoot.Header.Method = method.GetHotelList
+			requestRoot.Request = request.Request{
+				Search: &request.Search{
+					IDs: []int{9002},
+				},
+				Options: &request.Options{
+					HotelDetails: hoteldetails.BasicInfo |
+						hoteldetails.Coordinates,
+				},
+			}
 
-		return requestRoot
-	})
+			return requestRoot
+		},
+	)
 
 	if err != nil {
 		panic(err)
