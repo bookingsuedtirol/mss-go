@@ -25,6 +25,14 @@ type Bank struct {
 
 type CancelledStatus int
 
+// All statuses can be cancelled with cancelBooking except for Cancelled (1)
+const (
+	CancelledStatusNotCancelled CancelledStatus = iota
+	CancelledStatusCancelled
+	CancelledStatusNoShow CancelledStatus = iota + 5
+	CancelledStatusUnknown
+)
+
 type Booking struct {
 	BookingID     int             `xml:"booking_id"`
 	StornoID      string          `xml:"storno_id"`
@@ -129,6 +137,17 @@ type Day struct {
 }
 
 type ErrorCode int
+
+const (
+	ErrorCodeGenericError ErrorCode = 1 << iota
+	ErrorCodeAuthenticationError
+	ErrorCodeInvalidXML
+	ErrorCodeInvalidMethod
+	ErrorCodeResultIDNotInCache
+	ErrorCodeInvalidMissingParameter
+	ErrorCodeBookingValidationFailed
+	ErrorCodePermissionsDenied
+)
 
 type Error struct {
 	Code    ErrorCode `xml:"code"`
@@ -238,11 +257,25 @@ type HotelLocation struct {
 
 type PaymentMethods int
 
+const (
+	PaymentMethodsCreditCard PaymentMethods = 8 << iota
+	PaymentMethodsATM        PaymentMethods = 32 << iota
+	PaymentMethodsMastercard
+	PaymentMethodsVisa
+	PaymentMethodsDinersClub
+	PaymentMethodsAmericanExpress
+)
+
 type HotelPayment struct {
 	Methods PaymentMethods `xml:"methods"`
 }
 
 type InsuranceType int
+
+const (
+	InsuranceTypeHGV InsuranceType = iota + 1
+	InsuranceTypeHogast
+)
 
 type Insurance struct {
 	InsuranceType InsuranceType `xml:"insurance_type"`
@@ -560,6 +593,16 @@ type SourceData struct {
 }
 
 type Weekdays int
+
+const (
+	WeekdayMonday Weekdays = 1 << iota
+	WeekdayTuesday
+	WeekdayWednesday
+	WeekdayThursday
+	WeekdayFriday
+	WeekdaySaturday
+	WeekdaySunday
+)
 
 type Special struct {
 	OfferID        int                   `xml:"offer_id"`

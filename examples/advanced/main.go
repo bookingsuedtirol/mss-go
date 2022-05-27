@@ -10,8 +10,6 @@ import (
 	"github.com/HGV/mss-go"
 	"github.com/HGV/mss-go/request"
 	"github.com/HGV/mss-go/shared"
-	"github.com/HGV/mss-go/types/method"
-	"github.com/HGV/mss-go/types/offerdetails"
 )
 
 func main() {
@@ -32,7 +30,7 @@ func main() {
 	responseRoot, err := client.Request(
 		context.Background(),
 		func(requestRoot request.Root) request.Root {
-			requestRoot.Header.Method = method.GetHotelList
+			requestRoot.Header.Method = request.MethodGetHotelList
 			requestRoot.Request = request.Request{
 				Search: &request.Search{
 					IDs: []int{9002},
@@ -49,10 +47,10 @@ func main() {
 					},
 				},
 				Options: &request.Options{
-					OfferDetails: offerdetails.BasicInfo |
-						offerdetails.RoomTitle |
-						offerdetails.CancelPolicies |
-						offerdetails.PaymentTerms,
+					OfferDetails: request.OfferDetailsBasicInfo |
+						request.OfferDetailsRoomTitle |
+						request.OfferDetailsCancelPolicies |
+						request.OfferDetailsPaymentTerms,
 				},
 			}
 

@@ -38,6 +38,15 @@ type Credentials struct {
 
 type StornoReason int
 
+const (
+	StornoReasonUnknown                       StornoReason = 0
+	StornoReasonGuestUnavailable              StornoReason = 1
+	StornoReasonPropertyRequestedCancellation StornoReason = 2
+	StornoReasonGuestChoseAnotherDestination  StornoReason = 3
+	StornoReasonGuestChoseAnotherProperty     StornoReason = 4
+	StornoReasonOther                         StornoReason = 99
+)
+
 type Data struct {
 	Guest            *Guest       `xml:"guest"`
 	Company          *Company     `xml:"company"`
@@ -79,6 +88,24 @@ type Guest struct {
 
 type Method string
 
+const (
+	MethodGetHotelList          Method = "getHotelList"
+	MethodGetSpecialList        Method = "getSpecialList"
+	MethodGetRoomList           Method = "getRoomList"
+	MethodGetPriceList          Method = "getPriceList"
+	MethodGetRoomAvailability   Method = "getRoomAvailability"
+	MethodPrepareBooking        Method = "prepareBooking"
+	MethodGetBooking            Method = "getBooking"
+	MethodCancelBooking         Method = "cancelBooking"
+	MethodCreateInquiry         Method = "createInquiry"
+	MethodGetUserSources        Method = "getUserSources"
+	MethodGetLocationList       Method = "getLocationList"
+	MethodGetMasterpackagesList Method = "getMasterpackagesList"
+	MethodGetThemeList          Method = "getThemeList"
+	MethodGetSEOTexts           Method = "getSeoTexts"
+	MethodValidateCoupon        Method = "validateCoupon"
+)
+
 type Header struct {
 	Credentials Credentials `xml:"credentials"`
 	Method      Method      `xml:"method"`
@@ -92,15 +119,91 @@ type Logging struct {
 
 type HotelDetails int
 
+const (
+	HotelDetailsBasicInfo HotelDetails = 1 << iota
+	HotelDetailsThemes
+	HotelDetailsHotelFacilities
+	HotelDetailsShortDescription
+	HotelDetailsFullDescription
+	HotelDetailsGeographicInformation
+	HotelDetailsCoordinates
+	HotelDetailsAddress
+	HotelDetailsContacts
+	HotelDetailsPaymentOptionsForOnlineBooking
+	HotelDetailsPaymentOptionsAtHotel
+	HotelDetailsLogo
+	HotelDetailsHeaderImages
+	HotelDetailsGallery
+	HotelDetailsHotelMatching
+	HotelDetailsGeographicalInformationAsText
+	HotelDetailsHotelNavigatorData
+	HotelDetailsDetailedHotelFacilities
+	HotelDetailsLTSSpecificParameters
+	HotelDetailsSalesPoint
+	HotelDetailsCheckInOut
+	HotelDetailsSourceData
+	HotelDetailsBoardData HotelDetails = 2 << iota
+	HotelDetailsCouponServiceData
+)
+
 type OfferDetails int
+
+const (
+	OfferDetailsBasicInfo             OfferDetails = 1
+	OfferDetailsRoomCode              OfferDetails = 4
+	OfferDetailsRoomTitle             OfferDetails = 8
+	OfferDetailsPriceDetails          OfferDetails = 16
+	OfferDetailsRoomImages            OfferDetails = 32
+	OfferDetailsRoomFacilitiesFilter  OfferDetails = 64
+	OfferDetailsRoomDescription       OfferDetails = 256
+	OfferDetailsIncludedServices      OfferDetails = 1024
+	OfferDetailsAdditionalServices    OfferDetails = 2048
+	OfferDetailsRoomFacilitiesDetails OfferDetails = 4096
+	OfferDetailsPriceImages           OfferDetails = 8192
+	OfferDetailsThemes                OfferDetails = 16384
+	OfferDetailsRoomFeatures          OfferDetails = 32768
+	OfferDetailsCancelPolicies        OfferDetails = 262144
+	OfferDetailsPaymentTerms          OfferDetails = 1048576
+)
 
 type RoomDetails int
 
+const (
+	RoomDetailsBasicInfo             RoomDetails = 4
+	RoomDetailsTitle                 RoomDetails = 8
+	RoomDetailsRoomImages            RoomDetails = 32
+	RoomDetailsRoomFacilitiesFilter  RoomDetails = 64
+	RoomDetailsRoomDescription       RoomDetails = 256
+	RoomDetailsRoomFacilitiesDetails RoomDetails = 4096
+	RoomDetailsRoomFeatures          RoomDetails = 32768
+	RoomDetailsRoomNumbers           RoomDetails = 65536
+)
+
 type SpecialDetails int
+
+const (
+	SpecialDetailsBasicInfo SpecialDetails = 1 << iota
+	SpecialDetailsTitle
+	SpecialDetailsDescriptions
+	SpecialDetailsSeasons
+	SpecialDetailsImages
+	SpecialDetailsThemes
+	SpecialDetailsIncludedServices
+	SpecialDetailsHotelIncludedServices
+	SpecialDetailsHotelMandatoryServices
+)
 
 type SEODetails int
 
+const SEODetailsPictures SEODetails = 32
+
 type PriceListDetails int
+
+const (
+	PriceListDetailsBaseData  PriceListDetails = 1
+	PriceListDetailsHeadlines PriceListDetails = 8
+	PriceListDetailsSeasons   PriceListDetails = 4194304
+)
 
 type Options struct {
 	HotelDetails         HotelDetails     `xml:"hotel_details"`
@@ -127,7 +230,19 @@ type Order struct {
 
 type OrderField string
 
+const (
+	OrderFieldDate  OrderField = "date"
+	OrderFieldRand  OrderField = "rand"
+	OrderFieldStars OrderField = "stars"
+	OrderFieldName  OrderField = "name"
+)
+
 type Direction string
+
+const (
+	DirectionAsc  Direction = "asc"
+	DirectionDesc Direction = "desc"
+)
 
 type Paging struct {
 	Start int `xml:"start"`

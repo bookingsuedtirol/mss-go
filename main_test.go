@@ -8,8 +8,6 @@ import (
 	"time"
 
 	"github.com/HGV/mss-go/request"
-	"github.com/HGV/mss-go/types/hoteldetails"
-	"github.com/HGV/mss-go/types/method"
 )
 
 var client = NewClient(
@@ -32,14 +30,14 @@ func TestEnvVariablesAreDefined(t *testing.T) {
 func TestSimpleMssCall(t *testing.T) {
 	responseRoot, err := client.Request(context.Background(),
 		func(requestRoot request.Root) request.Root {
-			requestRoot.Header.Method = method.GetHotelList
+			requestRoot.Header.Method = request.MethodGetHotelList
 			requestRoot.Request = request.Request{
 				Search: &request.Search{
 					IDs: []int{9002},
 				},
 				Options: &request.Options{
-					HotelDetails: hoteldetails.BasicInfo |
-						hoteldetails.Coordinates,
+					HotelDetails: request.HotelDetailsBasicInfo |
+						request.HotelDetailsCoordinates,
 				},
 			}
 
