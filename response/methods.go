@@ -3,9 +3,11 @@ package response
 import (
 	"bytes"
 	"encoding/xml"
+	"errors"
 	"io"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/HGV/mss-go/shared"
 	"github.com/microcosm-cc/bluemonday"
@@ -148,4 +150,60 @@ func fixHTML(input io.Reader) (io.Reader, error) {
 	}
 
 	return buf, nil
+}
+
+func (input *LimitPerSeconds) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
+	var str string
+	err := decoder.DecodeElement(&str, &start)
+	if err != nil {
+		return err
+	}
+
+	if str == "" {
+		*input = LimitPerSeconds{}
+		return nil
+	}
+
+	splitStr := strings.Split(str, "/")
+	if len(splitStr) != 2 {
+		return errors.New("failed to parse rate_limit.limit")
+	}
+
+	limit, err := strconv.Atoi(splitStr[0])
+	if err != nil {
+		return err
+	}
+
+	secs, err := strconv.Atoi(splitStr[1])
+	if err != nil {
+		return err
+	}
+
+	*input = LimitPerSeconds{
+		Requests: limit,
+		Duration: time.Duration(secs) * time.Second,
+	}
+
+	return nil
+}
+
+func (input *Duration) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
+	var str string
+	err := decoder.DecodeElement(&str, &start)
+	if err != nil {
+		return err
+	}
+
+	if str == "" {
+		return nil
+	}
+
+	secs, err := strconv.Atoi(str)
+	if err != nil {
+		return err
+	}
+
+	*input = Duration{time.Duration(secs) * time.Second}
+
+	return nil
 }

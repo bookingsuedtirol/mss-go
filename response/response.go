@@ -194,11 +194,12 @@ type Guest struct {
 }
 
 type Header struct {
-	Error    Error  `xml:"error"`
-	ResultID string `xml:"result_id"`
-	Source   string `xml:"source"`
-	Paging   Paging `xml:"paging"`
-	Time     string `xml:"time"`
+	Error     Error     `xml:"error"`
+	ResultID  string    `xml:"result_id"`
+	Source    string    `xml:"source"`
+	Paging    Paging    `xml:"paging"`
+	RateLimit RateLimit `xml:"rate_limit"`
+	Time      string    `xml:"time"`
 }
 
 type Hotel struct {
@@ -339,6 +340,21 @@ type Offer struct {
 type Paging struct {
 	Count int `xml:"count"`
 	Total int `xml:"total"`
+}
+
+type RateLimit struct {
+	Limit     LimitPerSeconds `xml:"limit"`
+	Remaining int             `xml:"remaining"`
+	Reset     Duration        `xml:"reset"`
+}
+
+type LimitPerSeconds struct {
+	Requests int
+	Duration time.Duration
+}
+
+type Duration struct {
+	time.Duration
 }
 
 type Payment struct {
