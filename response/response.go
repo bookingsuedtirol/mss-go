@@ -460,16 +460,16 @@ type Restriction struct {
 	ObjSubID       int          `xml:"obj_sub_id"`
 	ObjSubOnly     int          `xml:"obj_sub_only"`
 	Service        shared.Board `xml:"service"`
-	Arrival        int          `xml:"arrival"`
-	Departure      int          `xml:"departure"`
+	Arrival        bool         `xml:"arrival"`
+	Departure      bool         `xml:"departure"`
 	Min            int          `xml:"min"`
 	MinArrival     int          `xml:"min_arrival"`
 	Max            int          `xml:"max"`
 	MaxArrival     int          `xml:"max_arrival"`
-	Close          int          `xml:"close"`
+	Close          bool         `xml:"close"`
 	ChildrenMin    int          `xml:"children_min"`
 	ChildrenMax    int          `xml:"children_max"`
-	Holes          int          `xml:"holes"`
+	Holes          bool         `xml:"holes"`
 	DaysArrivalMin int          `xml:"days_arrival_min"`
 	DaysArrivalMax int          `xml:"days_arrival_max"`
 	PersAgeMin     int          `xml:"pers_age_min"`
@@ -517,9 +517,11 @@ type Room struct {
 }
 
 type RoomDetail struct {
-	Number       string `xml:"number"`
-	Availability string `xml:"availability"`
+	Number       string         `xml:"number"`
+	Availability Availabilities `xml:"availability"` // slice of 1 or 2
 }
+
+type Availabilities []bool
 
 type RoomPrice struct {
 	RoomID         int     `xml:"room_id"`

@@ -86,6 +86,47 @@ func (input *NormalizedHTMLString) UnmarshalXML(decoder *xml.Decoder, start xml.
 	return nil
 }
 
+func (input *Availabilities) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
+	var value string
+	err := decoder.DecodeElement(&value, &start)
+
+	if err != nil {
+		return err
+	}
+
+	if value == "" {
+		return nil
+	}
+
+	runes := []rune(value)
+	out := make([]bool, 0, len(runes))
+
+	for _, r := range runes {
+		status, err := strconv.Atoi(string(r))
+
+		if err != nil {
+			return err
+		}
+
+		var v bool
+
+		switch status {
+		case 1:
+			v = true
+		case 2:
+			v = false
+		default:
+			return errors.New("failed to parse availability")
+		}
+
+		out = append(out, v)
+	}
+
+	*input = out
+
+	return nil
+}
+
 // Decode from a comma-separated list of ints
 func (input *Ints) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
 	var value string
