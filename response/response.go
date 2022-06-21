@@ -247,6 +247,7 @@ type Hotel struct {
 	Ratings               []Rating             `xml:"ratings>rating"`
 	SourceData            SourceData           `xml:"source_data"`
 	Coupon                CouponService        `xml:"coupon"`
+	RoomTypes             shared.RoomType      `xml:"room_types"`
 }
 
 type HotelLocation struct {

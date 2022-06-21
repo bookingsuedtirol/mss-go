@@ -144,6 +144,7 @@ const (
 	HotelDetailsSourceData
 	HotelDetailsBoardData HotelDetails = 2 << iota
 	HotelDetailsCouponServiceData
+	HotelDetailsRoomTypes HotelDetails = 8 << iota
 )
 
 type OfferDetails int
