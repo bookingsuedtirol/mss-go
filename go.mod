@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/microcosm-cc/bluemonday v1.0.18
-	golang.org/x/net v0.0.0-20220615171555-694bf12d69de
+	golang.org/x/net v0.0.0-20220621193019-9d032be2e588
 	golang.org/x/text v0.3.7
 )
 
