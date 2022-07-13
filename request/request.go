@@ -316,10 +316,11 @@ type Search struct {
 }
 
 type SearchAvailability struct {
-	DateFrom *shared.Date `xml:"date_from"`
-	DateTo   *shared.Date `xml:"date_to"`
-	OfferIDs []int        `xml:"offer_id"`
-	RoomIDs  []int        `xml:"room_id"`
+	DateFrom *shared.Date     `xml:"date_from"`
+	DateTo   *shared.Date     `xml:"date_to"`
+	OfferIDs []int            `xml:"offer_id"`
+	RoomIDs  []int            `xml:"room_id"`
+	Type     shared.OfferType `xml:"typ"`
 }
 
 type SearchDistance struct {
