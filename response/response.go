@@ -441,7 +441,7 @@ type Properties struct {
 	LivingRooms int `xml:"living_rooms"`
 	DiningRooms int `xml:"dining_rooms"`
 	BathRooms   int `xml:"bath_rooms"`
-	WcRooms     int `xml:"wc_rooms"`
+	WCRooms     int `xml:"wc_rooms"`
 	Min         int `xml:"min"`
 	Max         int `xml:"max"`
 	Std         int `xml:"std"`
