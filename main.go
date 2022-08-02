@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/xml"
 	"fmt"
+	"io"
 	"net/http"
 	"regexp"
 	"strings"
@@ -31,39 +32,27 @@ func NewClient(h http.Client, c Credentials) Client {
 	return Client{h, c}
 }
 
-func (c Client) Request(
-	ctx context.Context,
-	callback func(request.Root) request.Root) (*response.Root, *response.MSSError) {
-	requestRoot := request.Root{
-		Version: "2.0",
-		Header: request.Header{
-			Credentials: request.Credentials{
-				User:     c.credentials.User,
-				Password: c.credentials.Password,
-				Source:   c.credentials.Source,
-			},
-		},
+type Callback func(request.Root) request.Root
+
+func (c Client) Request(ctx context.Context, cb Callback) (*response.Root, *response.MSSError) {
+	body, err := c.RequestXML(ctx, cb)
+	if err != nil {
+		return nil, err
 	}
+	defer body.Close()
 
-	transformedRequestRoot := callback(requestRoot)
-
-	if transformedRequestRoot.Request.Search == nil {
-		transformedRequestRoot.Request.Search = &request.Search{}
-	}
-
-	// Set a default value for Lang because it’s required by the MSS
-	if transformedRequestRoot.Request.Search.Lang == "" {
-		transformedRequestRoot.Request.Search.Lang = "de"
-	}
-
-	return c.sendRequest(ctx, transformedRequestRoot)
+	return c.decodeXMLResponse(body)
 }
 
-func (c Client) sendRequest(
-	ctx context.Context,
-	requestRoot request.Root,
-) (*response.Root, *response.MSSError) {
-	requestXMLRoot, err := xml.Marshal(requestRoot)
+// RequestXML takes a callback to construct the request root,
+// marshals it to XML, sends it to MSS and outputs the
+// MSS XML response body as io.ReadCloser.
+func (c Client) RequestXML(
+	ctx context.Context, cb Callback,
+) (io.ReadCloser, *response.MSSError) {
+	reqRoot := c.getRequestRoot(cb)
+
+	reqXML, err := xml.Marshal(reqRoot)
 
 	if err != nil {
 		return nil, &response.MSSError{Err: err}
@@ -73,7 +62,7 @@ func (c Client) sendRequest(
 		ctx,
 		http.MethodPost,
 		"https://easychannel.it/mss/mss_service.php",
-		strings.NewReader(xml.Header+string(requestXMLRoot)),
+		strings.NewReader(xml.Header+string(reqXML)),
 	)
 
 	// The request needs to be closed every time because MSS does not seem to handle the
@@ -94,9 +83,8 @@ func (c Client) sendRequest(
 		return nil, &response.MSSError{Err: err}
 	}
 
-	defer resp.Body.Close()
-
 	if resp.StatusCode >= 400 {
+		resp.Body.Close()
 		return nil, &response.MSSError{
 			Err: fmt.Errorf(
 				"request to MSS failed with HTTP status code %v", resp.StatusCode,
@@ -105,13 +93,42 @@ func (c Client) sendRequest(
 		}
 	}
 
-	rawDec := xml.NewDecoder(resp.Body)
+	return resp.Body, nil
+}
+
+func (c Client) getRequestRoot(cb Callback) request.Root {
+	root := request.Root{
+		Version: "2.0",
+		Header: request.Header{
+			Credentials: request.Credentials{
+				User:     c.credentials.User,
+				Password: c.credentials.Password,
+				Source:   c.credentials.Source,
+			},
+		},
+	}
+
+	newRoot := cb(root)
+
+	if newRoot.Request.Search == nil {
+		newRoot.Request.Search = &request.Search{}
+	}
+
+	// Set a default value for Lang because it’s required by the MSS
+	if newRoot.Request.Search.Lang == "" {
+		newRoot.Request.Search.Lang = "de"
+	}
+
+	return newRoot
+}
+
+func (c Client) decodeXMLResponse(body io.Reader) (*response.Root, *response.MSSError) {
+	rawDec := xml.NewDecoder(body)
 	dec := xml.NewTokenDecoder(newNormalizer(rawDec))
 
 	var responseRoot response.Root
-	err = dec.Decode(&responseRoot)
 
-	if err != nil {
+	if err := dec.Decode(&responseRoot); err != nil {
 		return nil, &response.MSSError{Err: err}
 	}
 
