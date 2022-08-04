@@ -519,7 +519,7 @@ type Room struct {
 
 type RoomDetail struct {
 	Number       string         `xml:"number"`
-	Availability Availabilities `xml:"availability"` // slice of 1 or 2
+	Availability Availabilities `xml:"availability"`
 }
 
 type Availabilities []bool

@@ -112,8 +112,10 @@ func (input *Availabilities) UnmarshalXML(decoder *xml.Decoder, start xml.StartE
 
 		switch status {
 		case 1:
+			// 1 means available
 			v = true
 		case 2:
+			// 2 means unavailable.
 			v = false
 		default:
 			return errors.New("failed to parse availability")
