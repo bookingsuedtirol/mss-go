@@ -132,19 +132,27 @@ func (c Client) decodeXMLResponse(body io.Reader) (*response.Root, *response.MSS
 		return nil, &response.MSSError{Err: err}
 	}
 
-	if responseRoot.Header.Error.Code != 0 {
-		return nil,
-			&response.MSSError{
-				Err: fmt.Errorf(
-					"%v, code: %v",
-					responseRoot.Header.Error.Message,
-					responseRoot.Header.Error.Code,
-				),
-				Code: responseRoot.Header.Error.Code,
-			}
+	if err := c.ErrorResponse(responseRoot.Header); err != nil {
+		return nil, err
 	}
 
 	return &responseRoot, nil
+}
+
+// ErrorResponse checks if MSS returned an error in its response and formats it accordingly.
+func (c Client) ErrorResponse(h response.Header) *response.MSSError {
+	if h.Error.Code == 0 {
+		return nil
+	}
+
+	return &response.MSSError{
+		Err: fmt.Errorf(
+			"%v, code %v",
+			h.Error.Message,
+			h.Error.Code,
+		),
+		Code: h.Error.Code,
+	}
 }
 
 type normalizer struct {
