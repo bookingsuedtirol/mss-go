@@ -132,7 +132,7 @@ func (c Client) decodeXMLResponse(body io.Reader) (*response.Root, *response.MSS
 		return nil, &response.MSSError{Err: err}
 	}
 
-	if err := c.ErrorResponse(responseRoot.Header); err != nil {
+	if err := ErrorResponse(responseRoot.Header); err != nil {
 		return nil, err
 	}
 
@@ -140,7 +140,7 @@ func (c Client) decodeXMLResponse(body io.Reader) (*response.Root, *response.MSS
 }
 
 // ErrorResponse checks if MSS returned an error in its response and formats it accordingly.
-func (c Client) ErrorResponse(h response.Header) *response.MSSError {
+func ErrorResponse(h response.Header) *response.MSSError {
 	if h.Error.Code == 0 {
 		return nil
 	}
