@@ -3,8 +3,8 @@ module github.com/HGV/mss-go
 go 1.18
 
 require (
-	github.com/microcosm-cc/bluemonday v1.0.19
-	golang.org/x/net v0.0.0-20220728211354-c7608f3a8462
+	github.com/microcosm-cc/bluemonday v1.0.20
+	golang.org/x/net v0.0.0-20220909164309-bea034e7d591
 	golang.org/x/text v0.3.7
 )
 
