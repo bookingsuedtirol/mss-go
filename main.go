@@ -7,11 +7,13 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"regexp"
 	"strings"
+	"unicode"
 
 	"github.com/HGV/mss-go/request"
 	"github.com/HGV/mss-go/response"
+	"golang.org/x/text/runes"
+	"golang.org/x/text/transform"
 	"golang.org/x/text/unicode/norm"
 )
 
@@ -123,8 +125,19 @@ func (c Client) getRequestRoot(cb Callback) request.Root {
 }
 
 func (c Client) decodeXMLResponse(body io.Reader) (*response.Root, *response.MSSError) {
-	rawDec := xml.NewDecoder(body)
-	dec := xml.NewTokenDecoder(newNormalizer(rawDec))
+	// Fix some MSS inconvienences before decoding XML.
+	t := transform.NewReader(body,
+		transform.Chain(
+			// Normalize to Unicode NFC (MSS sometimes returns non-normalized Unicode sequences).
+			norm.NFC,
+			// Remove Unicode private use characters which MSS sometimes returns.
+			// They shouldn’t appear in normal text.
+			runes.Remove(runes.In(unicode.Co)),
+		),
+	)
+
+	rawDec := xml.NewDecoder(t)
+	dec := xml.NewTokenDecoder(newSpaceTrimmer(rawDec))
 
 	var responseRoot response.Root
 
@@ -155,30 +168,20 @@ func ErrorResponse(h response.Header) *response.MSSError {
 	}
 }
 
-type normalizer struct {
-	dec   *xml.Decoder
-	regex *regexp.Regexp
+// spaceTrimmer removes all leading and trailing whitespace inside XML elements.
+type spaceTrimmer struct {
+	dec *xml.Decoder
 }
 
-func newNormalizer(dec *xml.Decoder) normalizer {
-	// Match Unicode Private Use Areas
-	regex := regexp.MustCompile(`\p{Co}`)
-	return normalizer{dec, regex}
+func newSpaceTrimmer(dec *xml.Decoder) spaceTrimmer {
+	return spaceTrimmer{dec}
 }
 
-// Fixes some inconveniences of the MSS output.
-// They would otherwise produce warnings in the W3C HTML validator.
-// - Trims all leading and trailing whitespace.
-// - Removes Unicode Private Use characters.
-// - Runs text through Unicode normalization form NFC.
-func (n normalizer) Token() (xml.Token, error) {
+func (n spaceTrimmer) Token() (xml.Token, error) {
 	t, err := n.dec.Token()
 
 	if cd, ok := t.(xml.CharData); ok {
-		replaced := n.regex.ReplaceAll(cd, []byte(""))
-		trimmed := bytes.TrimSpace(replaced)
-		normalized := norm.NFC.Bytes(trimmed)
-		t = xml.CharData(normalized)
+		t = xml.CharData(bytes.TrimSpace(cd))
 	}
 	return t, err
 }
