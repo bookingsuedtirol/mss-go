@@ -72,7 +72,7 @@ type Channel struct {
 	OfferDescriptions []Offer          `xml:"offer_description>offer"`
 	RoomPrices        []RoomPrice      `xml:"room_price>price"`
 	RoomDescriptions  []Room           `xml:"room_description>room"`
-	ServicePrice      []Price          `xml:"service_price>price"`
+	ServicePrices     []Price          `xml:"service_price>price"`
 	FromPrice         int              `xml:"from_price"`
 	BasePrices        []RoomPrice      `xml:"base_price>price"`
 	CancelPolicies    []CancelPolicy   `xml:"cancel_policies>cancel_policy"`
