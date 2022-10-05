@@ -19,7 +19,6 @@ MSS API client for Go projects
 - [x] getLocationList ✓
 - [x] getMasterpackagesList
 - [x] getThemeList
-- [x] getSeoTexts ✓
 - [x] validateCoupon
 
 Warning: Only the methods with a check mark next to them have been tested so far.

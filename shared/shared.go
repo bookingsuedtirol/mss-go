@@ -245,14 +245,6 @@ const (
 	PaymentMethodPaymentAtTheHotel
 )
 
-type SEOType string
-
-const (
-	SEOTypeGeneral  SEOType = "gen"
-	SEOTypeLocation SEOType = "loc"
-	SEOTypeTheme    SEOType = "the"
-)
-
 type Gender string
 
 const (

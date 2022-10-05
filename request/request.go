@@ -102,7 +102,6 @@ const (
 	MethodGetLocationList       Method = "getLocationList"
 	MethodGetMasterpackagesList Method = "getMasterpackagesList"
 	MethodGetThemeList          Method = "getThemeList"
-	MethodGetSEOTexts           Method = "getSeoTexts"
 	MethodValidateCoupon        Method = "validateCoupon"
 )
 
@@ -194,10 +193,6 @@ const (
 	SpecialDetailsHotelMandatoryServices
 )
 
-type SEODetails int
-
-const SEODetailsPictures SEODetails = 32
-
 type PriceListDetails int
 
 const (
@@ -211,7 +206,6 @@ type Options struct {
 	OfferDetails         OfferDetails     `xml:"offer_details"`
 	RoomDetails          RoomDetails      `xml:"room_details"`
 	SpecialDetails       SpecialDetails   `xml:"special_details"`
-	SEODetails           SEODetails       `xml:"seo_details"`
 	PictureDate          *shared.Date     `xml:"picture_date"`
 	LTSBookable          int              `xml:"lts_bookable"`
 	GetAvailability      Bool             `xml:"get_availability"`
@@ -305,7 +299,6 @@ type Search struct {
 	RootID             int                 `xml:"root_id"`
 	ExternalID         int                 `xml:"external_id"`
 	Type               shared.LocationType `xml:"typ"`
-	SEOType            shared.SEOType      `xml:"seo_typ"`
 	LocationDetails    int                 `xml:"location_details"`
 	CouponCode         string              `xml:"coupon_code"`
 	CouponType         string              `xml:"coupon_type"`
