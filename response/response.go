@@ -285,13 +285,22 @@ type Insurance struct {
 	AgencyNr      string        `xml:"agency_nr"`
 }
 
+type Visibility int
+
+// The difference between VisibilityVisible1 and VisibilityVisible3 is unclear.
+const (
+	VisibilityHidden   Visibility = 0
+	VisibilityVisible1 Visibility = 1
+	VisibilityVisible3 Visibility = 3
+)
+
 type Location struct {
 	ID         int                 `xml:"id"`
 	RootID     int                 `xml:"root_id"`
 	ParentID   int                 `xml:"parent_id"`
 	VirtualIDs Ints                `xml:"virtual_id"`
 	Type       shared.LocationType `xml:"typ"`
-	Visible    int                 `xml:"visible"`
+	Visible    Visibility          `xml:"visible"`
 	Latitude   float64             `xml:"latitude"`
 	Longitude  float64             `xml:"longitude"`
 	NameDeu    string              `xml:"name_deu"`
