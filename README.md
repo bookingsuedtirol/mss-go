@@ -10,7 +10,7 @@ MSS API client for Go projects
 - [x] getSpecialList ✓
 - [x] getRoomList
 - [x] getPriceList
-- [x] getRoomAvailability
+- [x] getRoomAvailability ✓
 - [x] prepareBooking
 - [x] getBooking ✓
 - [x] cancelBooking ✓
