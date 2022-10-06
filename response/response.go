@@ -126,8 +126,15 @@ type Coupon struct {
 	CouponAmount  float64 `xml:"coupon_amount"`
 }
 
+type CouponProvider int
+
+const (
+	CouponProviderEasiCoupon CouponProvider = iota + 1
+	CouponProviderGetavo
+)
+
 type CouponService struct {
-	Provider int `xml:"provider"`
+	Provider CouponProvider `xml:"provider"`
 }
 
 type Day struct {
@@ -164,11 +171,26 @@ type Field struct {
 	Value string `xml:"value"`
 }
 
+type FormIframe int
+
+const (
+	FormIframeNotAllowed FormIframe = iota
+	FormIframeAllowed
+	FormIframeAllowedIfHTTPS
+)
+
+type FormMethod string
+
+const (
+	FormMethodPOST FormMethod = "POST"
+	FormMethodGET  FormMethod = "GET"
+)
+
 type Form struct {
-	FormURL     string   `xml:"form_url"`
-	FormIframe  int      `xml:"form_iframe"`
-	FormMethods []string `xml:"form_methods>method"`
-	FormFields  int      `xml:"form_fields"`
+	FormURL     string       `xml:"form_url"`
+	FormIframe  FormIframe   `xml:"form_iframe"`
+	FormMethods []FormMethod `xml:"form_methods>method"`
+	FormFields  int          `xml:"form_fields"`
 }
 
 type Geolocation struct {
@@ -202,6 +224,25 @@ type Header struct {
 	Time      string    `xml:"time"`
 }
 
+type PriceEngine int
+
+const (
+	PriceEngineEasiSuite PriceEngine = iota
+	PriceEngineLTS
+	PriceEngineDisabled
+)
+
+type BoardBit int
+
+const (
+	BoardBitUndefined    BoardBit = 0
+	BoardBitWithoutBoard BoardBit = 1 << (iota - 1)
+	BoardBitWithBreakfast
+	BoardBitHalfBoard
+	BoardBitFullBoard
+	BoardBitAllInclusive
+)
+
 type Hotel struct {
 	ID                    int                  `xml:"id"`
 	IDLTS                 string               `xml:"id_lts"`
@@ -231,12 +272,12 @@ type Hotel struct {
 	Channel               Channel              `xml:"channel"`
 	LTSData               shared.LTSData       `xml:"lts_data"`
 	POS                   []string             `xml:"pos>id_pos"`
-	PriceEngine           int                  `xml:"price_engine"`
+	PriceEngine           PriceEngine          `xml:"price_engine"`
 	Language              string               `xml:"language"`
 	CheckIn               CheckIn              `xml:"check_in"`
 	CheckOut              CheckOut             `xml:"check_out"`
 	PriceFrom             int                  `xml:"price_from"`
-	Board                 int                  `xml:"board"`
+	Board                 BoardBit             `xml:"board"`
 	BoardThreeQuarters    bool                 `xml:"board_tq"`
 	PersAgeMin            int                  `xml:"pers_age_min"`
 	ChildAgeMin           int                  `xml:"child_age_min"`
@@ -402,6 +443,21 @@ type Picture struct {
 	Height    int    `xml:"height"`
 }
 
+type Supplement int
+
+const (
+	SupplementRoomPrice Supplement = iota
+	SupplementSurchargesOrDiscounts
+	SupplementIncludedServices
+)
+
+type PriceUnit int
+
+const (
+	PriceUnitEuro PriceUnit = iota
+	PriceUnitPercent
+)
+
 type Price struct {
 	PriceID          int                  `xml:"price_id"`
 	PriceType        shared.OfferType     `xml:"price_typ"`
@@ -409,7 +465,7 @@ type Price struct {
 	PriceTitle       string               `xml:"price_title"`
 	Description      NormalizedHTMLString `xml:"description"`
 	PriceDescription string               `xml:"price_description"`
-	Supplement       int                  `xml:"supplement"`
+	Supplement       Supplement           `xml:"supplement"`
 	PriceSupplement  int                  `xml:"price_supplement"`
 	PriceWS          float64              `xml:"price_ws"`
 	PriceBB          float64              `xml:"price_bb"`
@@ -419,7 +475,7 @@ type Price struct {
 	PriceAmount      float64              `xml:"price_amount"`
 	PriceValue       float64              `xml:"price_value"`
 	PriceTotal       float64              `xml:"price_total"`
-	Unit             int                  `xml:"unit"`
+	Unit             PriceUnit            `xml:"unit"`
 	Pictures         []Picture            `xml:"pictures>picture"`
 }
 

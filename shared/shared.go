@@ -49,10 +49,35 @@ func (date Date) String() string {
 	return time.Time(date).String()
 }
 
+type LTSHotelStatus int
+
+const (
+	LTSHotelStatusUndefined LTSHotelStatus = iota
+	LTSHotelActive
+	LTSHotelInactive
+)
+
+type MemberOfTourismAssociation int
+
+const (
+	MemberOfTourismAssociationUndefined MemberOfTourismAssociation = iota
+	MemberOfTourismAssociationFalse
+	MemberOfTourismAssociationTrue
+)
+
+type LTSHotelRepresentation int
+
+const (
+	LTSHotelRepresentationUndefined LTSHotelRepresentation = iota
+	LTSHotelRepresentationDoNotDisplay
+	LTSHotelRepresentationMinimal
+	LTSHotelRepresentationComplete
+)
+
 type LTSData struct {
-	A0Ene int `xml:"A0Ene"`
-	A0MTV int `xml:"A0MTV"`
-	A0Rep int `xml:"A0Rep"`
+	A0Ene LTSHotelStatus             `xml:"A0Ene"`
+	A0MTV MemberOfTourismAssociation `xml:"A0MTV"`
+	A0Rep LTSHotelRepresentation     `xml:"A0Rep"`
 }
 
 type RoomType int
