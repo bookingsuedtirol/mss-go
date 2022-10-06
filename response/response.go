@@ -184,8 +184,8 @@ type Geolocation struct {
 
 type Guest struct {
 	GuestID   int           `xml:"guest_id"`
-	Firstname string        `xml:"firstname"`
-	Lastname  string        `xml:"lastname"`
+	FirstName string        `xml:"firstname"`
+	LastName  string        `xml:"lastname"`
 	Prefix    string        `xml:"prefix"`
 	Gender    shared.Gender `xml:"gender"`
 	Email     string        `xml:"email"`
@@ -380,7 +380,7 @@ type PaymentTerm struct {
 	ID          int                  `xml:"id"`
 	OwnerID     int                  `xml:"owner_id"`
 	Methods     shared.PaymentMethod `xml:"methods"`
-	Ccards      int                  `xml:"ccards"`
+	CCards      int                  `xml:"ccards"`
 	Prepayment  int                  `xml:"prepayment"`
 	Priority    int                  `xml:"priority"`
 	Bank        Bank                 `xml:"bank"`
@@ -412,11 +412,11 @@ type Price struct {
 	PriceDescription string               `xml:"price_description"`
 	Supplement       int                  `xml:"supplement"`
 	PriceSupplement  int                  `xml:"price_supplement"`
-	PriceWs          float64              `xml:"price_ws"`
-	PriceBb          float64              `xml:"price_bb"`
-	PriceHb          float64              `xml:"price_hb"`
-	PriceFb          float64              `xml:"price_fb"`
-	PriceAi          float64              `xml:"price_ai"`
+	PriceWS          float64              `xml:"price_ws"`
+	PriceBB          float64              `xml:"price_bb"`
+	PriceHB          float64              `xml:"price_hb"`
+	PriceFB          float64              `xml:"price_fb"`
+	PriceAI          float64              `xml:"price_ai"`
 	PriceAmount      float64              `xml:"price_amount"`
 	PriceValue       float64              `xml:"price_value"`
 	PriceTotal       float64              `xml:"price_total"`

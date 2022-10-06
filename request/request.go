@@ -20,7 +20,7 @@ type Address struct {
 
 type Company struct {
 	Name          string   `xml:"name"`
-	Taxnumber     string   `xml:"taxnumber"`
+	TaxNumber     string   `xml:"taxnumber"`
 	RecipientCode string   `xml:"recipient_code"`
 	Address       *Address `xml:"address"`
 }
@@ -78,8 +78,8 @@ type Form struct {
 type Guest struct {
 	Gender     shared.Gender `xml:"gender"`
 	Prefix     string        `xml:"prefix"`
-	Firstname  string        `xml:"firstname"`
-	Lastname   string        `xml:"lastname"`
+	FirstName  string        `xml:"firstname"`
+	LastName   string        `xml:"lastname"`
 	Email      string        `xml:"email"`
 	Phone      string        `xml:"phone"`
 	Address    *Address      `xml:"address"`
@@ -293,7 +293,7 @@ type Search struct {
 	SearchAvailability *SearchAvailability `xml:"search_availability"`
 	SearchPricelist    *SearchPriceList    `xml:"search_pricelist"`
 	In                 []int               `xml:"in"`
-	IDOfchannel        string              `xml:"id_ofchannel,omitempty"`
+	IDOfChannel        string              `xml:"id_ofchannel,omitempty"`
 	TransactionID      string              `xml:"transaction_id"`
 	BookingID          int                 `xml:"booking_id"`
 	GuestEmail         string              `xml:"guest_email"`
@@ -361,8 +361,8 @@ type SearchSpecial struct {
 	DateFrom *shared.Date          `xml:"date_from"`
 	DateTo   *shared.Date          `xml:"date_to"`
 	Themes   []shared.ThemeID      `xml:"theme"`
-	PoiIDs   []int                 `xml:"poi_id"`
-	PoiCats  []int                 `xml:"poi_cat"`
+	POIIDs   []int                 `xml:"poi_id"`
+	POICats  []int                 `xml:"poi_cat"`
 	Validity *Validity             `xml:"validity"`
 	Type     shared.SpecialType    `xml:"typ"`
 	Premium  shared.SpecialPremium `xml:"premium"`
@@ -379,7 +379,7 @@ type Tracking struct {
 	Media       string `xml:"media"`
 	Campain     string `xml:"campain"`
 	Campaign    string `xml:"campaign"`
-	Companyinfo string `xml:"companyinfo"`
+	CompanyInfo string `xml:"companyinfo"`
 }
 
 type Validity struct {
