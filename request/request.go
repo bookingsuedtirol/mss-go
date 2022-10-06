@@ -216,6 +216,7 @@ type Options struct {
 	PriceListDetails     PriceListDetails `xml:"pricelist_details"`
 	OnlySubscribedHotels Bool             `xml:"only_subscribed_hotels"`
 	OnlyAvailable        Bool             `xml:"only_available"`
+	CheckRestrictions    Bool             `xml:"check_restrictions"`
 }
 
 type Order struct {
