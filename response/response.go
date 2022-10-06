@@ -116,7 +116,7 @@ type Coupon struct {
 	CouponType   string `xml:"coupon_type"`
 	CouponCode   string `xml:"coupon_code"`
 	CouponStatus string `xml:"coupon_status"`
-	CouponValid  int    `xml:"coupon_valid"`
+	CouponValid  bool   `xml:"coupon_valid"`
 	// TODO: use custom time: DateTime<'Y-m-d\TH:i:sO'>
 	CouponValidFrom string `xml:"coupon_valid_from"`
 	// TODO: use custom time: DateTime<'Y-m-d\TH:i:sO'>
