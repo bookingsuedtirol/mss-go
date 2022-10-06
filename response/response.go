@@ -248,6 +248,7 @@ type Hotel struct {
 	SourceData            SourceData           `xml:"source_data"`
 	Coupon                CouponService        `xml:"coupon"`
 	RoomTypes             shared.RoomType      `xml:"room_types"`
+	InformalMail          bool                 `xml:"informal_mail"`
 }
 
 type HotelLocation struct {
