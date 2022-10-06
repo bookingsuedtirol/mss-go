@@ -339,7 +339,6 @@ type Offer struct {
 	OfferGID         int              `xml:"offer_gid"`
 	OfferBaseID      int              `xml:"offer_base_id"`
 	OfferType        shared.OfferType `xml:"offer_typ"`
-	OfferShow        int              `xml:"offer_show"`
 	OfferTitle       string           `xml:"offer_title"`
 	Title            string           `xml:"title"`
 	OfferDescription string           `xml:"offer_description"`
