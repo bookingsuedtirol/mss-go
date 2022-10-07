@@ -390,16 +390,16 @@ type Occupancy struct {
 }
 
 type Offer struct {
-	OfferID          int              `xml:"offer_id"`
-	OfferGID         int              `xml:"offer_gid"`
-	OfferBaseID      int              `xml:"offer_base_id"`
-	OfferType        shared.OfferType `xml:"offer_typ"`
-	OfferTitle       string           `xml:"offer_title"`
-	Title            string           `xml:"title"`
-	OfferDescription string           `xml:"offer_description"`
-	Description      string           `xml:"description"`
-	Pictures         []Picture        `xml:"pictures>picture"`
-	Themes           []Theme          `xml:"themes>theme"`
+	OfferID          int                  `xml:"offer_id"`
+	OfferGID         int                  `xml:"offer_gid"`
+	OfferBaseID      int                  `xml:"offer_base_id"`
+	OfferType        shared.OfferType     `xml:"offer_typ"`
+	OfferTitle       string               `xml:"offer_title"`
+	Title            string               `xml:"title"`
+	OfferDescription string               `xml:"offer_description"`
+	Description      NormalizedHTMLString `xml:"description"`
+	Pictures         []Picture            `xml:"pictures>picture"`
+	Themes           []Theme              `xml:"themes>theme"`
 }
 
 type Paging struct {
