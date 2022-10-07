@@ -26,8 +26,8 @@ type Company struct {
 }
 
 type Coupon struct {
-	CouponCode string `xml:"coupon_code"`
-	CouponType string `xml:"coupon_type"`
+	CouponCode string            `xml:"coupon_code"`
+	CouponType shared.CouponType `xml:"coupon_type"`
 }
 
 type Credentials struct {
@@ -39,12 +39,12 @@ type Credentials struct {
 type StornoReason int
 
 const (
-	StornoReasonUnknown                       StornoReason = 0
-	StornoReasonGuestUnavailable              StornoReason = 1
-	StornoReasonPropertyRequestedCancellation StornoReason = 2
-	StornoReasonGuestChoseAnotherDestination  StornoReason = 3
-	StornoReasonGuestChoseAnotherProperty     StornoReason = 4
-	StornoReasonOther                         StornoReason = 99
+	StornoReasonUnknown StornoReason = iota
+	StornoReasonGuestUnavailable
+	StornoReasonPropertyRequestedCancellation
+	StornoReasonGuestChoseAnotherDestination
+	StornoReasonGuestChoseAnotherProperty
+	StornoReasonOther StornoReason = 99
 )
 
 type Data struct {
@@ -301,7 +301,7 @@ type Search struct {
 	ExternalID         int                 `xml:"external_id"`
 	Type               shared.LocationType `xml:"typ"`
 	CouponCode         string              `xml:"coupon_code"`
-	CouponType         string              `xml:"coupon_type"`
+	CouponType         shared.CouponType   `xml:"coupon_type"`
 	TotalPrice         float64             `xml:"total_price"`
 	Arrival            *shared.Date        `xml:"arrival"`
 	Departure          *shared.Date        `xml:"departure"`
@@ -347,12 +347,21 @@ type SearchOffer struct {
 	Rateplan   *Rateplan        `xml:"rateplan"`
 }
 
+type ObjectFilter int
+
+const (
+	ObjectFilterPricelist ObjectFilter = iota
+	ObjectFilterPackage
+	ObjectFilterSpecial
+	ObjectFilterDiscountOrSurcharge ObjectFilter = 4
+)
+
 type SearchPriceList struct {
 	DateFrom *shared.Date `xml:"date_from"`
 	DateTo   *shared.Date `xml:"date_to"`
 	Service  shared.Board `xml:"service"`
 	RoomIDs  []int        `xml:"room_id"`
-	Type     int          `xml:"typ"`
+	Type     ObjectFilter `xml:"typ"`
 }
 
 type SearchSpecial struct {

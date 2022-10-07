@@ -112,18 +112,27 @@ type Contact struct {
 	Web   string `xml:"web"`
 }
 
+type CouponStatus string
+
+const (
+	CouponStatusRegistered CouponStatus = "registered"
+	CouponStatusRedeemable CouponStatus = "redeemable"
+	CouponStatusRedeemed   CouponStatus = "redeemed"
+	CouponStatusExpired    CouponStatus = "expired"
+	CouponStatusCancelled  CouponStatus = "cancelled"
+	CouponStatusUnknown    CouponStatus = "unknown"
+)
+
 type Coupon struct {
-	CouponType   string `xml:"coupon_type"`
-	CouponCode   string `xml:"coupon_code"`
-	CouponStatus string `xml:"coupon_status"`
-	CouponValid  bool   `xml:"coupon_valid"`
-	// TODO: use custom time: DateTime<'Y-m-d\TH:i:sO'>
-	CouponValidFrom string `xml:"coupon_valid_from"`
-	// TODO: use custom time: DateTime<'Y-m-d\TH:i:sO'>
-	CouponValidTo string  `xml:"coupon_valid_to"`
-	CouponTitle   string  `xml:"coupon_title"`
-	CouponPercent string  `xml:"coupon_percent"`
-	CouponAmount  float64 `xml:"coupon_amount"`
+	CouponType      shared.CouponType    `xml:"coupon_type"`
+	CouponCode      string               `xml:"coupon_code"`
+	CouponStatus    CouponStatus         `xml:"coupon_status"`
+	CouponValid     bool                 `xml:"coupon_valid"`
+	CouponValidFrom DateTimeWithTimeZone `xml:"coupon_valid_from"`
+	CouponValidTo   DateTimeWithTimeZone `xml:"coupon_valid_to"`
+	CouponTitle     string               `xml:"coupon_title"`
+	CouponPercent   string               `xml:"coupon_percent"`
+	CouponAmount    float64              `xml:"coupon_amount"`
 }
 
 type CouponProvider int
@@ -186,11 +195,16 @@ const (
 	FormMethodGET  FormMethod = "GET"
 )
 
+type FormField struct {
+	Name  string `xml:"name"`
+	Value string `xml:"value"`
+}
+
 type Form struct {
 	FormURL     string       `xml:"form_url"`
 	FormIframe  FormIframe   `xml:"form_iframe"`
 	FormMethods []FormMethod `xml:"form_methods>method"`
-	FormFields  int          `xml:"form_fields"`
+	FormFields  []FormField  `xml:"form_fields>field"`
 }
 
 type Geolocation struct {
@@ -695,6 +709,8 @@ type Tracking struct {
 }
 
 type DateTime time.Time
+
+type DateTimeWithTimeZone time.Time
 
 type Time struct {
 	Time time.Time

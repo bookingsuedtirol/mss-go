@@ -34,6 +34,25 @@ func (input *DateTime) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement
 	return nil
 }
 
+func (input *DateTimeWithTimeZone) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
+	var str string
+	err := decoder.DecodeElement(&str, &start)
+	if err != nil {
+		return err
+	}
+
+	value, err := shared.ParseDateTime("2006-01-02T15:04:05-0700", str)
+	if err != nil {
+		return err
+	}
+
+	if value != nil {
+		*input = DateTimeWithTimeZone(*value)
+	}
+
+	return nil
+}
+
 func (input *Time) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
 	var str string
 	err := decoder.DecodeElement(&str, &start)

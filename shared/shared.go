@@ -277,3 +277,10 @@ const (
 	GenderMale    Gender = "m"
 	GenderFemale  Gender = "f"
 )
+
+type CouponType string
+
+const (
+	CouponTypeVoucher   CouponType = "voucher"
+	CouponTypePromotion CouponType = "promotion"
+)
