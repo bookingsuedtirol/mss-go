@@ -193,6 +193,14 @@ const (
 	SpecialDetailsHotelMandatoryServices
 )
 
+type LTSBookable int
+
+const (
+	LTSBookableOverridenByIgnoreBookability LTSBookable = iota
+	LTSBookableOnlyBookableLTSOffers
+	LTSBookableOnlyNonBookableLTSOffers
+)
+
 type PriceListDetails int
 
 const (
@@ -207,7 +215,7 @@ type Options struct {
 	RoomDetails          RoomDetails      `xml:"room_details"`
 	SpecialDetails       SpecialDetails   `xml:"special_details"`
 	PictureDate          *shared.Date     `xml:"picture_date"`
-	LTSBookable          int              `xml:"lts_bookable"`
+	LTSBookable          LTSBookable      `xml:"lts_bookable"`
 	GetAvailability      Bool             `xml:"get_availability"`
 	GetRestrictions      Bool             `xml:"get_restrictions"`
 	GetRoomdetails       Bool             `xml:"get_roomdetails"`
@@ -279,6 +287,19 @@ type Root struct {
 	Request Request  `xml:"request"`
 }
 
+type IDOfChannel string
+
+const (
+	IDOfChannelHGV        IDOfChannel = "hgv"
+	IDOfChannelLTS        IDOfChannel = "lts"
+	IDOfChannelBookingCom IDOfChannel = "bok"
+	IDOfChannelHotelDe    IDOfChannel = "htl"
+	IDOfChannelExpediaCom IDOfChannel = "exp"
+	IDOfChannelHrsCom     IDOfChannel = "hrs"
+	IDOfChannelLTSPOS     IDOfChannel = "pos"
+	IDOfChannelGoogle     IDOfChannel = "gog"
+)
+
 type Search struct {
 	Lang               string              `xml:"lang"`
 	ResultID           string              `xml:"result_id"`
@@ -293,7 +314,7 @@ type Search struct {
 	SearchAvailability *SearchAvailability `xml:"search_availability"`
 	SearchPricelist    *SearchPriceList    `xml:"search_pricelist"`
 	In                 []int               `xml:"in"`
-	IDOfChannel        string              `xml:"id_ofchannel,omitempty"`
+	IDOfChannel        IDOfChannel         `xml:"id_ofchannel,omitempty"`
 	TransactionID      string              `xml:"transaction_id"`
 	BookingID          int                 `xml:"booking_id"`
 	GuestEmail         string              `xml:"guest_email"`
