@@ -32,8 +32,12 @@ func (input *Date) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) er
 	return nil
 }
 
+func (date Date) String() string {
+	return time.Time(date).String()
+}
+
 func ParseDateTime(layout string, value string) (*time.Time, error) {
-	if value == "" || value == "0000-00-00" {
+	if emptyDateTime(value) {
 		return nil, nil
 	}
 
@@ -45,8 +49,49 @@ func ParseDateTime(layout string, value string) (*time.Time, error) {
 	return &parsed, nil
 }
 
-func (date Date) String() string {
-	return time.Time(date).String()
+func ParseLocalDateTime(layout string, value string) (*time.Time, error) {
+	if emptyDateTime(value) {
+		return nil, nil
+	}
+
+	loc, err := loadLocation()
+	if err != nil {
+		return nil, err
+	}
+
+	parsed, err := time.ParseInLocation(layout, value, loc)
+	if err != nil {
+		return nil, err
+	}
+
+	return &parsed, nil
+}
+
+// location caches the loaded time zone.
+// Calling time.LoadLocation before each time.ParseInLocation
+// would decrease performance.
+var location *time.Location
+
+// loadLocation returns the location Europe/Rome
+// which is the local time zone of MSS.
+func loadLocation() (*time.Location, error) {
+	if location != nil {
+		return location, nil
+	}
+
+	loc, err := time.LoadLocation("Europe/Rome")
+	if err != nil {
+		return nil, err
+	}
+
+	location = loc
+	return loc, nil
+}
+
+// emptyDateTime checks if the MSS XML output
+// is an empty or zero date/time.
+func emptyDateTime(t string) bool {
+	return t == "" || t == "0000-00-00" || t == "0000-00-00 00:00:00"
 }
 
 type LTSHotelStatus int
