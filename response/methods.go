@@ -34,6 +34,11 @@ func (input *DateTime) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement
 	return nil
 }
 
+func (t DateTime) String() string {
+	// Return the formatted string for debugging purposes.
+	return time.Time(t).String()
+}
+
 func (input *DateTimeWithTimeZone) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
 	var str string
 	err := decoder.DecodeElement(&str, &start)
@@ -51,6 +56,10 @@ func (input *DateTimeWithTimeZone) UnmarshalXML(decoder *xml.Decoder, start xml.
 	}
 
 	return nil
+}
+
+func (t DateTimeWithTimeZone) String() string {
+	return time.Time(t).String()
 }
 
 func (input *Time) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
@@ -77,6 +86,10 @@ func (input *Time) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) er
 	}
 
 	return nil
+}
+
+func (t Time) String() string {
+	return time.Time(t.Time).String()
 }
 
 func (input *NormalizedHTMLString) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
