@@ -131,7 +131,7 @@ type Coupon struct {
 	CouponValidFrom DateTimeWithTimeZone `xml:"coupon_valid_from"`
 	CouponValidTo   DateTimeWithTimeZone `xml:"coupon_valid_to"`
 	CouponTitle     string               `xml:"coupon_title"`
-	CouponPercent   string               `xml:"coupon_percent"`
+	CouponPercent   float64              `xml:"coupon_percent"`
 	CouponAmount    float64              `xml:"coupon_amount"`
 }
 

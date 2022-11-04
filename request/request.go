@@ -322,7 +322,7 @@ type Search struct {
 	ExternalID         int                 `xml:"external_id"`
 	Type               shared.LocationType `xml:"typ"`
 	CouponCode         string              `xml:"coupon_code"`
-	CouponType         shared.CouponType   `xml:"coupon_type"`
+	CouponType         *shared.CouponType  `xml:"coupon_type"`
 	TotalPrice         float64             `xml:"total_price"`
 	Arrival            *shared.Date        `xml:"arrival"`
 	Departure          *shared.Date        `xml:"departure"`
