@@ -5,35 +5,31 @@ import (
 	"time"
 )
 
-type Date time.Time
+type Date struct{ time.Time }
 
-func (input Date) MarshalXML(element *xml.Encoder, start xml.StartElement) error {
-	timeValue := time.Time(input)
-	timeString := timeValue.Format("2006-01-02")
-	return element.EncodeElement(timeString, start)
+const dateLayout = "2006-01-02"
+
+func (d Date) MarshalXML(element *xml.Encoder, start xml.StartElement) error {
+	return element.EncodeElement(d.Format(dateLayout), start)
 }
 
-func (input *Date) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
+func (d *Date) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
 	var str string
 	err := decoder.DecodeElement(&str, &start)
 	if err != nil {
 		return err
 	}
 
-	value, err := ParseDateTime("2006-01-02", str)
+	value, err := ParseDateTime(dateLayout, str)
 	if err != nil {
 		return err
 	}
 
 	if value != nil {
-		*input = Date(*value)
+		*d = Date{*value}
 	}
 
 	return nil
-}
-
-func (date Date) String() string {
-	return time.Time(date).String()
 }
 
 func ParseDateTime(layout string, value string) (*time.Time, error) {

@@ -15,7 +15,7 @@ import (
 	"golang.org/x/net/html/atom"
 )
 
-func (input *DateTime) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
+func (t *DateTime) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
 	var str string
 	err := decoder.DecodeElement(&str, &start)
 	if err != nil {
@@ -28,18 +28,13 @@ func (input *DateTime) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement
 	}
 
 	if value != nil {
-		*input = DateTime(*value)
+		*t = DateTime{*value}
 	}
 
 	return nil
 }
 
-func (t DateTime) String() string {
-	// Return the formatted string for debugging purposes.
-	return time.Time(t).String()
-}
-
-func (input *DateTimeWithTimeZone) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
+func (t *DateTimeWithTimeZone) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
 	var str string
 	err := decoder.DecodeElement(&str, &start)
 	if err != nil {
@@ -52,17 +47,13 @@ func (input *DateTimeWithTimeZone) UnmarshalXML(decoder *xml.Decoder, start xml.
 	}
 
 	if value != nil {
-		*input = DateTimeWithTimeZone(*value)
+		*t = DateTimeWithTimeZone{*value}
 	}
 
 	return nil
 }
 
-func (t DateTimeWithTimeZone) String() string {
-	return time.Time(t).String()
-}
-
-func (input *Time) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
+func (t *Time) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
 	var str string
 	err := decoder.DecodeElement(&str, &start)
 	if err != nil {
@@ -79,17 +70,13 @@ func (input *Time) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) er
 	}
 
 	if value != nil {
-		*input = Time{
+		*t = Time{
 			Time:  *value,
 			Valid: true,
 		}
 	}
 
 	return nil
-}
-
-func (t Time) String() string {
-	return time.Time(t.Time).String()
 }
 
 func (input *NormalizedHTMLString) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {

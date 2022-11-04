@@ -24,8 +24,8 @@ func main() {
 		},
 	)
 
-	today := shared.Date(time.Now())
-	oneWeekFromNow := shared.Date(time.Now().AddDate(0, 0, 7))
+	today := shared.Date{Time: time.Now()}
+	oneWeekFromNow := shared.Date{Time: time.Now().AddDate(0, 0, 7)}
 
 	responseRoot, err := client.Request(
 		context.Background(),

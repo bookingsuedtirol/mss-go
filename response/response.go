@@ -709,12 +709,12 @@ type Tracking struct {
 	Pixel string `xml:"pixel"`
 }
 
-type DateTime time.Time
+type DateTime struct{ time.Time }
 
-type DateTimeWithTimeZone time.Time
+type DateTimeWithTimeZone struct{ time.Time }
 
 type Time struct {
-	Time time.Time
+	time.Time
 	// Valid is true if Time (which can also be Time.isZero() == 0) is present
 	Valid bool
 }
