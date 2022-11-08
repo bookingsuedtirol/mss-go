@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/xml"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -36,7 +37,7 @@ func NewClient(h http.Client, c Credentials) Client {
 
 type Callback func(request.Root) request.Root
 
-func (c Client) Request(ctx context.Context, cb Callback) (*response.Root, *response.MSSError) {
+func (c Client) Request(ctx context.Context, cb Callback) (*response.Root, error) {
 	body, err := c.RequestXML(ctx, cb)
 	if err != nil {
 		return nil, err
@@ -51,13 +52,13 @@ func (c Client) Request(ctx context.Context, cb Callback) (*response.Root, *resp
 // MSS XML response body as io.ReadCloser.
 func (c Client) RequestXML(
 	ctx context.Context, cb Callback,
-) (io.ReadCloser, *response.MSSError) {
+) (io.ReadCloser, error) {
 	reqRoot := c.getRequestRoot(cb)
 
 	reqXML, err := xml.Marshal(reqRoot)
 
 	if err != nil {
-		return nil, &response.MSSError{Err: err}
+		return nil, err
 	}
 
 	req, err := http.NewRequestWithContext(
@@ -75,23 +76,23 @@ func (c Client) RequestXML(
 	}
 
 	if err != nil {
-		return nil, &response.MSSError{Err: err}
+		return nil, err
 	}
 
 	req.Header.Set("Content-Type", "text/xml")
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
-		return nil, &response.MSSError{Err: err}
+		return nil, err
 	}
 
-	if resp.StatusCode >= 400 {
+	if resp.StatusCode >= http.StatusBadRequest {
 		resp.Body.Close()
-		return nil, &response.MSSError{
+		return nil, &Error{
 			Err: fmt.Errorf(
 				"request to MSS failed with HTTP status code %v", resp.StatusCode,
 			),
-			StatusCode: resp.StatusCode,
+			StatusCode: http.StatusBadGateway,
 		}
 	}
 
@@ -124,7 +125,7 @@ func (c Client) getRequestRoot(cb Callback) request.Root {
 	return newRoot
 }
 
-func (c Client) decodeXMLResponse(body io.Reader) (*response.Root, *response.MSSError) {
+func (c Client) decodeXMLResponse(body io.Reader) (*response.Root, error) {
 	// Fix some MSS inconvienences before decoding XML.
 	t := transform.NewReader(body,
 		transform.Chain(
@@ -142,7 +143,7 @@ func (c Client) decodeXMLResponse(body io.Reader) (*response.Root, *response.MSS
 	var responseRoot response.Root
 
 	if err := dec.Decode(&responseRoot); err != nil {
-		return nil, &response.MSSError{Err: err}
+		return nil, err
 	}
 
 	if err := ErrorResponse(responseRoot.Header); err != nil {
@@ -150,22 +151,6 @@ func (c Client) decodeXMLResponse(body io.Reader) (*response.Root, *response.MSS
 	}
 
 	return &responseRoot, nil
-}
-
-// ErrorResponse checks if MSS returned an error in its response and formats it accordingly.
-func ErrorResponse(h response.Header) *response.MSSError {
-	if h.Error.Code == 0 {
-		return nil
-	}
-
-	return &response.MSSError{
-		Err: fmt.Errorf(
-			"%v, code %v",
-			h.Error.Message,
-			h.Error.Code,
-		),
-		Code: h.Error.Code,
-	}
 }
 
 // spaceTrimmer removes all leading and trailing whitespace inside XML elements.
@@ -184,4 +169,56 @@ func (n spaceTrimmer) Token() (xml.Token, error) {
 		t = xml.CharData(bytes.TrimSpace(cd))
 	}
 	return t, err
+}
+
+// ErrorResponse checks if MSS returned an error in its response and formats it accordingly.
+func ErrorResponse(h response.Header) error {
+	if h.Error.Code == 0 {
+		return nil
+	}
+
+	return &Error{
+		Err:        errors.New(h.Error.Message),
+		Code:       h.Error.Code,
+		StatusCode: mapStatusCode(h.Error.Code),
+	}
+}
+
+func mapStatusCode(c response.ErrorCode) int {
+	switch c {
+	case response.ErrorCodeInvalidXML,
+		response.ErrorCodeInvalidMethod,
+		response.ErrorCodeInvalidMissingParameter,
+		response.ErrorCodeBookingValidationFailed:
+		return http.StatusBadRequest
+
+	case response.ErrorCodeAuthenticationError:
+		return http.StatusUnauthorized
+
+	case response.ErrorCodePermissionsDenied:
+		return http.StatusForbidden
+
+	case response.ErrorCodeResultIDNotInCache:
+		return http.StatusGone
+	}
+
+	return http.StatusBadGateway
+}
+
+type Error struct {
+	Err        error
+	Code       response.ErrorCode
+	StatusCode int
+}
+
+func (e Error) Error() string {
+	return e.Err.Error()
+}
+
+// AsError checks if the error matches mss.Error.
+// If it matches, it returns the Error, otherwise it returns nil.
+func AsError(err error) *Error {
+	var e *Error
+	errors.As(err, &e)
+	return e
 }
