@@ -563,6 +563,7 @@ type Result struct {
 	Locations []Location      `xml:"location"`
 	Themes    []ThemeListItem `xml:"theme"`
 	Booking   Booking         `xml:"booking"`
+	Form      Form            `xml:"form"`
 	Coupon    Coupon          `xml:"coupon"`
 }
 
