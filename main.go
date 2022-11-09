@@ -180,11 +180,15 @@ func ErrorResponse(h response.Header) error {
 	return &Error{
 		Err:        errors.New(h.Error.Message),
 		Code:       h.Error.Code,
-		StatusCode: mapStatusCode(h.Error.Code),
+		StatusCode: mapStatusCode(h.Error.Code, h.Error.Message),
 	}
 }
 
-func mapStatusCode(c response.ErrorCode) int {
+func mapStatusCode(c response.ErrorCode, msg string) int {
+	if strings.Contains(msg, "cannot cancel a cancelled booking") {
+		return http.StatusBadRequest
+	}
+
 	switch c {
 	case response.ErrorCodeInvalidXML,
 		response.ErrorCodeInvalidMethod,
