@@ -189,6 +189,12 @@ func mapStatusCode(c response.ErrorCode, msg string) int {
 		return http.StatusBadRequest
 	}
 
+	// Handle storno_id was not found by getBooking or cancelBooking.
+	if c == response.ErrorCodeInvalidMissingParameter &&
+		strings.Contains(msg, "storno_id") {
+		return http.StatusNotFound
+	}
+
 	switch c {
 	case response.ErrorCodeInvalidXML,
 		response.ErrorCodeInvalidMethod,
