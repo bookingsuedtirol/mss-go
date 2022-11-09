@@ -163,6 +163,7 @@ const (
 	ErrorCodeInvalidMissingParameter
 	ErrorCodeBookingValidationFailed
 	ErrorCodePermissionsDenied
+	ErrorCodeMaxStayExceeded
 )
 
 type Error struct {

@@ -199,7 +199,8 @@ func mapStatusCode(c response.ErrorCode, msg string) int {
 	case response.ErrorCodeInvalidXML,
 		response.ErrorCodeInvalidMethod,
 		response.ErrorCodeInvalidMissingParameter,
-		response.ErrorCodeBookingValidationFailed:
+		response.ErrorCodeBookingValidationFailed,
+		response.ErrorCodeMaxStayExceeded:
 		return http.StatusBadRequest
 
 	case response.ErrorCodeAuthenticationError:
