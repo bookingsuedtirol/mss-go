@@ -312,7 +312,7 @@ type Search struct {
 	LTS           *shared.LTSData     `xml:"search_lts"`
 	Special       *SearchSpecial      `xml:"search_special"`
 	Availability  *SearchAvailability `xml:"search_availability"`
-	Pricelist     *SearchPriceList    `xml:"search_pricelist"`
+	PriceList     *SearchPriceList    `xml:"search_pricelist"`
 	In            []int               `xml:"in"`
 	IDOfChannel   IDOfChannel         `xml:"id_ofchannel,omitempty"`
 	TransactionID string              `xml:"transaction_id"`
@@ -371,7 +371,7 @@ type SearchOffer struct {
 type ObjectFilter int
 
 const (
-	ObjectFilterPricelist ObjectFilter = iota
+	ObjectFilterPriceList ObjectFilter = iota
 	ObjectFilterPackage
 	ObjectFilterSpecial
 	ObjectFilterDiscountOrSurcharge ObjectFilter = 4
