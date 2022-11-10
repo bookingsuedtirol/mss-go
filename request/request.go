@@ -26,8 +26,8 @@ type Company struct {
 }
 
 type Coupon struct {
-	CouponCode string            `xml:"coupon_code"`
-	CouponType shared.CouponType `xml:"coupon_type"`
+	Code string            `xml:"coupon_code"`
+	Type shared.CouponType `xml:"coupon_type"`
 }
 
 type Credentials struct {
@@ -66,8 +66,8 @@ type Details struct {
 }
 
 type ExtraPrice struct {
-	PriceID     int     `xml:"price_id"`
-	PriceAmount float64 `xml:"price_amount"`
+	ID     int     `xml:"price_id"`
+	Amount float64 `xml:"price_amount"`
 }
 
 type Form struct {
@@ -301,32 +301,32 @@ const (
 )
 
 type Search struct {
-	Lang               string              `xml:"lang"`
-	ResultID           string              `xml:"result_id"`
-	Agent              string              `xml:"agent"`
-	IDs                []int               `xml:"id"`
-	SearchHotel        *SearchHotel        `xml:"search_hotel"`
-	SearchLocation     *SearchLocation     `xml:"search_location"`
-	SearchDistance     *SearchDistance     `xml:"search_distance"`
-	SearchOffer        *SearchOffer        `xml:"search_offer"`
-	SearchLTS          *shared.LTSData     `xml:"search_lts"`
-	SearchSpecial      *SearchSpecial      `xml:"search_special"`
-	SearchAvailability *SearchAvailability `xml:"search_availability"`
-	SearchPricelist    *SearchPriceList    `xml:"search_pricelist"`
-	In                 []int               `xml:"in"`
-	IDOfChannel        IDOfChannel         `xml:"id_ofchannel,omitempty"`
-	TransactionID      string              `xml:"transaction_id"`
-	BookingID          int                 `xml:"booking_id"`
-	GuestEmail         string              `xml:"guest_email"`
-	RootID             int                 `xml:"root_id"`
-	ExternalID         int                 `xml:"external_id"`
-	Type               shared.LocationType `xml:"typ"`
-	CouponCode         string              `xml:"coupon_code"`
-	CouponType         *shared.CouponType  `xml:"coupon_type"`
-	TotalPrice         float64             `xml:"total_price"`
-	Arrival            *shared.Date        `xml:"arrival"`
-	Departure          *shared.Date        `xml:"departure"`
-	StornoID           string              `xml:"storno_id"`
+	Lang          string              `xml:"lang"`
+	ResultID      string              `xml:"result_id"`
+	Agent         string              `xml:"agent"`
+	IDs           []int               `xml:"id"`
+	Hotel         *SearchHotel        `xml:"search_hotel"`
+	Location      *SearchLocation     `xml:"search_location"`
+	Distance      *SearchDistance     `xml:"search_distance"`
+	Offer         *SearchOffer        `xml:"search_offer"`
+	LTS           *shared.LTSData     `xml:"search_lts"`
+	Special       *SearchSpecial      `xml:"search_special"`
+	Availability  *SearchAvailability `xml:"search_availability"`
+	Pricelist     *SearchPriceList    `xml:"search_pricelist"`
+	In            []int               `xml:"in"`
+	IDOfChannel   IDOfChannel         `xml:"id_ofchannel,omitempty"`
+	TransactionID string              `xml:"transaction_id"`
+	BookingID     int                 `xml:"booking_id"`
+	GuestEmail    string              `xml:"guest_email"`
+	RootID        int                 `xml:"root_id"`
+	ExternalID    int                 `xml:"external_id"`
+	Type          shared.LocationType `xml:"typ"`
+	CouponCode    string              `xml:"coupon_code"`
+	CouponType    *shared.CouponType  `xml:"coupon_type"`
+	TotalPrice    float64             `xml:"total_price"`
+	Arrival       *shared.Date        `xml:"arrival"`
+	Departure     *shared.Date        `xml:"departure"`
+	StornoID      string              `xml:"storno_id"`
 }
 
 type SearchAvailability struct {

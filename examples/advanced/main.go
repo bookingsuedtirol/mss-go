@@ -34,7 +34,7 @@ func main() {
 			requestRoot.Request = request.Request{
 				Search: &request.Search{
 					IDs: []int{9002},
-					SearchOffer: &request.SearchOffer{
+					Offer: &request.SearchOffer{
 						Arrival:   &today,
 						Departure: &oneWeekFromNow,
 						Rooms: []request.Room{

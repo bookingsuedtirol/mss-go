@@ -124,15 +124,15 @@ const (
 )
 
 type Coupon struct {
-	CouponType      shared.CouponType    `xml:"coupon_type"`
-	CouponCode      string               `xml:"coupon_code"`
-	CouponStatus    CouponStatus         `xml:"coupon_status"`
-	CouponValid     bool                 `xml:"coupon_valid"`
-	CouponValidFrom DateTimeWithTimeZone `xml:"coupon_valid_from"`
-	CouponValidTo   DateTimeWithTimeZone `xml:"coupon_valid_to"`
-	CouponTitle     string               `xml:"coupon_title"`
-	CouponPercent   float64              `xml:"coupon_percent"`
-	CouponAmount    float64              `xml:"coupon_amount"`
+	Type      shared.CouponType    `xml:"coupon_type"`
+	Code      string               `xml:"coupon_code"`
+	Status    CouponStatus         `xml:"coupon_status"`
+	Valid     bool                 `xml:"coupon_valid"`
+	ValidFrom DateTimeWithTimeZone `xml:"coupon_valid_from"`
+	ValidTo   DateTimeWithTimeZone `xml:"coupon_valid_to"`
+	Title     string               `xml:"coupon_title"`
+	Percent   float64              `xml:"coupon_percent"`
+	Amount    float64              `xml:"coupon_amount"`
 }
 
 type CouponProvider int
@@ -202,10 +202,10 @@ type FormField struct {
 }
 
 type Form struct {
-	FormURL     string       `xml:"form_url"`
-	FormIframe  FormIframe   `xml:"form_iframe"`
-	FormMethods []FormMethod `xml:"form_methods>method"`
-	FormFields  []FormField  `xml:"form_fields>field"`
+	URL     string       `xml:"form_url"`
+	Iframe  FormIframe   `xml:"form_iframe"`
+	Methods []FormMethod `xml:"form_methods>method"`
+	Fields  []FormField  `xml:"form_fields>field"`
 }
 
 type Geolocation struct {
@@ -220,7 +220,7 @@ type Geolocation struct {
 }
 
 type Guest struct {
-	GuestID   int           `xml:"guest_id"`
+	ID        int           `xml:"guest_id"`
 	FirstName string        `xml:"firstname"`
 	LastName  string        `xml:"lastname"`
 	Prefix    string        `xml:"prefix"`
@@ -274,7 +274,7 @@ type Hotel struct {
 	Contact               Contact              `xml:"contact"`
 	Headline              string               `xml:"headline"`
 	Description           NormalizedHTMLString `xml:"description"`
-	HotelPayment          HotelPayment         `xml:"hotel_payment"`
+	Payment               HotelPayment         `xml:"hotel_payment"`
 	Matching              Matching             `xml:"matching"`
 	Logo                  Picture              `xml:"logo>picture"`
 	Pictures              []Picture            `xml:"pictures>picture"`
@@ -337,9 +337,9 @@ const (
 )
 
 type Insurance struct {
-	InsuranceType InsuranceType `xml:"insurance_type"`
-	InsuranceURL  string        `xml:"insurance_url"`
-	AgencyNr      string        `xml:"agency_nr"`
+	Type     InsuranceType `xml:"insurance_type"`
+	URL      string        `xml:"insurance_url"`
+	AgencyNr string        `xml:"agency_nr"`
 }
 
 type Visibility int
@@ -474,7 +474,7 @@ const (
 )
 
 type Price struct {
-	PriceID          int                  `xml:"price_id"`
+	ID               int                  `xml:"price_id"`
 	PriceType        shared.OfferType     `xml:"price_typ"`
 	Title            string               `xml:"title"`
 	PriceTitle       string               `xml:"price_title"`
@@ -569,19 +569,19 @@ type Result struct {
 }
 
 type Room struct {
-	RoomID          int             `xml:"room_id"`
+	ID              int             `xml:"room_id"`
 	RoomLTSID       string          `xml:"room_lts_id"`
 	OfferID         int             `xml:"offer_id"`
 	Service         shared.Board    `xml:"service"`
 	RoomType        shared.RoomType `xml:"room_type"`
-	RoomCode        string          `xml:"room_code"`
+	Code            string          `xml:"room_code"`
 	RoomTitle       string          `xml:"room_title"`
 	RoomDescription string          `xml:"room_description"`
 	Title           string          `xml:"title"`
 	// Description can contain \n characters.
 	Description  string       `xml:"description"`
-	RoomPersons  Ints         `xml:"room_persons"`
-	RoomFree     int          `xml:"room_free"`
+	Persons      Ints         `xml:"room_persons"`
+	Free         int          `xml:"room_free"`
 	Features     int          `xml:"features"`
 	FeaturesView []Feature    `xml:"features_view>feature"`
 	RoomTotal    float64      `xml:"room_total"`
@@ -591,8 +591,8 @@ type Room struct {
 	PaymentTerm  PaymentTerm  `xml:"payment_term"`
 	Properties   Properties   `xml:"properties"`
 	Occupancy    Occupancy    `xml:"occupancy"`
-	RoomNumbers  []string     `xml:"room_numbers>number"`
-	RoomDetails  []RoomDetail `xml:"room_details>room_detail"`
+	Numbers      []string     `xml:"room_numbers>number"`
+	Details      []RoomDetail `xml:"room_details>room_detail"`
 	Days         []Day        `xml:"days>day"`
 	PriceFrom    int          `xml:"price_from"`
 	PriceList    []PriceList  `xml:"pricelist"`
@@ -629,12 +629,12 @@ type Season struct {
 }
 
 type Source struct {
-	SrcID      int    `xml:"src_id"`
-	Sourcename string `xml:"sourcename"`
-	Logkey     string `xml:"logkey"`
-	De         string `xml:"de"`
-	En         string `xml:"en"`
-	It         string `xml:"it"`
+	ID     int    `xml:"src_id"`
+	Name   string `xml:"sourcename"`
+	Logkey string `xml:"logkey"`
+	De     string `xml:"de"`
+	En     string `xml:"en"`
+	It     string `xml:"it"`
 }
 
 type SourceData struct {
@@ -660,8 +660,8 @@ type Special struct {
 	Status         int                   `xml:"status"`
 	Valid          bool                  `xml:"valid"`
 	OfferType      shared.OfferType      `xml:"offer_typ"`
-	SpecialType    shared.SpecialType    `xml:"special_typ"`
-	SpecialPremium shared.SpecialPremium `xml:"special_premium"`
+	Type           shared.SpecialType    `xml:"special_typ"`
+	Premium        shared.SpecialPremium `xml:"special_premium"`
 	DaysArrival    Weekdays              `xml:"days_arrival"`
 	DaysDeparture  Weekdays              `xml:"days_departure"`
 	DaysDurMin     int                   `xml:"days_dur_min"`
