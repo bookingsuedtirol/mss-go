@@ -272,12 +272,12 @@ type Request struct {
 }
 
 type Room struct {
-	OfferID  int             `xml:"offer_id"`
-	RoomID   int             `xml:"room_id"`
-	Service  shared.Board    `xml:"service,omitempty"`
-	RoomType shared.RoomType `xml:"room_type"`
-	RoomSeq  int             `xml:"room_seq"`
-	Persons  []int           `xml:"person"`
+	OfferID int             `xml:"offer_id"`
+	ID      int             `xml:"room_id"`
+	Service shared.Board    `xml:"service,omitempty"`
+	Type    shared.RoomType `xml:"room_type"`
+	Seq     int             `xml:"room_seq"`
+	Persons []int           `xml:"person"`
 }
 
 type Root struct {

@@ -39,9 +39,9 @@ func main() {
 						Departure: &oneWeekFromNow,
 						Rooms: []request.Room{
 							{
-								RoomSeq:  1,
-								RoomType: 0,
-								Persons:  []int{18, 18},
+								Seq:     1,
+								Type:    0,
+								Persons: []int{18, 18},
 							},
 						},
 					},
