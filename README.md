@@ -13,9 +13,9 @@ This library requires an IANA Time Zone database to be present on the operating 
 - [x] getHotelList ✓
 - [x] getSpecialList ✓
 - [x] getRoomList ✓
-- [x] getPriceList
+- [x] getPriceList ✓
 - [x] getRoomAvailability ✓
-- [x] prepareBooking
+- [x] prepareBooking ✓
 - [x] getBooking ✓
 - [x] cancelBooking ✓
 - [x] createInquiry
@@ -23,9 +23,9 @@ This library requires an IANA Time Zone database to be present on the operating 
 - [x] getLocationList ✓
 - [x] getMasterpackagesList
 - [x] getThemeList
-- [x] validateCoupon
+- [x] validateCoupon ✓
 
-Warning: Only the methods with a check mark next to them have been tested so far.
+Warning: Only the methods with a ✓ next to them have been tested so far.
 
 ## Before running examples/tests
 
