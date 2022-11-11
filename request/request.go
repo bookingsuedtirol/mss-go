@@ -406,7 +406,6 @@ type Stars struct {
 type Tracking struct {
 	Partner     string `xml:"partner"`
 	Media       string `xml:"media"`
-	Campain     string `xml:"campain"`
 	Campaign    string `xml:"campaign"`
 	CompanyInfo string `xml:"companyinfo"`
 }
