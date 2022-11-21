@@ -185,7 +185,7 @@ var sanitizePolicy = getSanitizePolicy()
 func getSanitizePolicy() *bluemonday.Policy {
 	p := bluemonday.StrictPolicy()
 	// TODO: Check if this is the right list of allowed elements
-	p.AllowElements("p", "ul", "ol", "li", "b", "strong", "br", "em", "u")
+	p.AllowElements("b", "br", "em", "i", "li", "ol", "p", "strong", "u", "ul")
 	return p
 }
 
