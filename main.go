@@ -195,6 +195,13 @@ func mapStatusCode(c response.ErrorCode, msg string) int {
 		return http.StatusNotFound
 	}
 
+	// This error is returned if a non-existing property (e.g. hotel) ID is provided
+	// or if the property does not have a configured coupon provider.
+	if c == response.ErrorCodeGenericError &&
+		msg == "Hotel has no configured coupon provider" {
+		return http.StatusNotFound
+	}
+
 	switch c {
 	case response.ErrorCodeInvalidXML,
 		response.ErrorCodeInvalidMethod,
