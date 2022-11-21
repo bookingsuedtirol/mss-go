@@ -211,12 +211,8 @@ type Form struct {
 type Geolocation struct {
 	Latitude  float64 `xml:"latitude"`
 	Longitude float64 `xml:"longitude"`
-
-	// TODO: use int if value float64 from accommodation 10148
-	// returns an int by MSS
-	Altitude float64 `xml:"altitude"`
-
-	Distance float64 `xml:"distance"`
+	Altitude  float64 `xml:"altitude"`
+	Distance  float64 `xml:"distance"`
 }
 
 type Guest struct {
