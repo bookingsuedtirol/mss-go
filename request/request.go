@@ -47,6 +47,15 @@ const (
 	StornoReasonOther StornoReason = 99
 )
 
+var StornoReasons = []StornoReason{
+	StornoReasonUnknown,
+	StornoReasonGuestUnavailable,
+	StornoReasonPropertyRequestedCancellation,
+	StornoReasonGuestChoseAnotherDestination,
+	StornoReasonGuestChoseAnotherProperty,
+	StornoReasonOther,
+}
+
 type Data struct {
 	Guest            *Guest       `xml:"guest"`
 	Company          *Company     `xml:"company"`
@@ -105,6 +114,23 @@ const (
 	MethodValidateCoupon        Method = "validateCoupon"
 )
 
+var Methods = []Method{
+	MethodGetHotelList,
+	MethodGetSpecialList,
+	MethodGetRoomList,
+	MethodGetPriceList,
+	MethodGetRoomAvailability,
+	MethodPrepareBooking,
+	MethodGetBooking,
+	MethodCancelBooking,
+	MethodCreateInquiry,
+	MethodGetUserSources,
+	MethodGetLocationList,
+	MethodGetMasterpackagesList,
+	MethodGetThemeList,
+	MethodValidateCoupon,
+}
+
 type Header struct {
 	Credentials Credentials `xml:"credentials"`
 	Method      Method      `xml:"method"`
@@ -146,6 +172,34 @@ const (
 	HotelDetailsRoomTypes HotelDetails = 8 << iota
 )
 
+var HotelDetailsList = []HotelDetails{
+	HotelDetailsBasicInfo,
+	HotelDetailsThemes,
+	HotelDetailsHotelFacilities,
+	HotelDetailsShortDescription,
+	HotelDetailsFullDescription,
+	HotelDetailsGeographicInformation,
+	HotelDetailsCoordinates,
+	HotelDetailsAddress,
+	HotelDetailsContacts,
+	HotelDetailsPaymentOptionsForOnlineBooking,
+	HotelDetailsPaymentOptionsAtHotel,
+	HotelDetailsLogo,
+	HotelDetailsHeaderImages,
+	HotelDetailsGallery,
+	HotelDetailsHotelMatching,
+	HotelDetailsGeographicalInformationAsText,
+	HotelDetailsHotelNavigatorData,
+	HotelDetailsDetailedHotelFacilities,
+	HotelDetailsLTSSpecificParameters,
+	HotelDetailsSalesPoint,
+	HotelDetailsCheckInOut,
+	HotelDetailsSourceData,
+	HotelDetailsBoardData,
+	HotelDetailsCouponServiceData,
+	HotelDetailsRoomTypes,
+}
+
 type OfferDetails int
 
 const (
@@ -166,6 +220,24 @@ const (
 	OfferDetailsPaymentTerms          OfferDetails = 1048576
 )
 
+var OfferDetailsList = []OfferDetails{
+	OfferDetailsBasicInfo,
+	OfferDetailsRoomCode,
+	OfferDetailsRoomTitle,
+	OfferDetailsPriceDetails,
+	OfferDetailsRoomImages,
+	OfferDetailsRoomFacilitiesFilter,
+	OfferDetailsRoomDescription,
+	OfferDetailsIncludedServices,
+	OfferDetailsAdditionalServices,
+	OfferDetailsRoomFacilitiesDetails,
+	OfferDetailsPriceImages,
+	OfferDetailsThemes,
+	OfferDetailsRoomFeatures,
+	OfferDetailsCancelPolicies,
+	OfferDetailsPaymentTerms,
+}
+
 type RoomDetails int
 
 const (
@@ -178,6 +250,17 @@ const (
 	RoomDetailsRoomFeatures          RoomDetails = 32768
 	RoomDetailsRoomNumbers           RoomDetails = 65536
 )
+
+var RoomDetailsList = []RoomDetails{
+	RoomDetailsBasicInfo,
+	RoomDetailsTitle,
+	RoomDetailsRoomImages,
+	RoomDetailsRoomFacilitiesFilter,
+	RoomDetailsRoomDescription,
+	RoomDetailsRoomFacilitiesDetails,
+	RoomDetailsRoomFeatures,
+	RoomDetailsRoomNumbers,
+}
 
 type SpecialDetails int
 
@@ -193,6 +276,18 @@ const (
 	SpecialDetailsHotelMandatoryServices
 )
 
+var SpecialDetailsList = []SpecialDetails{
+	SpecialDetailsBasicInfo,
+	SpecialDetailsTitle,
+	SpecialDetailsDescriptions,
+	SpecialDetailsSeasons,
+	SpecialDetailsImages,
+	SpecialDetailsThemes,
+	SpecialDetailsIncludedServices,
+	SpecialDetailsHotelIncludedServices,
+	SpecialDetailsHotelMandatoryServices,
+}
+
 type LTSBookable int
 
 const (
@@ -201,6 +296,12 @@ const (
 	LTSBookableOnlyNonBookableLTSOffers
 )
 
+var LTSBookables = []LTSBookable{
+	LTSBookableOverridenByIgnoreBookability,
+	LTSBookableOnlyBookableLTSOffers,
+	LTSBookableOnlyNonBookableLTSOffers,
+}
+
 type PriceListDetails int
 
 const (
@@ -208,6 +309,12 @@ const (
 	PriceListDetailsHeadlines PriceListDetails = 8
 	PriceListDetailsSeasons   PriceListDetails = 4194304
 )
+
+var PriceListDetailsList = []PriceListDetails{
+	PriceListDetailsBaseData,
+	PriceListDetailsHeadlines,
+	PriceListDetailsSeasons,
+}
 
 type Options struct {
 	HotelDetails         HotelDetails     `xml:"hotel_details"`
@@ -241,12 +348,24 @@ const (
 	OrderFieldName  OrderField = "name"
 )
 
+var OrderFields = []OrderField{
+	OrderFieldDate,
+	OrderFieldRand,
+	OrderFieldStars,
+	OrderFieldName,
+}
+
 type Direction string
 
 const (
 	DirectionAsc  Direction = "asc"
 	DirectionDesc Direction = "desc"
 )
+
+var Directions = []Direction{
+	DirectionAsc,
+	DirectionDesc,
+}
 
 type Paging struct {
 	Start int `xml:"start"`
@@ -299,6 +418,17 @@ const (
 	IDOfChannelLTSPOS     IDOfChannel = "pos"
 	IDOfChannelGoogle     IDOfChannel = "gog"
 )
+
+var IDOfChannels = []IDOfChannel{
+	IDOfChannelHGV,
+	IDOfChannelLTS,
+	IDOfChannelBookingCom,
+	IDOfChannelHotelDe,
+	IDOfChannelExpediaCom,
+	IDOfChannelHrsCom,
+	IDOfChannelLTSPOS,
+	IDOfChannelGoogle,
+}
 
 type Search struct {
 	Lang          string              `xml:"lang"`
@@ -376,6 +506,13 @@ const (
 	ObjectFilterSpecial
 	ObjectFilterDiscountOrSurcharge ObjectFilter = 4
 )
+
+var ObjectFilters = []ObjectFilter{
+	ObjectFilterPriceList,
+	ObjectFilterPackage,
+	ObjectFilterSpecial,
+	ObjectFilterDiscountOrSurcharge,
+}
 
 type SearchPriceList struct {
 	DateFrom *shared.Date `xml:"date_from"`

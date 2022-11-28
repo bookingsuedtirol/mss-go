@@ -33,6 +33,13 @@ const (
 	CancelledStatusUnknown
 )
 
+var CancelledStatuses = []CancelledStatus{
+	CancelledStatusNotCancelled,
+	CancelledStatusCancelled,
+	CancelledStatusNoShow,
+	CancelledStatusUnknown,
+}
+
 type Booking struct {
 	ID          int             `xml:"booking_id"`
 	StornoID    string          `xml:"storno_id"`
@@ -123,6 +130,15 @@ const (
 	CouponStatusUnknown    CouponStatus = "unknown"
 )
 
+var CouponStatuses = []CouponStatus{
+	CouponStatusRegistered,
+	CouponStatusRedeemable,
+	CouponStatusRedeemed,
+	CouponStatusExpired,
+	CouponStatusCancelled,
+	CouponStatusUnknown,
+}
+
 type Coupon struct {
 	Type      shared.CouponType    `xml:"coupon_type"`
 	Code      string               `xml:"coupon_code"`
@@ -141,6 +157,11 @@ const (
 	CouponProviderEasiCoupon CouponProvider = iota + 1
 	CouponProviderGetavo
 )
+
+var CouponProviders = []CouponProvider{
+	CouponProviderEasiCoupon,
+	CouponProviderGetavo,
+}
 
 type CouponService struct {
 	Provider CouponProvider `xml:"provider"`
@@ -166,6 +187,18 @@ const (
 	ErrorCodeMaxStayExceeded
 )
 
+var ErrorCodes = []ErrorCode{
+	ErrorCodeGenericError,
+	ErrorCodeAuthenticationError,
+	ErrorCodeInvalidXML,
+	ErrorCodeInvalidMethod,
+	ErrorCodeResultIDNotInCache,
+	ErrorCodeInvalidMissingParameter,
+	ErrorCodeBookingValidationFailed,
+	ErrorCodePermissionsDenied,
+	ErrorCodeMaxStayExceeded,
+}
+
 type Error struct {
 	Code    ErrorCode `xml:"code"`
 	Message string    `xml:"message"`
@@ -189,12 +222,23 @@ const (
 	FormIframeAllowedIfHTTPS
 )
 
+var FormIframes = []FormIframe{
+	FormIframeNotAllowed,
+	FormIframeAllowed,
+	FormIframeAllowedIfHTTPS,
+}
+
 type FormMethod string
 
 const (
 	FormMethodPOST FormMethod = "POST"
 	FormMethodGET  FormMethod = "GET"
 )
+
+var FormMethods = []FormMethod{
+	FormMethodPOST,
+	FormMethodGET,
+}
 
 type FormField struct {
 	Name  string `xml:"name"`
@@ -243,6 +287,12 @@ const (
 	PriceEngineDisabled
 )
 
+var PriceEngines = []PriceEngine{
+	PriceEngineEasiSuite,
+	PriceEngineLTS,
+	PriceEngineDisabled,
+}
+
 type BoardBit int
 
 const (
@@ -253,6 +303,15 @@ const (
 	BoardBitFullBoard
 	BoardBitAllInclusive
 )
+
+var BoardBits = []BoardBit{
+	BoardBitUndefined,
+	BoardBitWithoutBoard,
+	BoardBitWithBreakfast,
+	BoardBitHalfBoard,
+	BoardBitFullBoard,
+	BoardBitAllInclusive,
+}
 
 type Hotel struct {
 	ID                    int                  `xml:"id"`
@@ -321,6 +380,15 @@ const (
 	PaymentMethodsAmericanExpress
 )
 
+var PaymentMethodsList = []PaymentMethods{
+	PaymentMethodsCreditCard,
+	PaymentMethodsATM,
+	PaymentMethodsMastercard,
+	PaymentMethodsVisa,
+	PaymentMethodsDinersClub,
+	PaymentMethodsAmericanExpress,
+}
+
 type HotelPayment struct {
 	Methods PaymentMethods `xml:"methods"`
 }
@@ -331,6 +399,11 @@ const (
 	InsuranceTypeHGV InsuranceType = iota + 1
 	InsuranceTypeHogast
 )
+
+var InsuranceTypes = []InsuranceType{
+	InsuranceTypeHGV,
+	InsuranceTypeHogast,
+}
 
 type Insurance struct {
 	Type     InsuranceType `xml:"insurance_type"`
@@ -346,6 +419,12 @@ const (
 	VisibilityVisible1 Visibility = 1
 	VisibilityVisible3 Visibility = 3
 )
+
+var Visibilities = []Visibility{
+	VisibilityHidden,
+	VisibilityVisible1,
+	VisibilityVisible3,
+}
 
 type Location struct {
 	ID         int                 `xml:"id"`
@@ -462,12 +541,23 @@ const (
 	SupplementIncludedServices
 )
 
+var Supplements = []Supplement{
+	SupplementRoomPrice,
+	SupplementSurchargesOrDiscounts,
+	SupplementIncludedServices,
+}
+
 type PriceUnit int
 
 const (
 	PriceUnitEuro PriceUnit = iota
 	PriceUnitPercent
 )
+
+var PriceUnits = []PriceUnit{
+	PriceUnitEuro,
+	PriceUnitPercent,
+}
 
 type Price struct {
 	ID               int                  `xml:"price_id"`
@@ -650,6 +740,16 @@ const (
 	WeekdaySaturday
 	WeekdaySunday
 )
+
+var WeekdaysList = []Weekdays{
+	WeekdayMonday,
+	WeekdayTuesday,
+	WeekdayWednesday,
+	WeekdayThursday,
+	WeekdayFriday,
+	WeekdaySaturday,
+	WeekdaySunday,
+}
 
 type Special struct {
 	OfferID        int                   `xml:"offer_id"`

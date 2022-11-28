@@ -98,6 +98,12 @@ const (
 	LTSHotelInactive
 )
 
+var LTSHotelStatuses = []LTSHotelStatus{
+	LTSHotelStatusUndefined,
+	LTSHotelActive,
+	LTSHotelInactive,
+}
+
 type MemberOfTourismAssociation int
 
 const (
@@ -105,6 +111,12 @@ const (
 	MemberOfTourismAssociationFalse
 	MemberOfTourismAssociationTrue
 )
+
+var MemberOfTourismAssociations = []MemberOfTourismAssociation{
+	MemberOfTourismAssociationUndefined,
+	MemberOfTourismAssociationFalse,
+	MemberOfTourismAssociationTrue,
+}
 
 type LTSHotelRepresentation int
 
@@ -114,6 +126,13 @@ const (
 	LTSHotelRepresentationMinimal
 	LTSHotelRepresentationComplete
 )
+
+var LTSHotelRepresentations = []LTSHotelRepresentation{
+	LTSHotelRepresentationUndefined,
+	LTSHotelRepresentationDoNotDisplay,
+	LTSHotelRepresentationMinimal,
+	LTSHotelRepresentationComplete,
+}
 
 type LTSData struct {
 	A0Ene LTSHotelStatus             `xml:"A0Ene"`
@@ -128,6 +147,12 @@ const (
 	RoomTypeApartment
 	RoomTypeCampingPitch
 )
+
+var RoomTypes = []RoomType{
+	RoomTypeRoom,
+	RoomTypeApartment,
+	RoomTypeCampingPitch,
+}
 
 type HotelType int
 
@@ -146,6 +171,22 @@ const (
 	HotelTypeGarni
 	HotelTypeInn
 )
+
+var HotelTypes = []HotelType{
+	HotelTypeHotel,
+	HotelTypeSkiSchool,
+	HotelTypeResidence,
+	HotelTypeBBAndAppartmentsPriv,
+	HotelTypeFarmVacation,
+	HotelTypeMountainInn,
+	HotelTypeCampingSite,
+	HotelTypeHolidayHome,
+	HotelTypeYouthHostel,
+	HotelTypeGuesthouse,
+	HotelTypeRefuge,
+	HotelTypeGarni,
+	HotelTypeInn,
+}
 
 type HotelFeature int
 
@@ -177,6 +218,34 @@ const (
 	HotelFeatureDogsAllowed
 )
 
+var HotelFeatures = []HotelFeature{
+	HotelFeatureGarage,
+	HotelFeatureElevatorLift,
+	HotelFeatureRestaurant,
+	HotelFeatureGym,
+	HotelFeatureWellness,
+	HotelFeatureSpaCuisineHealthFoods,
+	HotelFeatureContinentalBreakfastLuncheon,
+	HotelFeatureBreakfastBuffet,
+	HotelFeatureOutdoorPool,
+	HotelFeatureIndoorPool,
+	HotelFeatureBar,
+	HotelFeatureBarrierFree,
+	HotelFeatureWlan,
+	HotelFeatureShuttleService,
+	HotelFeatureChildcare,
+	HotelFeatureSmallPetsAllowed,
+	HotelFeatureBeautyFarm,
+	HotelFeatureCentralLocation,
+	HotelFeatureCoveredParking,
+	HotelFeatureOpenParking,
+	HotelFeatureMassages,
+	HotelFeatureSauna,
+	HotelFeatureSteamBath,
+	HotelFeaturePublicBar,
+	HotelFeatureDogsAllowed,
+}
+
 type Theme int
 
 const (
@@ -195,6 +264,22 @@ const (
 	ThemeSnowshoeing
 )
 
+var Themes = []Theme{
+	ThemeFamily,
+	ThemeWellness,
+	ThemeHiking,
+	ThemeMotorcycle,
+	ThemeBike,
+	ThemeGolf,
+	ThemeRiding,
+	ThemeRomantic,
+	ThemeSki,
+	ThemeMeeting,
+	ThemeCrossCountrySkiing,
+	ThemeCulture,
+	ThemeSnowshoeing,
+}
+
 type Board int
 
 const (
@@ -204,6 +289,14 @@ const (
 	BoardFullBoard
 	BoardAllInclusive
 )
+
+var Boards = []Board{
+	BoardWithoutBoard,
+	BoardWithBreakfast,
+	BoardHalfBoard,
+	BoardFullBoard,
+	BoardAllInclusive,
+}
 
 type OfferType int
 
@@ -223,6 +316,22 @@ const (
 	OfferTypeSpecialNoReference           OfferType = 55
 )
 
+var OfferTypes = []OfferType{
+	OfferTypePriceListStandardPrice,
+	OfferTypeBasedOnAgeOfPeople,
+	OfferTypeBasedOnNumberOfPeople,
+	OfferTypeBasedOnStaying,
+	OfferTypeBasedOnDateOfBooking,
+	OfferTypeBasedOnWeekday,
+	OfferTypeNoReference,
+	OfferTypeSpecialBasedOnAgeOfPeople,
+	OfferTypeSpecialBasedOnNumberOfPeople,
+	OfferTypeSpecialBasedOnStaying,
+	OfferTypeSpecialBasedOnDateOfBooking,
+	OfferTypeSpecialBasedOnWeekday,
+	OfferTypeSpecialNoReference,
+}
+
 type SpecialType int
 
 const (
@@ -230,6 +339,12 @@ const (
 	SpecialTypeSpecials
 	SpecialTypeMasterpackages
 )
+
+var SpecialTypes = []SpecialType{
+	SpecialTypePackages,
+	SpecialTypeSpecials,
+	SpecialTypeMasterpackages,
+}
 
 type SpecialPremium int
 
@@ -253,6 +368,27 @@ const (
 	SpecialPremiumFamilienHotelsNaturdetektivSommer
 	SpecialPremiumFamilienHotelsNaturdetektivWinter
 )
+
+var SpecialPremiums = []SpecialPremium{
+	SpecialPremiumVitalpina,
+	SpecialPremiumFamilyHotelsPremium,
+	SpecialPremiumVinumHotelsPremium,
+	SpecialPremiumSüdtirolBalancePremium,
+	SpecialPremiumVitalpinaDurchatmen,
+	SpecialPremiumVitalpinaWohlfühlen,
+	SpecialPremiumVitaplinaErnährung,
+	SpecialPremiumVitaplinaAktiv,
+	SpecialPremiumVitalpinaPremium,
+	SpecialPremiumBikehotelsMountainbike,
+	SpecialPremiumBikehotelsBikeTouringAndEbike,
+	SpecialPremiumBikehotelsRoadbike,
+	SpecialPremiumBikehotelsPremium,
+	SpecialPremiumArchitectureDays,
+	SpecialPremiumVinumHotels,
+	SpecialPremiumFamilienHotels,
+	SpecialPremiumFamilienHotelsNaturdetektivSommer,
+	SpecialPremiumFamilienHotelsNaturdetektivWinter,
+}
 
 type ThemeID int
 
@@ -285,6 +421,35 @@ const (
 	ThemeIDNatureDetectivWinter
 )
 
+var ThemeIDs = []ThemeID{
+	ThemeIDHiking,
+	ThemeIDCyclingMountainbike,
+	ThemeIDFamily,
+	ThemeIDWellnessHealth,
+	ThemeIDFoodAndDrink,
+	ThemeIDGolf,
+	ThemeIDCulture,
+	ThemeIDMotorsport,
+	ThemeIDCarFreeHolidays,
+	ThemeIDSkiSnowboard,
+	ThemeIDSummerActivities,
+	ThemeIDEvents,
+	ThemeIDChristmasMarkets,
+	ThemeIDActiveWinter,
+	ThemeIDVitalpina,
+	ThemeIDVitalpinaBreathe,
+	ThemeIDBikeHotelsEBike,
+	ThemeIDBikeHotelsFreeride,
+	ThemeIDBikeHotelsMountainbike,
+	ThemeIDBikeHotelsBikeTours,
+	ThemeIDBikeHotelsRacingBike,
+	ThemeIDFamilyHotels,
+	ThemeIDFamilyHotelsNatureDetective,
+	ThemeIDFamilyHotel,
+	ThemeIDNatureDetectivSummer,
+	ThemeIDNatureDetectivWinter,
+}
+
 type LocationType string
 
 const (
@@ -300,6 +465,14 @@ const (
 	LocationTypeVirtualLocation LocationType = "vir"
 )
 
+var LocationTypes = []LocationType{
+	LocationTypeArea,
+	LocationTypeRegion,
+	LocationTypeCommunity,
+	LocationTypeLocation,
+	LocationTypeVirtualLocation,
+}
+
 type PaymentMethod int
 
 const (
@@ -311,6 +484,15 @@ const (
 	PaymentMethodPaymentAtTheHotel
 )
 
+var PaymentMethods = []PaymentMethod{
+	PaymentMethodDepositByCreditCard,
+	PaymentMethodCreditCardAsSecurity,
+	PaymentMethodDepositByBankTransfer,
+	PaymentMethodPaymentByCreditCard,
+	PaymentMethodPaymentByBankTransfer,
+	PaymentMethodPaymentAtTheHotel,
+}
+
 type Gender string
 
 const (
@@ -319,9 +501,20 @@ const (
 	GenderFemale  Gender = "f"
 )
 
+var Genders = []Gender{
+	GenderUnknown,
+	GenderMale,
+	GenderFemale,
+}
+
 type CouponType string
 
 const (
 	CouponTypeVoucher   CouponType = "voucher"
 	CouponTypePromotion CouponType = "promotion"
 )
+
+var CouponTypes = []CouponType{
+	CouponTypeVoucher,
+	CouponTypePromotion,
+}
