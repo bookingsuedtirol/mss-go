@@ -41,19 +41,10 @@ var CancelledStatuses = []CancelledStatus{
 }
 
 type Booking struct {
-	ID          int             `xml:"booking_id"`
+	Inquiry
 	StornoID    string          `xml:"storno_id"`
-	Date        DateTime        `xml:"booking_date"`
-	Source      string          `xml:"source"`
-	HotelID     int             `xml:"hotel_id"`
-	Arrival     shared.Date     `xml:"arrival"`
-	Departure   shared.Date     `xml:"departure"`
-	Service     shared.Board    `xml:"service"`
 	Status      bool            `xml:"booking_status"`
 	Cancelled   CancelledStatus `xml:"cancelled"`
-	Note        string          `xml:"note"`
-	Hotel       Hotel           `xml:"hotel"`
-	Guest       Guest           `xml:"guest"`
 	Company     Company         `xml:"company"`
 	Payment     Payment         `xml:"payment"`
 	Rooms       []Room          `xml:"room"`
@@ -61,6 +52,19 @@ type Booking struct {
 	Offers      []Offer         `xml:"offer"`
 	Insurance   Insurance       `xml:"insurance"`
 	Coupon      Coupon          `xml:"coupon"`
+}
+
+type Inquiry struct {
+	ID        int          `xml:"booking_id"`
+	Date      DateTime     `xml:"booking_date"`
+	Source    string       `xml:"source"`
+	HotelID   int          `xml:"hotel_id"`
+	Arrival   shared.Date  `xml:"arrival"`
+	Departure shared.Date  `xml:"departure"`
+	Service   shared.Board `xml:"service"`
+	Note      string       `xml:"note"`
+	Hotel     Hotel        `xml:"hotel"`
+	Guest     Guest        `xml:"guest"`
 }
 
 type CancelPolicy struct {
@@ -649,6 +653,7 @@ type Result struct {
 	Sources   []Source        `xml:"source"`
 	Locations []Location      `xml:"location"`
 	Themes    []ThemeListItem `xml:"theme"`
+	Inquiry   Inquiry         `xml:"inquiry"`
 	Booking   Booking         `xml:"booking"`
 	Form      Form            `xml:"form"`
 	Coupon    Coupon          `xml:"coupon"`
