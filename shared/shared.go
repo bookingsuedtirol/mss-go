@@ -283,7 +283,8 @@ var Themes = []Theme{
 type Board int
 
 const (
-	BoardWithoutBoard Board = iota + 1
+	BoardAny Board = iota
+	BoardWithoutBoard
 	BoardWithBreakfast
 	BoardHalfBoard
 	BoardFullBoard
@@ -291,6 +292,7 @@ const (
 )
 
 var Boards = []Board{
+	BoardAny,
 	BoardWithoutBoard,
 	BoardWithBreakfast,
 	BoardHalfBoard,
