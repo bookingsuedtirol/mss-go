@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/HGV/mss-go/shared"
+	"golang.org/x/text/language"
 )
 
 type Address struct {
@@ -347,7 +348,7 @@ type Hotel struct {
 	LTSData               shared.LTSData       `xml:"lts_data"`
 	POS                   []string             `xml:"pos>id_pos"`
 	PriceEngine           PriceEngine          `xml:"price_engine"`
-	Language              string               `xml:"language"`
+	Language              language.Tag         `xml:"language"`
 	CheckIn               CheckIn              `xml:"check_in"`
 	CheckOut              CheckOut             `xml:"check_out"`
 	PriceFrom             int                  `xml:"price_from"`

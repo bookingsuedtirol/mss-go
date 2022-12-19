@@ -13,6 +13,7 @@ import (
 
 	"github.com/HGV/mss-go/request"
 	"github.com/HGV/mss-go/response"
+	"golang.org/x/text/language"
 	"golang.org/x/text/runes"
 	"golang.org/x/text/transform"
 	"golang.org/x/text/unicode/norm"
@@ -118,8 +119,8 @@ func (c Client) getRequestRoot(cb Callback) request.Root {
 	}
 
 	// Set a default value for Lang because it’s required by the MSS
-	if newRoot.Request.Search.Lang == "" {
-		newRoot.Request.Search.Lang = "de"
+	if newRoot.Request.Search.Lang == language.Und {
+		newRoot.Request.Search.Lang = language.German
 	}
 
 	return newRoot

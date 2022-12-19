@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 
 	"github.com/HGV/mss-go/shared"
+	"golang.org/x/text/language"
 )
 
 // The boolean type for request data. This must be used instead of the
@@ -419,6 +420,16 @@ const (
 	IDOfChannelGoogle     IDOfChannel = "gog"
 )
 
+var Languages = []language.Tag{
+	language.German,
+	language.Italian,
+	language.English,
+	language.Spanish,
+	language.French,
+	language.Russian,
+	language.Danish,
+}
+
 var IDOfChannels = []IDOfChannel{
 	IDOfChannelHGV,
 	IDOfChannelLTS,
@@ -431,7 +442,7 @@ var IDOfChannels = []IDOfChannel{
 }
 
 type Search struct {
-	Lang          string              `xml:"lang"`
+	Lang          language.Tag        `xml:"lang"`
 	ResultID      string              `xml:"result_id"`
 	Agent         string              `xml:"agent"`
 	IDs           []int               `xml:"id"`
