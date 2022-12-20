@@ -623,12 +623,24 @@ type Properties struct {
 	Mfp         int `xml:"mfp"`
 }
 
+type RatingProvider string
+
+const (
+	RatingProviderTrustYou       RatingProvider = "trustyou"
+	RatingProviderHotelnavigator RatingProvider = "hotelnavigator"
+)
+
+var RatingProviders = []RatingProvider{
+	RatingProviderTrustYou,
+	RatingProviderHotelnavigator,
+}
+
 type Rating struct {
-	ID       string      `xml:"id"`
-	Provider string      `xml:"provider"`
-	Value    float64     `xml:"value"`
-	Count    int         `xml:"count"`
-	Date     shared.Date `xml:"date"`
+	ID       string         `xml:"id"`
+	Provider RatingProvider `xml:"provider"`
+	Value    float64        `xml:"value"`
+	Count    int            `xml:"count"`
+	Date     shared.Date    `xml:"date"`
 }
 
 type Restriction struct {
