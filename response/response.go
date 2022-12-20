@@ -159,13 +159,17 @@ type Coupon struct {
 type CouponProvider int
 
 const (
-	CouponProviderEasiCoupon CouponProvider = iota + 1
+	CouponProviderNone CouponProvider = iota
+	CouponProviderEasiCoupon
 	CouponProviderGetavo
+	CouponProviderAdditive
 )
 
 var CouponProviders = []CouponProvider{
+	CouponProviderNone,
 	CouponProviderEasiCoupon,
 	CouponProviderGetavo,
+	CouponProviderAdditive,
 }
 
 type CouponService struct {
