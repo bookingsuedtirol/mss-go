@@ -41,14 +41,7 @@ func (t *DateTimeWithTimeZone) UnmarshalXML(decoder *xml.Decoder, start xml.Star
 		return err
 	}
 
-	value, err := shared.ParseDateTime("2006-01-02T15:04:05-0700", str)
-	if err != nil {
-		// Try parsing a second time with a different layout (format). This is
-		// necessary because MSS seems to output both the above and the below format
-		// randomly.
-		value, err = shared.ParseDateTime("2006-01-02T15:04:05-07:00", str)
-	}
-
+	value, err := shared.ParseDateTime("2006-01-02T15:04:05-07:00", str)
 	if err != nil {
 		return err
 	}
