@@ -421,6 +421,15 @@ const (
 	ThemeIDFamilyHotel ThemeID = iota + 3
 	ThemeIDNatureDetectivSummer
 	ThemeIDNatureDetectivWinter
+	ThemeIDEcologicHoliday ThemeID = iota + 53
+	ThemeIDHorseBackRiding
+	ThemeIDLuxuryHoliday
+	ThemeIDPetsFriendlyHoliday
+	ThemeIDRoadBike
+	ThemeIDRomanticHoliday
+	ThemeIDWine
+	ThemeIDBicycleTouring
+	ThemeIDEBike
 )
 
 var ThemeIDs = []ThemeID{
@@ -450,6 +459,15 @@ var ThemeIDs = []ThemeID{
 	ThemeIDFamilyHotel,
 	ThemeIDNatureDetectivSummer,
 	ThemeIDNatureDetectivWinter,
+	ThemeIDEcologicHoliday,
+	ThemeIDHorseBackRiding,
+	ThemeIDLuxuryHoliday,
+	ThemeIDPetsFriendlyHoliday,
+	ThemeIDRoadBike,
+	ThemeIDRomanticHoliday,
+	ThemeIDWine,
+	ThemeIDBicycleTouring,
+	ThemeIDEBike,
 }
 
 type LocationType string
