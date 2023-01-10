@@ -35,6 +35,7 @@ type Credentials struct {
 	User     string `xml:"user"`
 	Password string `xml:"password"`
 	Source   string `xml:"source"`
+	SourceID int    `xml:"source_id"`
 }
 
 type StornoReason int
