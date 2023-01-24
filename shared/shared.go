@@ -157,10 +157,11 @@ var RoomTypes = []RoomType{
 type HotelType int
 
 const (
-	HotelTypeHotel HotelType = 1 << iota
+	HotelTypeUndefined HotelType = 0
+	HotelTypeHotel     HotelType = 1 << (iota - 1)
 	HotelTypeSkiSchool
 	HotelTypeResidence
-	HotelTypeBBAndAppartmentsPriv HotelType = 2 << iota
+	HotelTypeBBAndAppartmentsPriv HotelType = 2 << (iota - 1)
 	HotelTypeFarmVacation
 	HotelTypeMountainInn
 	HotelTypeCampingSite
@@ -173,6 +174,7 @@ const (
 )
 
 var HotelTypes = []HotelType{
+	HotelTypeUndefined,
 	HotelTypeHotel,
 	HotelTypeSkiSchool,
 	HotelTypeResidence,
@@ -273,7 +275,8 @@ var HotelFeatures = []HotelFeature{
 type Theme int
 
 const (
-	ThemeFamily Theme = 1 << iota
+	ThemeUndefined Theme = 0
+	ThemeFamily    Theme = 1 << (iota - 1)
 	ThemeWellness
 	ThemeHiking
 	ThemeMotorcycle
@@ -289,6 +292,7 @@ const (
 )
 
 var Themes = []Theme{
+	ThemeUndefined,
 	ThemeFamily,
 	ThemeWellness,
 	ThemeHiking,
