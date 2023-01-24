@@ -328,7 +328,7 @@ type Hotel struct {
 	Bookable              bool                 `xml:"bookable"`
 	Name                  string               `xml:"name"`
 	Type                  shared.HotelType     `xml:"type"`
-	Stars                 float64              `xml:"stars"`
+	Stars                 shared.HotelStars    `xml:"stars"`
 	Address               Address              `xml:"address"`
 	Themes                shared.Theme         `xml:"themes"`
 	Features              shared.HotelFeature  `xml:"features"`

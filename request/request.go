@@ -548,8 +548,8 @@ type SearchSpecial struct {
 }
 
 type Stars struct {
-	Min float64 `xml:"min"`
-	Max float64 `xml:"max"`
+	Min shared.HotelStars `xml:"min"`
+	Max shared.HotelStars `xml:"max"`
 }
 
 type Tracking struct {

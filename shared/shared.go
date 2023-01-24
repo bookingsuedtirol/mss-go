@@ -188,6 +188,30 @@ var HotelTypes = []HotelType{
 	HotelTypeInn,
 }
 
+type HotelStars float64
+
+const (
+	HotelStarsUndefined HotelStars = 0
+	HotelStars1         HotelStars = 1
+	HotelStars2         HotelStars = 2
+	HotelStars3         HotelStars = 3
+	HotelStars3S        HotelStars = 3.5
+	HotelStars4         HotelStars = 4
+	HotelStars4S        HotelStars = 4.5
+	HotelStars5         HotelStars = 5
+)
+
+var HotelStarsList = []HotelStars{
+	HotelStarsUndefined,
+	HotelStars1,
+	HotelStars2,
+	HotelStars3,
+	HotelStars3S,
+	HotelStars4,
+	HotelStars4S,
+	HotelStars5,
+}
+
 type HotelFeature int
 
 const (
