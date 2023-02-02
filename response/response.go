@@ -336,7 +336,7 @@ type Hotel struct {
 	LocationName          LocationName         `xml:"location_name"`
 	Geolocation           Geolocation          `xml:"geolocation"`
 	Contact               Contact              `xml:"contact"`
-	Headline              string               `xml:"headline"`
+	Headline              NormalizedHTMLString `xml:"headline"`
 	Description           NormalizedHTMLString `xml:"description"`
 	Payment               HotelPayment         `xml:"hotel_payment"`
 	Matching              Matching             `xml:"matching"`
