@@ -394,7 +394,7 @@ type Request struct {
 
 type Room struct {
 	OfferID int             `xml:"offer_id"`
-	ID      int             `xml:"room_id"`
+	ID      int             `xml:"room_id,omitempty"`
 	Service shared.Board    `xml:"service,omitempty"`
 	Type    shared.RoomType `xml:"room_type"`
 	Seq     int             `xml:"room_seq"`
