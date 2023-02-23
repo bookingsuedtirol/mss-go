@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"time"
 	"unicode"
 
 	"github.com/HGV/mss-go/request"
@@ -34,6 +35,17 @@ type Credentials struct {
 // Make sure to pass an http.Client with a reasonable timeout, e.g. 10–20 seconds.
 func NewClient(h http.Client, c Credentials) Client {
 	return Client{h, c}
+}
+
+// NewDefaultClient creates a new default client for requests to MSS.
+// The underlying http.Client is preconfigured with reasonable settings.
+func NewDefaultClient(c Credentials) Client {
+	return Client{http.Client{
+		Timeout: 10 * time.Second,
+		Transport: &http.Transport{
+			TLSHandshakeTimeout: 3 * time.Second,
+		},
+	}, c}
 }
 
 type Callback func(request.Root) request.Root
