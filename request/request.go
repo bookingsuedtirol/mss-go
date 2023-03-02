@@ -319,22 +319,27 @@ var PriceListDetailsList = []PriceListDetails{
 }
 
 type Options struct {
-	HotelDetails         HotelDetails     `xml:"hotel_details"`
-	OfferDetails         OfferDetails     `xml:"offer_details"`
-	RoomDetails          RoomDetails      `xml:"room_details"`
-	SpecialDetails       SpecialDetails   `xml:"special_details"`
-	PictureDate          *shared.Date     `xml:"picture_date"`
-	LTSBookable          LTSBookable      `xml:"lts_bookable"`
-	GetAvailability      Bool             `xml:"get_availability"`
-	GetRestrictions      Bool             `xml:"get_restrictions"`
-	GetRoomdetails       Bool             `xml:"get_roomdetails"`
-	GetMasterpackages    Bool             `xml:"get_masterpackages"`
-	BasePrice            Bool             `xml:"base_price"`
-	PriceListDetails     PriceListDetails `xml:"pricelist_details"`
-	OnlySubscribedHotels Bool             `xml:"only_subscribed_hotels"`
-	OnlyAvailable        Bool             `xml:"only_available"`
-	CheckRestrictions    Bool             `xml:"check_restrictions"`
+	HotelDetails         HotelDetails        `xml:"hotel_details"`
+	OfferDetails         OfferDetails        `xml:"offer_details"`
+	RoomDetails          RoomDetails         `xml:"room_details"`
+	SpecialDetails       SpecialDetails      `xml:"special_details"`
+	PictureDate          *shared.Date        `xml:"picture_date"`
+	LTSBookable          LTSBookable         `xml:"lts_bookable"`
+	GetAvailability      Bool                `xml:"get_availability"`
+	GetRestrictions      RestrictionsVersion `xml:"get_restrictions"`
+	GetRoomdetails       Bool                `xml:"get_roomdetails"`
+	GetMasterpackages    Bool                `xml:"get_masterpackages"`
+	BasePrice            Bool                `xml:"base_price"`
+	PriceListDetails     PriceListDetails    `xml:"pricelist_details"`
+	OnlySubscribedHotels Bool                `xml:"only_subscribed_hotels"`
+	OnlyAvailable        Bool                `xml:"only_available"`
+	CheckRestrictions    Bool                `xml:"check_restrictions"`
 }
+
+type RestrictionsVersion string
+
+// The old v1 is not supported by this library.
+const RestrictionsVersion2 RestrictionsVersion = "v2"
 
 type Order struct {
 	Field OrderField `xml:"field"`

@@ -79,17 +79,18 @@ type CancelPolicy struct {
 }
 
 type Channel struct {
-	ID                string           `xml:"channel_id"`
-	OfferID           int              `xml:"offer_id"`
-	OfferDescriptions []Offer          `xml:"offer_description>offer"`
-	RoomPrices        []RoomPrice      `xml:"room_price>price"`
-	RoomDescriptions  []Room           `xml:"room_description>room"`
-	ServicePrices     []Price          `xml:"service_price>price"`
-	FromPrice         int              `xml:"from_price"`
-	BasePrices        []RoomPrice      `xml:"base_price>price"`
-	CancelPolicies    []CancelPolicy   `xml:"cancel_policies>cancel_policy"`
-	PaymentTerms      []PaymentTerm    `xml:"payment_terms>payment_term"`
-	PriceList         ChannelPriceList `xml:"pricelist"`
+	ID                      string                   `xml:"channel_id"`
+	OfferID                 int                      `xml:"offer_id"`
+	OfferDescriptions       []Offer                  `xml:"offer_description>offer"`
+	RoomPrices              []RoomPrice              `xml:"room_price>price"`
+	RoomDescriptions        []Room                   `xml:"room_description>room"`
+	ServicePrices           []Price                  `xml:"service_price>price"`
+	FromPrice               int                      `xml:"from_price"`
+	BasePrices              []RoomPrice              `xml:"base_price>price"`
+	CancelPolicies          []CancelPolicy           `xml:"cancel_policies>cancel_policy"`
+	PaymentTerms            []PaymentTerm            `xml:"payment_terms>payment_term"`
+	PriceList               ChannelPriceList         `xml:"pricelist"`
+	RestrictionDescriptions []RestrictionDescription `xml:"restriction_description>restriction"`
 }
 
 type ChannelPriceList struct {
@@ -644,23 +645,27 @@ type Rating struct {
 }
 
 type Restriction struct {
-	ObjID          int          `xml:"obj_id"`
-	ObjSubID       int          `xml:"obj_sub_id"`
-	ObjSubOnly     int          `xml:"obj_sub_only"`
-	Service        shared.Board `xml:"service"`
-	Arrival        bool         `xml:"arrival"`
-	Departure      bool         `xml:"departure"`
-	Min            int          `xml:"min"`
-	MinArrival     int          `xml:"min_arrival"`
-	Max            int          `xml:"max"`
-	MaxArrival     int          `xml:"max_arrival"`
-	Close          bool         `xml:"close"`
-	ChildrenMin    int          `xml:"children_min"`
-	ChildrenMax    int          `xml:"children_max"`
-	Holes          bool         `xml:"holes"`
-	DaysArrivalMin int          `xml:"days_arrival_min"`
-	DaysArrivalMax int          `xml:"days_arrival_max"`
-	PersAgeMin     int          `xml:"pers_age_min"`
+	ObjID      int          `xml:"obj_id"`
+	Service    shared.Board `xml:"service"`
+	Arrival    bool         `xml:"arrival"`
+	Departure  bool         `xml:"departure"`
+	Min        int          `xml:"min"`
+	MinArrival int          `xml:"min_arrival"`
+	Max        int          `xml:"max"`
+	MaxArrival int          `xml:"max_arrival"`
+	Close      bool         `xml:"close"`
+}
+
+type RestrictionDescription struct {
+	ObjID          int  `xml:"obj_id"`
+	ObjSubID       int  `xml:"obj_sub_id"`
+	ObjSubOnly     int  `xml:"obj_sub_only"`
+	ChildrenMin    int  `xml:"children_min"`
+	ChildrenMax    int  `xml:"children_max"`
+	DaysArrivalMin int  `xml:"days_arrival_min"`
+	DaysArrivalMax int  `xml:"days_arrival_max"`
+	PersAgeMin     int  `xml:"pers_age_min"`
+	Holes          bool `xml:"holes"`
 }
 
 type Result struct {
