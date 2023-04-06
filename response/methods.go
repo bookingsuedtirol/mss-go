@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/HGV/mss-go/shared"
+	"github.com/bookingsuedtirol/mss-go/shared"
 	"github.com/microcosm-cc/bluemonday"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"

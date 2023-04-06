@@ -7,9 +7,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/HGV/mss-go"
-	"github.com/HGV/mss-go/request"
-	"github.com/HGV/mss-go/shared"
+	"github.com/bookingsuedtirol/mss-go"
+	"github.com/bookingsuedtirol/mss-go/request"
+	"github.com/bookingsuedtirol/mss-go/shared"
 )
 
 func main() {

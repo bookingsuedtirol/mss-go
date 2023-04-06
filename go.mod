@@ -1,4 +1,4 @@
-module github.com/HGV/mss-go
+module github.com/bookingsuedtirol/mss-go
 
 go 1.18
 

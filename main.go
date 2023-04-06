@@ -12,8 +12,8 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/HGV/mss-go/request"
-	"github.com/HGV/mss-go/response"
+	"github.com/bookingsuedtirol/mss-go/request"
+	"github.com/bookingsuedtirol/mss-go/response"
 	"golang.org/x/text/language"
 	"golang.org/x/text/runes"
 	"golang.org/x/text/transform"

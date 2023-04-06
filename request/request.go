@@ -3,7 +3,7 @@ package request
 import (
 	"encoding/xml"
 
-	"github.com/HGV/mss-go/shared"
+	"github.com/bookingsuedtirol/mss-go/shared"
 	"golang.org/x/text/language"
 )
 

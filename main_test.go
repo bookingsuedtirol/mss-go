@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/HGV/mss-go/request"
+	"github.com/bookingsuedtirol/mss-go/request"
 )
 
 var client = NewClient(
