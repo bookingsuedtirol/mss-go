@@ -289,6 +289,9 @@ const (
 	ThemeCrossCountrySkiing
 	ThemeCulture
 	ThemeSnowshoeing
+	ThemeSustainabilityLevel1 Theme = 1 << 22 << iota
+	ThemeSustainabilityLevel2
+	ThemeSustainabilityLevel3
 )
 
 var Themes = []Theme{
@@ -306,6 +309,9 @@ var Themes = []Theme{
 	ThemeCrossCountrySkiing,
 	ThemeCulture,
 	ThemeSnowshoeing,
+	ThemeSustainabilityLevel1,
+	ThemeSustainabilityLevel2,
+	ThemeSustainabilityLevel3,
 }
 
 type Board int
