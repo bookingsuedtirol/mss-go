@@ -611,6 +611,11 @@ type PriceList struct {
 	Seasons        []Season           `xml:"season"`
 }
 
+type Allotment struct {
+	Code     string `xml:"code"`
+	Quantity int    `xml:"quantity"`
+}
+
 type Properties struct {
 	Area        int `xml:"area"`
 	BedRooms    int `xml:"bed_rooms"`
@@ -709,6 +714,7 @@ type Room struct {
 	Days         []Day        `xml:"days>day"`
 	PriceFrom    int          `xml:"price_from"`
 	PriceList    []PriceList  `xml:"pricelist"`
+	Allotments   []Allotment  `xml:"allotments>allotment"`
 }
 
 type RoomDetail struct {
@@ -727,6 +733,7 @@ type RoomPrice struct {
 	PriceInclusive Price   `xml:"price_inclusive"`
 	CancelPolicyID int     `xml:"cancel_policy_id"`
 	PaymentTermID  int     `xml:"payment_term_id"`
+	AllotmentCode  string  `xml:"allotment_code"`
 }
 
 type Root struct {
