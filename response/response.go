@@ -76,6 +76,7 @@ type CancelPolicy struct {
 	// Description can contain \n characters.
 	Description string `xml:"description"`
 	Priority    string `xml:"priority"`
+	Manual      bool   `xml:"manual"`
 }
 
 type Channel struct {
