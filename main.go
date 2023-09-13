@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -23,6 +24,7 @@ import (
 type Client struct {
 	httpClient  http.Client
 	credentials Credentials
+	debug       bool
 }
 
 type Credentials struct {
@@ -31,21 +33,33 @@ type Credentials struct {
 	Source   string
 }
 
+type ClientOptions struct {
+	Debug bool
+}
+
 // NewClient creates a new client for requests to MSS.
 // Make sure to pass an http.Client with a reasonable timeout, e.g. 10–20 seconds.
-func NewClient(h http.Client, c Credentials) Client {
-	return Client{h, c}
+func NewClient(h http.Client, c Credentials, opts ClientOptions) Client {
+	return Client{
+		httpClient:  h,
+		credentials: c,
+		debug:       opts.Debug,
+	}
 }
 
 // NewDefaultClient creates a new default client for requests to MSS.
 // The underlying http.Client is preconfigured with reasonable settings.
-func NewDefaultClient(c Credentials) Client {
-	return Client{http.Client{
-		Timeout: 10 * time.Second,
-		Transport: &http.Transport{
-			TLSHandshakeTimeout: 3 * time.Second,
+func NewDefaultClient(c Credentials, opts ClientOptions) Client {
+	return Client{
+		httpClient: http.Client{
+			Timeout: 10 * time.Second,
+			Transport: &http.Transport{
+				TLSHandshakeTimeout: 3 * time.Second,
+			},
 		},
-	}, c}
+		credentials: c,
+		debug:       opts.Debug,
+	}
 }
 
 type Callback func(request.Root) request.Root
@@ -69,6 +83,10 @@ func (c Client) RequestXML(
 	reqRoot := c.getRequestRoot(cb)
 
 	reqXML, err := xml.Marshal(reqRoot)
+
+	if c.debug {
+		log.Println("Request XML:", string(reqXML))
+	}
 
 	if err != nil {
 		return nil, err
