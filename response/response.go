@@ -660,6 +660,10 @@ type Restriction struct {
 	Max        int          `xml:"max"`
 	MaxArrival int          `xml:"max_arrival"`
 	Close      bool         `xml:"close"`
+	// StayMin is the statically defined minimum amount of nights of the stay.
+	StayMin int `xml:"stay_min"`
+	// StayMax is the statically defined maximum amount of nights of the stay.
+	StayMax int `xml:"stay_max"`
 }
 
 type RestrictionDescription struct {
