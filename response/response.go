@@ -371,6 +371,7 @@ type Hotel struct {
 	Coupon                CouponService        `xml:"coupon"`
 	RoomTypes             shared.RoomType      `xml:"room_types"`
 	InformalMail          bool                 `xml:"informal_mail"`
+	TouristTaxPPPN        float64              `xml:"tourist_tax_pppn"`
 }
 
 type HotelLocation struct {
