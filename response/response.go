@@ -510,11 +510,12 @@ type Duration struct {
 }
 
 type Payment struct {
-	Method     shared.PaymentMethod `xml:"method"`
-	Price      float64              `xml:"price"`
-	Prepayment float64              `xml:"prepayment"`
-	Invoice    bool                 `xml:"invoice"`
-	Bank       Bank                 `xml:"bank"`
+	Method          shared.PaymentMethod `xml:"method"`
+	Price           float64              `xml:"price"`
+	Prepayment      float64              `xml:"prepayment"`
+	PriceTouristTax float64              `xml:"price_tourist_tax"`
+	Invoice         bool                 `xml:"invoice"`
+	Bank            Bank                 `xml:"bank"`
 }
 
 type PaymentTerm struct {
