@@ -410,11 +410,19 @@ type InsuranceType int
 const (
 	InsuranceTypeHGV InsuranceType = iota + 1
 	InsuranceTypeHogast
+	InsuranceTypeRoterHahn
+	InsuranceTypeVPS
+	InsuranceTypeHGVGlobal
+	InsuranceTypeGastropool
 )
 
 var InsuranceTypes = []InsuranceType{
 	InsuranceTypeHGV,
 	InsuranceTypeHogast,
+	InsuranceTypeRoterHahn,
+	InsuranceTypeVPS,
+	InsuranceTypeHGVGlobal,
+	InsuranceTypeGastropool,
 }
 
 type Insurance struct {
