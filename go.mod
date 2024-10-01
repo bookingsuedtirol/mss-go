@@ -3,9 +3,9 @@ module github.com/bookingsuedtirol/mss-go
 go 1.22
 
 require (
-	github.com/microcosm-cc/bluemonday v1.0.26
-	golang.org/x/net v0.26.0
-	golang.org/x/text v0.16.0
+	github.com/microcosm-cc/bluemonday v1.0.27
+	golang.org/x/net v0.29.0
+	golang.org/x/text v0.18.0
 )
 
 require (
