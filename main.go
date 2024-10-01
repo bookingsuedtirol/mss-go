@@ -191,7 +191,11 @@ func ErrorResponse(h response.Header) error {
 	}
 
 	return &Error{
-		Err:        errors.New(h.Error.Message),
+		Err: fmt.Errorf(
+			`MSS returned an error with the code %d and the following message: %s`,
+			h.Error.Code,
+			h.Error.Message,
+		),
 		Code:       h.Error.Code,
 		StatusCode: mapStatusCode(h.Error.Code, h.Error.Message),
 	}
