@@ -329,6 +329,7 @@ type Hotel struct {
 	IDLTS                 string               `xml:"id_lts"`
 	Bookable              bool                 `xml:"bookable"`
 	Name                  string               `xml:"name"`
+	CIN                   string               `xml:"cin"`
 	Type                  shared.HotelType     `xml:"type"`
 	Stars                 shared.HotelStars    `xml:"stars"`
 	Address               Address              `xml:"address"`
