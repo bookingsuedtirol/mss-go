@@ -22,7 +22,7 @@ func (t *DateTime) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) er
 		return err
 	}
 
-	value, err := shared.ParseLocalDateTime("2006-01-02 15:04:05", str)
+	value, err := shared.ParseLocalDateTime(time.DateTime, str)
 	if err != nil {
 		return err
 	}

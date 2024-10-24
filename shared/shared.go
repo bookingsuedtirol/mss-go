@@ -7,10 +7,8 @@ import (
 
 type Date struct{ time.Time }
 
-const dateLayout = "2006-01-02"
-
 func (d Date) MarshalXML(element *xml.Encoder, start xml.StartElement) error {
-	return element.EncodeElement(d.Format(dateLayout), start)
+	return element.EncodeElement(d.Format(time.DateOnly), start)
 }
 
 func (d *Date) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
@@ -20,7 +18,7 @@ func (d *Date) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error 
 		return err
 	}
 
-	value, err := ParseDateTime(dateLayout, str)
+	value, err := ParseDateTime(time.DateOnly, str)
 	if err != nil {
 		return err
 	}
