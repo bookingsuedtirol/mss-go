@@ -2,6 +2,7 @@ package response
 
 import (
 	"encoding/xml"
+	"net/url"
 	"time"
 
 	"github.com/bookingsuedtirol/mss-go/shared"
@@ -547,12 +548,16 @@ type Penalty struct {
 }
 
 type Picture struct {
-	URL       string `xml:"url"`
-	Time      int    `xml:"time"`
-	Title     string `xml:"title"`
-	Copyright string `xml:"copyright"`
-	Width     int    `xml:"width"`
-	Height    int    `xml:"height"`
+	URL       pictureURL `xml:"url"`
+	Time      int        `xml:"time"`
+	Title     string     `xml:"title"`
+	Copyright string     `xml:"copyright"`
+	Width     int        `xml:"width"`
+	Height    int        `xml:"height"`
+}
+
+type pictureURL struct {
+	*url.URL
 }
 
 type Supplement int

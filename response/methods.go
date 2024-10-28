@@ -5,6 +5,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"io"
+	"net/url"
 	"strconv"
 	"strings"
 	"time"
@@ -266,6 +267,24 @@ func (input *Duration) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement
 	}
 
 	*input = Duration{time.Duration(secs) * time.Second}
+
+	return nil
+}
+
+func (u *pictureURL) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) error {
+	var s string
+
+	if err := decoder.DecodeElement(&s, &start); err != nil {
+		return err
+	}
+
+	parsed, err := url.Parse(s)
+	if err != nil {
+		return err
+	}
+
+	parsed.Host = "cdn.easychannel.it"
+	*u = pictureURL{parsed}
 
 	return nil
 }
