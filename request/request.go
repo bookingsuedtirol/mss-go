@@ -293,13 +293,13 @@ var SpecialDetailsList = []SpecialDetails{
 type LTSBookable int
 
 const (
-	LTSBookableOverridenByIgnoreBookability LTSBookable = iota
+	LTSBookableOverriddenByIgnoreBookability LTSBookable = iota
 	LTSBookableOnlyBookableLTSOffers
 	LTSBookableOnlyNonBookableLTSOffers
 )
 
 var LTSBookables = []LTSBookable{
-	LTSBookableOverridenByIgnoreBookability,
+	LTSBookableOverriddenByIgnoreBookability,
 	LTSBookableOnlyBookableLTSOffers,
 	LTSBookableOnlyNonBookableLTSOffers,
 }

@@ -159,7 +159,7 @@ const (
 	HotelTypeHotel     HotelType = 1 << (iota - 1)
 	HotelTypeSkiSchool
 	HotelTypeResidence
-	HotelTypeBBAndAppartmentsPriv HotelType = 2 << (iota - 1)
+	HotelTypeBBAndApartmentsPriv HotelType = 2 << (iota - 1)
 	HotelTypeFarmVacation
 	HotelTypeMountainInn
 	HotelTypeCampingSite
@@ -176,7 +176,7 @@ var HotelTypes = []HotelType{
 	HotelTypeHotel,
 	HotelTypeSkiSchool,
 	HotelTypeResidence,
-	HotelTypeBBAndAppartmentsPriv,
+	HotelTypeBBAndApartmentsPriv,
 	HotelTypeFarmVacation,
 	HotelTypeMountainInn,
 	HotelTypeCampingSite,
