@@ -1,6 +1,6 @@
 module github.com/bookingsuedtirol/mss-go
 
-go 1.22
+go 1.23
 
 require (
 	github.com/microcosm-cc/bluemonday v1.0.27
