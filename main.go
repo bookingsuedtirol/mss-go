@@ -21,7 +21,7 @@ import (
 )
 
 type Client struct {
-	httpClient  http.Client
+	httpClient  *http.Client
 	credentials Credentials
 }
 
@@ -33,14 +33,17 @@ type Credentials struct {
 
 // NewClient creates a new client for requests to MSS.
 // Make sure to pass an http.Client with a reasonable timeout, e.g. 10–20 seconds.
-func NewClient(h http.Client, c Credentials) Client {
+func NewClient(h *http.Client, c Credentials) Client {
+	if h == nil {
+		return NewDefaultClient(c)
+	}
 	return Client{h, c}
 }
 
 // NewDefaultClient creates a new default client for requests to MSS.
 // The underlying http.Client is preconfigured with reasonable settings.
 func NewDefaultClient(c Credentials) Client {
-	return Client{http.Client{
+	return Client{&http.Client{
 		Timeout: 10 * time.Second,
 		Transport: &http.Transport{
 			TLSHandshakeTimeout: 3 * time.Second,

@@ -13,7 +13,7 @@ import (
 
 func main() {
 	client := mss.NewClient(
-		http.Client{
+		&http.Client{
 			Timeout: 20 * time.Second,
 		},
 		mss.Credentials{
@@ -57,5 +57,4 @@ func main() {
 		hotel.Geolocation.Latitude,
 		hotel.Geolocation.Latitude,
 	)
-
 }

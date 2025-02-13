@@ -11,7 +11,7 @@ import (
 )
 
 var client = NewClient(
-	http.Client{
+	&http.Client{
 		Timeout: 20 * time.Second,
 	},
 	Credentials{
