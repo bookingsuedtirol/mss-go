@@ -4,7 +4,19 @@ MSS API client for Go projects
 
 ## Dependencies
 
-This library requires an IANA Time Zone database to be present on the operating system (because it uses https://pkg.go.dev/time#LoadLocation). This database comes pre-installed with many Linux distros. If it’s unavailable (such as on Windows), https://pkg.go.dev/time/tzdata can be imported in the main program (which uses mss-go) instead.
+This library relies on the IANA Time Zone Database, which must be available on the operating system. It uses [time.LoadLocation](https://pkg.go.dev/time#LoadLocation) to load time zone data. Many Linux distributions include this database by default, but on Alpine Linux, you must install it explicitly:
+
+```Shell
+apk add --no-cache tzdata
+```
+
+For Windows support, add the following import to your main Go file:
+
+```Go
+import _ "time/tzdata"
+```
+
+For details, see [time/tzdata](https://pkg.go.dev/time/tzdata).
 
 ## Available methods
 
@@ -29,7 +41,7 @@ Warning: Only the methods with a ✓ next to them have been tested so far.
 
 Set the environment variables with:
 
-```Bash
+```Shell
 export $(make env)
 ```
 
