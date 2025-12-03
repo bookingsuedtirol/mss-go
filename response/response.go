@@ -374,6 +374,7 @@ type Hotel struct {
 	RoomTypes             shared.RoomType      `xml:"room_types"`
 	InformalMail          bool                 `xml:"informal_mail"`
 	TouristTaxPPPN        float64              `xml:"tourist_tax_pppn"`
+	TouristTaxes          []TouristTax         `xml:"tourist_taxes>tourist_tax"`
 }
 
 type HotelLocation struct {
@@ -861,6 +862,11 @@ type ThemeListItem struct {
 
 type Tracking struct {
 	Pixel string `xml:"pixel"`
+}
+
+type TouristTax struct {
+	Price     float64     `xml:"price"`
+	ValidFrom shared.Date `xml:"valid_from"`
 }
 
 type DateTime struct{ time.Time }

@@ -172,6 +172,7 @@ const (
 	HotelDetailsBoardData HotelDetails = 2 << iota
 	HotelDetailsCouponServiceData
 	HotelDetailsRoomTypes HotelDetails = 8 << iota
+	HotelDetailsTouristTaxes
 )
 
 var HotelDetailsList = []HotelDetails{
@@ -200,6 +201,7 @@ var HotelDetailsList = []HotelDetails{
 	HotelDetailsBoardData,
 	HotelDetailsCouponServiceData,
 	HotelDetailsRoomTypes,
+	HotelDetailsTouristTaxes,
 }
 
 type OfferDetails int
