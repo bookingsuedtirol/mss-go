@@ -3,20 +3,14 @@ package main
 import (
 	"context"
 	"fmt"
-	"net/http"
 	"os"
-	"time"
 
 	"github.com/bookingsuedtirol/mss-go"
 	"github.com/bookingsuedtirol/mss-go/request"
 )
 
 func main() {
-	client := mss.NewClient(
-		&http.Client{
-			Timeout:   20 * time.Second,
-			Transport: &http.Transport{DisableKeepAlives: true},
-		},
+	client := mss.NewDefaultClient(
 		mss.Credentials{
 			User:     os.Getenv("MSS_USER"),
 			Password: os.Getenv("MSS_PASSWORD"),

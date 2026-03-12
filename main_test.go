@@ -2,18 +2,13 @@ package mss
 
 import (
 	"context"
-	"net/http"
 	"os"
 	"testing"
-	"time"
 
 	"github.com/bookingsuedtirol/mss-go/request"
 )
 
-var client = NewClient(
-	&http.Client{
-		Timeout: 20 * time.Second,
-	},
+var client = NewDefaultClient(
 	Credentials{
 		User:     os.Getenv("MSS_USER"),
 		Password: os.Getenv("MSS_PASSWORD"),

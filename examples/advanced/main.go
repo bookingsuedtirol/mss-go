@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"net/http"
 	"os"
 	"time"
 
@@ -13,10 +12,7 @@ import (
 )
 
 func main() {
-	client := mss.NewClient(
-		&http.Client{
-			Timeout: 20 * time.Second,
-		},
+	client := mss.NewDefaultClient(
 		mss.Credentials{
 			User:     os.Getenv("MSS_USER"),
 			Password: os.Getenv("MSS_PASSWORD"),
