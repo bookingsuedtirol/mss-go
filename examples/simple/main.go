@@ -14,7 +14,8 @@ import (
 func main() {
 	client := mss.NewClient(
 		&http.Client{
-			Timeout: 20 * time.Second,
+			Timeout:   20 * time.Second,
+			Transport: &http.Transport{DisableKeepAlives: true},
 		},
 		mss.Credentials{
 			User:     os.Getenv("MSS_USER"),
