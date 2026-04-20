@@ -4,8 +4,8 @@ go 1.25.0
 
 require (
 	github.com/microcosm-cc/bluemonday v1.0.27
-	golang.org/x/net v0.42.0
-	golang.org/x/text v0.27.0
+	golang.org/x/net v0.53.0
+	golang.org/x/text v0.36.0
 )
 
 require (
