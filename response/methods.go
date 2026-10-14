@@ -283,7 +283,7 @@ func (u *pictureURL) UnmarshalXML(decoder *xml.Decoder, start xml.StartElement) 
 		return err
 	}
 
-	parsed.Host = "cdn.easychannel.it"
+	parsed.Host = "easychannel.it"
 	*u = pictureURL{parsed}
 
 	return nil
