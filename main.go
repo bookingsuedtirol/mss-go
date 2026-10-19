@@ -32,8 +32,7 @@ type Credentials struct {
 }
 
 // NewClient creates a new client for requests to MSS. Make sure to pass an
-// http.Client with a reasonable timeout, e.g. 10–20 seconds. The transport
-// should have DisableKeepAlives set to true. See NewDefaultClient for details.
+// http.Client with a reasonable timeout, e.g. 10–20 seconds.
 func NewClient(h *http.Client, c Credentials) Client {
 	if h == nil {
 		return NewDefaultClient(c)
@@ -48,11 +47,6 @@ func NewDefaultClient(c Credentials) Client {
 		Timeout: 10 * time.Second,
 		Transport: &http.Transport{
 			TLSHandshakeTimeout: 3 * time.Second,
-			// MSS always responds with "Connection: close", so it never reuses
-			// connections. Without this, Go’s transport pools connections that the
-			// server has already closed, causing EOF errors when a stale connection
-			// is picked for a subsequent request.
-			DisableKeepAlives: true,
 		},
 	}, c}
 }
@@ -89,13 +83,6 @@ func (c Client) RequestXML(
 		"https://easychannel.it/mss/mss_service.php",
 		strings.NewReader(xml.Header+string(reqXML)),
 	)
-
-	// The request needs to be closed every time because MSS does not seem to handle the
-	// "Connection: Keep-Alive" header correctly.
-	// For reference: https://stackoverflow.com/q/17714494, https://stackoverflow.com/a/34474535
-	if req != nil {
-		req.Close = true
-	}
 
 	if err != nil {
 		return nil, err
